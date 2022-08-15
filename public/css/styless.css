@@ -1,0 +1,21 @@
+#logo {
+    height: 100px;
+    width: 200px
+}
+
+#ul {
+    list-style-type: none;
+    padding: 0;
+    text-decoration:none;
+    width: 100px;
+    height: 100px;
+}
+#centrado{
+    text-align: center;
+}
+body {
+    background-color: yellow;
+    color: black;
+   
+}
+
