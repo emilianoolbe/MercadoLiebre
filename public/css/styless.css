@@ -10,12 +10,28 @@
     width: 100px;
     height: 100px;
 }
-#centrado{
+.centrado{
     text-align: center;
 }
-body {
-    background-color: yellow;
-    color: black;
-   
+.cuerpo {
+    background-color:#EAC926;
+    font-family: 'Raleway', sans-serif;;
+    
+}
+.titulares{
+    font-size: 24px;
+}
+.precios{
+    font-size: 18px;
+}
+.descuentos{
+    font-size: 16px;
+}
+.descripciones{
+    font-size: 16px;
+}
+.resoluciones {
+    width: 400px;
+    height: 400px;
 }
 
