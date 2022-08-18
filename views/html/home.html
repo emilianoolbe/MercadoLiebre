@@ -5,16 +5,20 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Mercado Liebre</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css
+    ">
     <link href="./css/styless.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap" rel="stylesheet">
+    
     <script src='main.js'></script>
 </head>
 
 <body>
-    <header class="header">
+    <header class="row header">
+        
         <img src="./imagenes/logo-mercado-liebre.svg" alt="Logo Mercado Liebre" id="logo"> <!-- Logo -->
 
         <form>
@@ -26,33 +30,33 @@
         <a href="./financiacion.html"> Comprá en cuotas y sin tarjeta de crédito</a> <!-- Comprá en cuotas y sin tarjeta de crédito-->
         
         <nav>
-            <ul id="ul">
-                <li><a href="./ofertas.html"> Ofertas </a></li>
-                <li><a href="./tiendasOficiales.html"> Tiendas Oficiales </a></li>
-                <li><a href="./vender.html"> Vender </a></li>
-                <li><a href="./ayuda.html"> Ayuda </a></li>
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item"><a href="./ofertas.html"> Ofertas </a></li>
+                <li class="list-group-item"><a href="./tiendasOficiales.html"> Tiendas Oficiales </a></li>
+                <li class="list-group-item"><a href="./vender.html"> Vender </a></li>
+                <li class="list-group-item"><a href="./ayuda.html"> Ayuda </a></li>
             </ul>
         </nav>
         <nav>
-            <ul id="ul">
-                <li><a href="./creaTuCuenta.html"> Creá tu cuenta </a></li>
-                <li><a href="./ingresa.html"> Ingresa </a></li>
-                <li><a href="./misCompras.html"> Mis compras </a></li>
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item"><a href="./creaTuCuenta.html"> Creá tu cuenta </a></li>
+                <li class="list-group-item"><a href="./ingresa.html"> Ingresa </a></li>
+                <li class="list-group-item"><a href="./misCompras.html"> Mis compras </a></li>
             </ul>
         </nav>  <!-- barra de navegación que tenga Ofertas, Tiendas Oficiales, vender, ayuda, creá tu cuenta, Ingresa, Mis compras-->
 
     </header>
     
     <main class="main centrado">
-        <section >
+        <section class="row">
             <h2 class= "titulares">Basado en tu última visita</h2>
-            <article class="articulos">
+            <article class="col-6">
                 <img src="./imagenes/img-macbook-pro-2019.jpg" alt="Imagen de MacBook" class="resoluciones">
                 <p class="precio"> Precio del producto : uS$ 1500 </p>
                 <p class="descuentos"> 10% off </p>
                 <p class="descripciones">MacBook Pro 2019</p> 
             </article>
-            <article>
+            <article class="col-6">
                 <img src="./imagenes/img-samsung-galaxy-s10.jpg" alt="Imagen de Samsung Galaxy" class="resoluciones">
                 <p class="precio"> Precio del producto : uS$700 </p>
                 <p class="descuentos"> 5% off</p>
@@ -61,17 +65,17 @@
             </article>
         </section>
         
-        <section>
+        <section class="row">
             
             <h2 class="titulares">Sección de ofertas</h2>
             
-            <article>
+            <article class="col-6">
                 <img src="./imagenes/img-tv-samsung-smart.jpg" alt="Imagen de TV Samsung" class="resoluciones">
                 <p class="precios">Precio del producto : uS$1490</p>
                 <p class="descuentos">30$ off</p>
                 <p class="descripciones">Smart-TV Samsung FSDK</p>
             </article>
-            <article>
+            <article class="col-6">
                 <img src="./imagenes/img-cafetera-moulinex.jpg" alt="Imagen cafetera Moulinex" class="resoluciones">
                 <p class="precios">Precio del producto : uS$40</p>
                 <p class="descripciones">Cafetera Moulinex</p>

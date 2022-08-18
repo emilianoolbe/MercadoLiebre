@@ -1,3 +1,6 @@
+*{
+    box-sizing: border-box;
+}
 .header{
     color: black;
     background-color: #EAC926;
@@ -5,8 +8,7 @@
     border: solid 2px grey;
     padding: 22px;
     margin: 30px;
-    box-sizing: border-box;
-    text-align: center;
+   
 }
 .main {
     background-color:#EAC926;
@@ -14,14 +16,13 @@
     padding: 50px;
     margin: 30px;
     border: solid 2px grey;
-    box-sizing: border-box;
+    
 }
 
 .footer{
     border: solid 2px grey;
     background-color: #EAC926;
     font-family: 'Raleway', sans-serif;
-    box-sizing: border-box;
     padding: 22px;
     margin: 30px;
 }
@@ -31,13 +32,8 @@
     width: 200px;
 }
 
-#ul {
-    list-style-type: none;
-    padding: 0;
-    text-decoration:none;
-    width: 100px;
-    height: 100px;
-}
+
+
 .articulos{
     position: relative;
     
