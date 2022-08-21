@@ -5,27 +5,44 @@
 body{
     margin:auto;
     font-family: "Roboto";
-    background-color: #EAC926;
+    
 
 }
 .header{
-    display: flex;
-    flex-direction: column;
-    justify-content:center;
-    align-items: center;
-    color: black;
-    padding: 22px;
+    background-color: #EAC926;
+    padding: 20px;
    
 }
-.nav-var{
-    display: flex;
-    justify-content: center;
+.header-compras{
+    text-align: center;
+    text-decoration: none;
+    color: #222222;
+}
+
+.btn-outline-dark{
+  display: block;
+  margin: auto;
+
+}
+
+.header-bottom-bar ul {
     list-style-type: none;
+    padding: 0px;
+    margin: 0%;
+}
+.header-bottom-bar a {
+    text-decoration: none;
+    color: #222222;
+    display: inline-block;
     padding: 3px;
-   
-   
+
 }
 .main {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: center;
+  align-items: center;
+  
   
 }
 
@@ -33,24 +50,20 @@ body{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
-  
+    
 }
 
+
 #logo {
-  width: 30%;
+  width: 150px;
 }
 
 
 
 .articulos{
     position: relative;
-    
-
 }
-
-
 .titulares{
     font-size: 24px;
 }
@@ -67,3 +80,62 @@ body{
     width: 40%;
 }
 
+
+@media (max-width: 767px){
+    .header-compras{
+        text-align: center;
+        display: block;
+        margin: auto;
+        text-decoration: none;
+        color: #222222;
+    }
+    .header-bottom-bar{
+        display: none;
+    }
+}
+
+@media (min-width: 768px){
+    .header-top-bar{
+        display: flex;
+        justify-content: space-between;
+    }
+    .header-compras{
+        max-width: 250px;
+        text-align: right;
+    }
+    .btn-outline-dark{
+        display: none;
+    }
+    .header-bottom-bar{
+        display: flex;
+        justify-content: space-between;
+    }
+    .header-bottom-bar ul{
+        display: flex;
+    }
+    .header-bottom-bar li{
+        margin: 0 2px;
+    }
+}
+
+@media (min-width: 1200px){
+    .header-bottom-bar, .header-top-bar{
+        max-width: 1200px;
+        margin: auto;
+        
+    }
+    .header-bottom-bar{
+        margin-top: 10px;
+        
+    }
+    #logo {
+        width: 250px;
+      }
+    .header-compras{
+        max-width: none;
+ 
+    }
+    .header-top-bar{
+        align-items: center;
+    }
+}
