@@ -5,7 +5,6 @@
 body{
     margin:auto;
     font-family: "Roboto";
-    
 
 }
 .header{
@@ -13,10 +12,24 @@ body{
     padding: 20px;
    
 }
+
+#logo {
+    width: 150px;
+  }
+
 .header-compras{
     text-align: center;
     text-decoration: none;
     color: #222222;
+}
+.banner{
+    width: 78%;
+}
+
+.div-banner{
+    display: block;
+    text-align: center;
+    margin-top: 15px;
 }
 
 .btn-outline-dark{
@@ -37,13 +50,48 @@ body{
     padding: 3px;
 
 }
+
 .main {
-  display: flex;
-  flex-flow: row wrap;
-  align-content: center;
-  align-items: center;
-  
-  
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    width: 90%;
+}
+.main-articulos-visitas{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+   margin: auto;
+   padding-bottom: 10px;
+   
+}
+
+.main-artculos-ofertas{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+    padding-bottom: 10px;
+    
+}
+
+.iconos-main{
+    color: #39b54a;
+    
+}
+
+.main-size{
+    font-size: 1rem;
+}
+
+.titulares{
+    padding: 15px;
+    font-size: 1.5rem;
 }
 
 .footer{
@@ -54,30 +102,29 @@ body{
     
 }
 
-
-#logo {
-  width: 150px;
+.iconos-footer{
+    margin-bottom: 10px;
+    font-size: 2rem;
+    color: #1259c3;
 }
-
-
-
-.articulos{
-    position: relative;
+.footer-titulares{
+    font-size: 1.5rem;
+    color: #313230;
+    font-weight: 400;
 }
-.titulares{
-    font-size: 24px;
-}
+.parrafos{
+    text-align: center;
+    color: dimgray;
+    font-size: 0.75rem;
+} 
+
 .precios{
-    font-size: 18px;
+    font-size: 1.125rem;
 }
-.descuentos{
-    font-size: 16px;
-}
-.descripciones{
-    font-size: 16px;
-}
+
 .resoluciones {
-    width: 40%;
+    width: 45%;
+     
 }
 
 
@@ -92,6 +139,13 @@ body{
     .header-bottom-bar{
         display: none;
     }
+    .main-articulos-visitas, .main-artculos-ofertas{
+        display: flex;
+        flex-direction: column;
+    }
+    .main-descripciones{
+        display: none;
+    }      
 }
 
 @media (min-width: 768px){
