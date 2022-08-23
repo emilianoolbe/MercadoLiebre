@@ -5,6 +5,7 @@
 body{
     margin:auto;
     font-family: "Roboto";
+    background-color: rgba(240,240,240,0.8)
 
 }
 .header{
@@ -59,6 +60,7 @@ body{
     text-align: center;
     margin: auto;
     width: 90%;
+    
 }
 .main-articulos-visitas{
    display: flex;
@@ -77,6 +79,10 @@ body{
     text-align: center;
     margin: auto;
     padding-bottom: 10px;
+    
+}
+.border-ofertas{
+    border: solid 0.5px rgba(155,155,155,0.5)
     
 }
 
