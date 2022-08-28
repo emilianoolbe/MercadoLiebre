@@ -22,14 +22,15 @@
     <header class="header">
         <div class="header-top-bar">
             
-            <img src="./imagenes/logo-mercado-liebre.svg" alt="Logo Mercado Liebre" id="logo">
+            <img  src="./imagenes/logo-mercado-liebre.svg" alt="Logo Mercado Liebre" id="logo"> 
 
-        
+            <div class="header-input-search"><input type="text" name="" id="" placeholder="Buscar, productos..." class="input"> <button class="header-input-search"><i class="fa-solid fa-magnifying-glass "></i></button></div>
 
            
             <a href="./financiacion.html" class="header-compras"><i class="fas fa-hand-holding-usd"></i> Comprá en cuotas y sin tarjeta de crédito</a>
        
         </div>
+        
         <button class="btn btn-outline-dark"><i class="fa-solid fa-bars"></i></button>
         
         <nav class="header-bottom-bar">
@@ -49,7 +50,9 @@
             </ul>
         </nav> 
         
-        <div class="div-banner"><img src="./imagenes/img-home-banner.jpg" alt="banner" class="banner"></div>
+        <div class="div-banner">
+            <img src="./imagenes/img-home-banner.jpg" alt="banner" class="banner">
+        </div>
     </header>
     
     <main class="main">
@@ -59,18 +62,28 @@
             
             <article class="border-ofertas order-1-visitas">
                 <img src="./imagenes/img-macbook-pro-2019.jpg" alt="Imagen de MacBook" class="resoluciones">
-                <p><i class="fa-solid fa-truck-fast iconos-main"></i></p>
-                <p class="precios"> uS$ 1500 </p>
-                <p class=".main-size  iconos-main"> 10% off </p>
-                <p class=".main-size main-descripciones">MacBook Pro 2019</p> 
+
+                <div class="contenedor-macbook">
+                    <p class="item3"><i class="fa-solid fa-truck-fast iconos-main-truck"></i></p>
+                    <p class="precios item1"> uS$ 1500 </p>
+                    <p class=".main-size  iconos-main item0"> 10% off </p>
+                </div>
+
+                <p class=".main-size main-descripciones">MacBook Pro 2019</p>
+                
             </article>
             
             <articlec class="border-ofertas order-2-visitas">
                 <img src="./imagenes/img-samsung-galaxy-s10.jpg" alt="Imagen de Samsung Galaxy" class="resoluciones">
-                <p><i class="fa-solid fa-truck-fast iconos-main"></i></p>
-                <p class="precios"> uS$700 </p>
-                <p class=".main-size iconos-main"> 5% off</p>
-                <p class=".main-size main-descripciones">Samsung Galaxy S10</p>
+
+                <div class="contenedor-samsung">
+                    <p class="item3"><i class="fa-solid fa-truck-fast iconos-main-truck"></i></p>
+                    <p class="precios item1"> uS$700 </p>
+                    <p class=".main-size iconos-main item0"> 5% off</p>
+                 </div>
+
+                 <p class=".main-size main-descripciones">Samsung Galaxy S10</p>
+                
             </article>
        
         </section>
@@ -81,20 +94,28 @@
             
             <article class="border-ofertas order-1-ofertas">
                 <img src="./imagenes/img-tv-samsung-smart.jpg" alt="Imagen de TV Samsung " class="resoluciones">
-                <p><i class="fa-solid fa-truck-fast iconos-main"></i></p>
-                <p class="precios"> uS$1490</p>
-                <p class=".main-size  iconos-main">30% off</p>
+
+                <div class="contenedor-tv">
+                    <p class="item3"><i class="fa-solid fa-truck-fast iconos-main-truck"></i></p>
+                    <p class="precios item1"> uS$1490</p>
+                    <p class=".main-size iconos-main item0">30% off</p>
+                </div>
+                
                 <p class=".main-size main-descripciones">Smart-TV Samsung FSDK</p>
+                
             </article>
             
             <article class="border-ofertas order-2-ofertas">
                 <img src="./imagenes/img-cafetera-moulinex.jpg" alt="Imagen cafetera Moulinex" class="resoluciones">
-                <p><i class="fa-solid fa-truck-fast iconos-main"></i></p>
-                <p class="precios">uS$40</p>
-                <p class=".main-size iconos-main">25% off</p>
+
+                <div class="contenedor-cafetera">
+                    <p class="item3"><i class="fa-solid fa-truck-fast iconos-main-truck"></i></p>
+                    <p class="precios item1">uS$40</p>
+                    <p class=".main-size iconos-main item0">25% off</p>
+                </div>
+
                 <p class=".main-size main-descripciones">Cafetera Moulinex</p>
-                
-                
+            
             </article>
 
         </section>
