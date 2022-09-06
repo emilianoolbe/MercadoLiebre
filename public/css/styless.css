@@ -1,12 +1,14 @@
 *{
     box-sizing: border-box;  
 }
+
 body{
     margin:auto;
     font-family: "Roboto";
     background-color: rgba(240,240,240,0.8)
 
 }
+
 .header{
     background-color: #EAC926;
     padding: 20px;
@@ -22,6 +24,7 @@ body{
     text-decoration: none;
     color: #222222;
 }
+
 .banner{
     width: 78%;
 }
@@ -43,12 +46,14 @@ body{
     padding: 0px;
     margin: 0%;
 }
+
 .header-bottom-bar a {
     text-decoration: none;
     color: #222222;
     display: inline-block;
     padding: 3px;
 }
+
 .header-input-search{
     padding: 3px;
     border-radius: 100% 100% 100% 100%;
@@ -135,6 +140,7 @@ body{
    
     
 }
+
 .contenedor-cafetera{
     display: inline-flex;
     flex-wrap: nowrap;
@@ -165,6 +171,7 @@ body{
     
 
 }
+
 .item3{
     position: relative;
     left: 60px;
@@ -258,6 +265,7 @@ body{
 }
 
 @media only screen and (min-width: 768px){
+    
     .header-top-bar{
         display: flex;
         justify-content: space-between;
@@ -286,6 +294,7 @@ body{
 }
 
 @media (min-width: 1200px){
+   
     .header-bottom-bar, .header-top-bar{
         max-width: 1200px;
         margin: auto;
