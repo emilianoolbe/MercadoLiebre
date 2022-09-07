@@ -61,6 +61,7 @@ body{
     border: none;
     
 }
+
 .header-input-search:focus{
     border: white;
     color: grey;
@@ -201,7 +202,7 @@ body{
 }
 
 .iconos-footer:hover{
-    color:#EAC926
+    color: rgb(106, 90, 205)
 }
 
 .footer-titulares{
@@ -243,7 +244,8 @@ body{
 
 .formulario-crear-cuenta{
     max-width: 90%;
-    background-color: gainsboro;
+    background-color: rgba(66, 63, 64, 0.11);
+    margin-top: 45px;
 }
 
 
@@ -260,7 +262,6 @@ body{
 
 .section-crea-tu-cuenta{
     height: 100%;
-    margin-top: 40px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -274,17 +275,91 @@ body{
     color: white;
     padding: 10px;
 }
+
 .submit-button{
     border-radius: 3px;
     border: none;
-    background-color:#39b54a;
+    background-color:rgb(106, 90, 205);
     color: white;
     padding: 10px;
 }
+
 .input-img-usuario{
     border-radius: 3px;
     border: none;
 }
+
+
+/* LOGIN */
+
+.form-login{
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+
+}
+
+.form-login-hijo{
+    
+    margin-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+    background-color: rgba(66, 63, 64, 0.11)
+    
+}
+
+.div-form-hijo{
+    margin: 20px;
+    
+}
+
+.button-login{
+    border-radius: 5px;
+    background-color: rgb(106, 90, 205);
+    color: white;
+    border: none;
+    padding: 4px;
+    
+}
+.link-login{
+    text-decoration: none;
+    text-decoration-style: none;
+    color: white;
+}
+
+.button-login-siging{
+    border-radius: 5px;
+    background-color: #313230;
+    border: none;
+    color: white;
+    padding: 10px;
+}
+
+.input-login{
+    border: none;
+    border-radius: 7px;
+}
+
+.button-login-siging:hover{
+
+    background-color: #eac926;
+}
+
+.borde-fondo-2{
+    filter: drop-shadow(.75em .75em 50px #eac926);
+}
+
+.main-login{
+    background-color: rgba(66, 63, 64, 0.11);
+}
+
+
+
+
+
 
 
 @media (max-width: 767px){
@@ -329,14 +404,19 @@ body{
         flex-direction: column;
         flex-wrap: wrap;
         align-items: center;
+        
     }
 
     .footer-articulos{
         text-align: center;
     }
     .section-crea-tu-cuenta{
-        margin-top: 40px;
+        margin-bottom: 60px;
     }
+
+    
+
+
 }
 
 @media (min-width: 768px){
@@ -367,8 +447,10 @@ body{
         text-align: center;
     }
     .section-crea-tu-cuenta{
-        margin-top: 40px;
+        margin-bottom: 60px;
     }
+    
+    
 }
 
 @media (min-width: 1200px){
