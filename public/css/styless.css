@@ -55,8 +55,15 @@ body{
 }
 
 .header-input-search{
-    padding: 3px;
-    border-radius: 100% 100% 100% 100%;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 3px;
+    border: none;
+    
+}
+.header-input-search:focus{
+    border: white;
+    color: grey;
 }
 
 .main {
@@ -96,9 +103,10 @@ body{
 }
 
 .borde-producto{
-    margin: 10px;
+    margin: 20px;
     padding: 10px;
     box-shadow: 0 5px 20px rgba(0,0,0, 0.9);
+    border-radius: 5px;
     
 }
 
@@ -124,6 +132,7 @@ body{
     
 
 }
+
 .contenedor-samsung{
     display: inline-flex;
     justify-content: center;
@@ -131,6 +140,7 @@ body{
     width: 70%;
     
 }
+
 .contenedor-tv{
     display: inline-flex;
     flex-wrap: nowrap;
@@ -178,7 +188,6 @@ body{
 }
 
 
-
 .titulares{
     padding: 15px;
     font-size: 1.5rem;
@@ -190,6 +199,7 @@ body{
     font-size: 2rem;
     color: #1259c3;
 }
+
 .iconos-footer:hover{
     color:#EAC926
 }
@@ -211,12 +221,74 @@ body{
 }
 
 .resoluciones {
-    width: 45%;
+    width: 50%;
      
+}
+
+/* --CREA TU CUENTA */
+
+.hedear-crea-tu-cuenta{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.button-crear-cuenta{
+  border: none;
+  padding: 5px;
+  color: gray;
+}
+
+.formulario-crear-cuenta{
+    max-width: 90%;
+    background-color: gainsboro;
+}
+
+
+.formulario-crear-cuenta div input {
+    border-radius: 3px;
+    border: none;
+}
+
+.formulario-crear-cuenta div  {
+    margin: 10px;
+    padding: 5px;
+}
+
+
+.section-crea-tu-cuenta{
+    height: 100%;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+}
+
+.detele-button{
+    border-radius: 3px;
+    border: none;
+    background-color:orange;
+    color: white;
+    padding: 10px;
+}
+.submit-button{
+    border-radius: 3px;
+    border: none;
+    background-color:#39b54a;
+    color: white;
+    padding: 10px;
+}
+.input-img-usuario{
+    border-radius: 3px;
+    border: none;
 }
 
 
 @media (max-width: 767px){
+
     .header-compras{
         text-align: center;
         display: block;
@@ -261,10 +333,13 @@ body{
 
     .footer-articulos{
         text-align: center;
-    } 
+    }
+    .section-crea-tu-cuenta{
+        margin-top: 40px;
+    }
 }
 
-@media only screen and (min-width: 768px){
+@media (min-width: 768px){
     
     .header-top-bar{
         display: flex;
@@ -290,6 +365,9 @@ body{
   
     .footer-articulos{
         text-align: center;
+    }
+    .section-crea-tu-cuenta{
+        margin-top: 40px;
     }
 }
 
@@ -321,6 +399,7 @@ body{
 
     .contenedor-1200{
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-evenly;
         align-items: center;
     }
@@ -335,6 +414,21 @@ body{
         text-align: center;
         padding: 5px;
         margin: 5px;
+    }
+    .productos-desktop{
+        display: flex;
+    }
+
+    .main{
+        justify-content: start;
+    }
+
+    .titulares::after{
+        content: "   Ver historial";
+        font-size: 1rem;
+        text-decoration: underline;
+        text-decoration-color: #1259c3;
+        color: #1259c3;
     }
 
 

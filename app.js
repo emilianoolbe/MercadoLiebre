@@ -11,3 +11,7 @@ app.listen(3010, () => console.log("Servidor Corriendo"));
 app.get("/", (req, res) =>{
     res.sendFile(path.join(__dirname, "./views/html/home.html"));
 })
+
+app.get("/creatucuenta.html", (req, res) => {
+    res.sendFile(path.join(__dirname, "./views/html/creatucuenta.html"));
+})
