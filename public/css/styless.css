@@ -121,51 +121,27 @@ body{
     border: solid 1px #39b54a;
     padding: 6px;
     border-radius: 50% 50% 50% 50%;
+    background-color: white;
     
 }
 
 
-.contenedor-macbook{
-    display: inline-flex;
-    justify-content: center;
-    height: 100px;
-    width: 70%;
-    
-
-}
-
-.contenedor-samsung{
-    display: inline-flex;
-    justify-content: center;
-    height: 100px;
-    width: 70%;
-    
-}
-
-.contenedor-tv{
+.contenedor-descripciones{
     display: inline-flex;
     flex-wrap: nowrap;
     justify-content: center;
-    height: 100px;
-    width: 70%;
-   
-    
-}
-
-.contenedor-cafetera{
-    display: inline-flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    height: 100px;
-    width: 70%;
+    height: 110px;
+    width: 100%;
 }
 
 
 .item0{
     order: 1;
-    align-self: flex-start;
+    align-self: center;
     font-weight: bold;
-    
+    position: relative;
+    left: -65px;
+    font-size: 1.2rem;
 
 }
 
@@ -173,19 +149,30 @@ body{
     order: 0;
     align-self: flex-end;
     font-weight: bold;
+    position:relative;
+    bottom: -15px;;
     
 }
 
 .item1{
     order: -1;
-    align-self: flex-start;
+    align-self: center;
+    position: relative;
+    left: 20px;
     
 
 }
 
-.item3{
+.item-truck{
+    display: block;
+    text-align: right;
+}
+
+#dimesiones-descripciones{
+    order: -1;
+    align-self: center;
     position: relative;
-    left: 60px;
+    left: 50px;
 }
 
 
@@ -221,10 +208,9 @@ body{
     font-size: 1.125rem;
 }
 
-.resoluciones {
-    width: 50%;
-     
-}
+
+
+
 
 /* --CREA TU CUENTA */
 
@@ -288,6 +274,7 @@ body{
     border-radius: 3px;
     border: none;
 }
+
 
 
 /* LOGIN */
@@ -359,9 +346,6 @@ body{
 
 
 
-
-
-
 @media (max-width: 767px){
 
     .header-compras{
@@ -414,6 +398,10 @@ body{
         margin-bottom: 60px;
     }
 
+    .resoluciones {
+        width: 55%;
+    }
+   
     
 
 
@@ -449,6 +437,12 @@ body{
     .section-crea-tu-cuenta{
         margin-bottom: 60px;
     }
+
+    .resoluciones {
+        width: 55%;
+         
+    }
+  
     
     
 }
@@ -511,6 +505,29 @@ body{
         text-decoration: underline;
         text-decoration-color: #1259c3;
         color: #1259c3;
+    }
+
+    .resoluciones {
+        width: 60%;
+         
+    }
+
+    .contenedor-descripciones{
+        height: 130px;
+        width: 100%;
+    }
+    
+    .item0{
+        left: -45px;
+        font-size: 1.1rem;
+    
+    }
+
+    #dimesiones-descripciones{
+        order: -1;
+        align-self: center;
+        position: relative;
+        left: 45px;
     }
 
 
