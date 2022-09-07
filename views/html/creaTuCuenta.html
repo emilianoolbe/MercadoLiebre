@@ -66,14 +66,14 @@
             <section class=" section-crea-tu-cuenta">
                 <article class="formulario-crear-cuenta borde-fondo-2">
 
-                    <form action="/ingresa" method="post" id="form">
+                    <form action="/" method="get" id="form">
                         <div class=>
                             
-                            <input type="text" name="nombre" id="nombre" required placeholder="Nombre - Completo">
+                            <input type="text" name="nombre" id="nombre" required placeholder="Nombre - Completo" minlength="3" pattern="[A-Za-z0-9_-]{1,15}" >
                         </div>
                         <div>
                             
-                            <input type="text" name="usuario" id="usuario" placeholder="Usuario" required>
+                            <input type="text" name="usuario" id="usuario" placeholder="Usuario" required pattern="[A-Za-z0-9_-]{1,15}" minlength="6">
                         </div>
                         <div>
                             <label for="fecha">Fecha de nacimiento :</label>
@@ -109,11 +109,11 @@
                         </div>
                         <div>
                             
-                            <input type="password" name="password" id="contraseña" placeholder="Contraseña :" required>
+                            <input type="password" name="password" id="contraseña" placeholder="Contraseña :" required minlength="6">
                         </div>
                         <div>
                             
-                            <input type="password" name="password" id="contraseña" placeholder="Confirme contraseña :" required>
+                            <input type="password" name="password" id="contraseña" placeholder="Confirme contraseña :" required minlength="6">
                         </div>
                         <div>
                             <button type="reset" class="detele-button">Borrar</button>

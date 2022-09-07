@@ -114,11 +114,12 @@ body{
 .borde-producto:hover{
     box-shadow: 0 5px 20px rgba(0,0,0, 0.9);
     border-radius: 5px;
-    transform: scale(1.15);
+    transform: scale(1.12);
 }
 
 .articulo-margin{
-    margin: 20px;
+    
+    margin: 20px 20px 50px 20px;
     padding:10px
 }
 
@@ -133,8 +134,21 @@ body{
     padding: 6px;
     border-radius: 50% 50% 50% 50%;
     background-color: white;
+
+
     
 }
+@keyframes rotacion-truck {
+    100% { transform: rotateZ(-120deg)} 
+}
+
+.truck:hover{
+    animation-name: rotacion-truck;
+    animation-duration: 1s;
+    
+}
+
+
 
 
 .contenedor-descripciones{
@@ -175,8 +189,17 @@ body{
 }
 
 .item-truck{
-    display: block;
-    text-align: right;
+    margin: 0;
+    padding: 15px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+
+}
+
+.camion-con-foto{
+    
+    position: relative;
 }
 
 #dimesiones-descripciones{
@@ -225,7 +248,6 @@ body{
 .precios{
     font-size: 1.125rem;
 }
-
 
 
 
@@ -350,6 +372,17 @@ body{
     color: #313230;
 }
 
+.link-arrow-home{
+    text-decoration: none;
+    text-decoration-style: none;
+    color: white;
+    transition: all 600ms;
+}
+
+.link-arrow-home:hover{
+    color: #39b54a;
+    background-color: white;
+}
 
 .button-login-siging{
 
@@ -383,6 +416,9 @@ body{
 
 .main-login{
     background-color: rgba(66, 63, 64, 0.11);
+}
+.resoluciones {
+    width: 100%;
 }
 
 
@@ -441,8 +477,9 @@ body{
     }
 
     .resoluciones {
-        width: 55%;
+        width: 100%;
     }
+
     .header{
         position: fixed;
         top: 0px;
@@ -450,13 +487,17 @@ body{
     
     }
     .main{
-        margin-top: 290px;
+        margin-top: 345px;
     }
    
     .iconos-footer:hover{
         transform: scale(1.60);
         
       
+    }
+    
+    #arrow{
+        display: none;
     }
     
 
@@ -495,14 +536,28 @@ body{
     }
 
     .resoluciones {
-        width: 55%;
+        width: 100%;
          
     }
     .iconos-footer:hover{
         transform: scale(1.80);
         
     }
-  
+    
+    #arrow{
+        position: fixed;
+        z-index: 929;
+        bottom: 5px;
+        right: 5px;
+        font-size: 2rem;
+        background-color: #313230;
+        border-radius: 50%;
+        padding: 5px;
+            
+    }
+    #arrow:hover{
+        background-color: white;
+    }
     
     
 }
@@ -569,7 +624,7 @@ body{
     }
 
     .resoluciones {
-        width: 60%;
+        width: 100%;
        
          
     }
@@ -593,5 +648,20 @@ body{
         left: 45px;
     }
 
+    #arrow{
+        position: fixed;
+        z-index: 929;
+        bottom: 5px;
+        right: 5px;
+        font-size: 2rem;
+        background-color: #313230;
+        border-radius: 50%;
+        padding: 5px;
+        transition: 350ms;
+            
+    }
+    #arrow:hover{
+        background-color: white;
+    }
 
 }
