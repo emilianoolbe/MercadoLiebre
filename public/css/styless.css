@@ -9,6 +9,9 @@ body{
 
 }
 
+
+
+/*  HOME */
 .header{
     background-color: #EAC926;
     padding: 20px;
@@ -85,7 +88,7 @@ body{
    justify-content: center;
    text-align: center;
    margin: auto;
-   padding-bottom: 10px;
+   padding-bottom: 30px;
 
 }
 
@@ -104,11 +107,19 @@ body{
 }
 
 .borde-producto{
-    margin: 20px;
-    padding: 10px;
+    transition: all 450ms;
+    
+}
+
+.borde-producto:hover{
     box-shadow: 0 5px 20px rgba(0,0,0, 0.9);
     border-radius: 5px;
-    
+    transform: scale(1.15);
+}
+
+.articulo-margin{
+    margin: 20px;
+    padding:10px
 }
 
 .iconos-main{
@@ -183,13 +194,20 @@ body{
 
 
 .iconos-footer{
-    margin-bottom: 10px;
-    font-size: 2rem;
+   font-size: 2rem;
     color: #1259c3;
+    transition: all 350ms;
 }
 
 .iconos-footer:hover{
-    color: rgb(106, 90, 205)
+    transform: scale(2.15);
+    color: rgb(106, 90, 205);
+  
+}
+
+.iconos-footer-margin{
+    margin: 3%;
+    padding: 10px;
 }
 
 .footer-titulares{
@@ -260,6 +278,10 @@ body{
     background-color:orange;
     color: white;
     padding: 10px;
+    transition: all 450ms;
+}
+.detele-button:hover{
+    background-color: #fa2550
 }
 
 .submit-button{
@@ -268,6 +290,11 @@ body{
     background-color:rgb(106, 90, 205);
     color: white;
     padding: 10px;
+    transition: all 450ms;
+}
+
+.submit-button:hover{
+    background-color:#39b54a;
 }
 
 .input-img-usuario{
@@ -311,18 +338,32 @@ body{
     padding: 4px;
     
 }
+
 .link-login{
     text-decoration: none;
     text-decoration-style: none;
     color: white;
+    transition: all 600ms;
 }
 
+.link-login:hover{
+    color: #313230;
+}
+
+
 .button-login-siging{
+
     border-radius: 5px;
     background-color: #313230;
     border: none;
     color: white;
     padding: 10px;
+    transition: all 450ms;
+}
+
+.button-login-siging:hover{
+    background-color: #39b54a
+
 }
 
 .input-login{
@@ -330,13 +371,14 @@ body{
     border-radius: 7px;
 }
 
-.button-login-siging:hover{
-
-    background-color: #eac926;
-}
 
 .borde-fondo-2{
+    transition: all 500ms;
+}
+
+.borde-fondo-2:hover{
     filter: drop-shadow(.75em .75em 50px #eac926);
+   
 }
 
 .main-login{
@@ -485,6 +527,7 @@ body{
         flex-direction:row;
         flex-wrap: nowrap;
         
+        
     }
     .footer-articulos{
         text-align: center;
@@ -509,8 +552,10 @@ body{
 
     .resoluciones {
         width: 60%;
+       
          
     }
+
 
     .contenedor-descripciones{
         height: 130px;
