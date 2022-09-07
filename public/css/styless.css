@@ -15,7 +15,7 @@ body{
 .header{
     background-color: #EAC926;
     padding: 20px;
-   
+
 }
 
 #logo {
@@ -200,7 +200,7 @@ body{
 }
 
 .iconos-footer:hover{
-    transform: scale(2.15);
+    transform: scale(2.0);
     color: rgb(106, 90, 205);
   
 }
@@ -443,7 +443,21 @@ body{
     .resoluciones {
         width: 55%;
     }
+    .header{
+        position: fixed;
+        top: 0px;
+        z-index: 10;
+    
+    }
+    .main{
+        margin-top: 290px;
+    }
    
+    .iconos-footer:hover{
+        transform: scale(1.60);
+        
+      
+    }
     
 
 
@@ -483,6 +497,10 @@ body{
     .resoluciones {
         width: 55%;
          
+    }
+    .iconos-footer:hover{
+        transform: scale(1.80);
+        
     }
   
     
