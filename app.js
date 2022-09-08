@@ -12,16 +12,16 @@ app.use(express.static(path.join(__dirname, "./public")));
 
 
 app.get("/", (req, res) =>{
-    res.sendFile(path.join(__dirname, "./views/html/home.html"));
+    res.sendFile(path.join(__dirname, "/views/html/home.html"));
 })
 
 app.get("/creatucuenta", (req, res) => {
-    res.sendFile(path.join(__dirname, "./views/html/creatucuenta.html"));
+    res.sendFile(path.join(__dirname, "/views/html/creatucuenta.html"));
 })
 
 
 app.get("/ingresa", (req, res) => {
-    res.sendFile(path.join(__dirname, "./views/html/ingresa.html"));
+    res.sendFile(path.join(__dirname, "/views/html/ingresa.html"));
 })
 
 app.listen(process.env.PORT || 3010, function() {
