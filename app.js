@@ -9,7 +9,7 @@ app.use(express.static(path.join(__dirname, "./public")));
 //app.listen(3010, () => console.log("Servidor Corriendo"));
 
 
-app.listen(process.env.PORT || 3002, function() {
+app.listen(process.env.PORT || 3010, function() {
     console.log("Servidor corriendo en el puerto 3010");
 });
 
