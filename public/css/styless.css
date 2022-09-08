@@ -480,15 +480,7 @@ body{
         width: 100%;
     }
 
-    .header{
-        position: fixed;
-        top: 0px;
-        z-index: 10;
-    
-    }
-    .main{
-        margin-top: 345px;
-    }
+
    
     .iconos-footer:hover{
         transform: scale(1.60);
