@@ -6,7 +6,11 @@ let app = express();
 
 app.use(express.static(path.join(__dirname, "./public")));
 
-app.listen(3010, () => console.log("Servidor Corriendo"));
+//app.listen(3010, () => console.log("Servidor Corriendo"));
+
+app.listen(process.env.PORT || 3002, function() {
+    console.log("Servidor corriendo en el puerto 3010");
+});
 
 app.get("/", (req, res) =>{
     res.sendFile(path.join(__dirname, "./views/html/home.html"));
