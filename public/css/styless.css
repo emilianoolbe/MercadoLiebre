@@ -138,6 +138,7 @@ body{
 
     
 }
+
 @keyframes rotacion-truck {
     100% { transform: rotateZ(-120deg)} 
 }
@@ -148,9 +149,6 @@ body{
     
 }
 
-
-
-
 .contenedor-descripciones{
     display: inline-flex;
     flex-wrap: nowrap;
@@ -158,7 +156,6 @@ body{
     height: 110px;
     width: 100%;
 }
-
 
 .item0{
     order: 1;
@@ -209,12 +206,10 @@ body{
     left: 50px;
 }
 
-
 .titulares{
     padding: 15px;
     font-size: 1.5rem;
 }
-
 
 .iconos-footer{
    font-size: 2rem;
@@ -248,8 +243,6 @@ body{
 .precios{
     font-size: 1.125rem;
 }
-
-
 
 
 /* --CREA TU CUENTA */
@@ -302,6 +295,7 @@ body{
     padding: 10px;
     transition: all 450ms;
 }
+
 .detele-button:hover{
     background-color: #fa2550
 }
@@ -417,11 +411,10 @@ body{
 .main-login{
     background-color: rgba(66, 63, 64, 0.11);
 }
+
 .resoluciones {
     width: 100%;
 }
-
-
 
 
 @media (max-width: 767px){
