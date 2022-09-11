@@ -1,11 +1,11 @@
 const express = require ("express");
 let app = express();
 const path = require("path");
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.static(path.join(__dirname, "./public")));
 
-const router = require("./routes/homeRouter");
-const routerLogin = require("./routes/loginRouter");
-const routerRegister = require("./routes/registerRouter");
+const router = require("./src/routes/homeRouter");
+const routerLogin = require("./src/routes/loginRouter");
+const routerRegister = require("./src/routes/registerRouter");
 
 app.get("/", router);
 app.get("/ingresa", routerLogin);
