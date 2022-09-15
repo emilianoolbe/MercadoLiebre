@@ -11,7 +11,7 @@ let app = express();
 app.use(express.static(path.join(__dirname, "../public")));
 
 //Lineas EJS
-app.set('view engine', 'ejs')
+app.set('view engine', 'ejs');
 
 //Detallo rutas
 app.use("/", router);
