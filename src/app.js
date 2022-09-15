@@ -11,13 +11,13 @@ let app = express();
 app.use(express.static(path.join(__dirname, "../public")));
 
 //Lineas EJS
+app.set('views', path.join(__dirname, '../src/views'));
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, './src/views'));
+
 
 //Detallo rutas
 app.use("/", router);
-app.use("/ingresa", routerUser);
-app.use("/register", routerUser);
+app.use("/user", routerUser);
 
 
 //Levanto servidor
