@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <%- include('../partials/head.ejs') %>
+    </head>
+    <body>
+
+        <header class="header">
+
+            <div class="hedear-crea-tu-cuenta"> 
+                <div class="header-top-bar ">    
+                    <a href="/"><img  src="/imagenes/logo-mercado-liebre.svg" alt="Logo Mercado Liebre" id="logo"></a>
+                </div>
+          
+                <button class="btn btn-outline-dark"><i class="fa-solid fa-bars"></i></button>
+
+                <nav class="header-bottom-bar"> 
+                    <ul class="nav-var">        
+                        <li><a href="#"> Ayuda |</a></li>
+                    </ul>     
+                </nav>           
+            </div>
+           
+        </header>
+    
+        <main class="main-login">
+
+            <section class="form-login">
+                <article class="form-login-hijo borde-fondo-2">
+
+                    <h2 class="titulo-login">Bienvenidos</h2>
+
+                    <form action="/" method="get">
+                        <div class="div-form-hijo">
+                            <input type="text" name="nombre" placeholder="User@" class="input-login" minlength="6" required>   
+                        </div>
+                        <div>
+                            <input type="password" name="password" placeholder="Password" class="input-login" minlength="6" required>
+                        </div>
+                        <div>
+                           <a href="/"><button type="submit" class="div-form-hijo button-login-siging" >SIGN IN</button></a> 
+                        </div>
+
+                        <div class="div-form-hijo">
+                            <h5>¿No recordás la contraseña?</h5> <span><a href="#" class="link-login link-login-2">Recupera tu contraseña</a></span>
+                        </div>
+                        <div class="div-form-hijo">
+                            <h5>¿No tenés cuenta?</h5><span><a href="/user/register" class="link-login link-login-2">Registrate</a></span>
+                        </div>
+                        <div class="div-form-hijo">
+                            <button class="button-login"><a href="https://myaccount.google.com/" class="link-login">REGISTRARME CON GOOGLE</a></button>
+                        </div>
+                    </form>
+                </article>
+            </section>
+        </main>
+
+        <footer >
+            <%- include('../partials/footer.ejs') %>
+        </footer>
+        
+    </body>
+</html>

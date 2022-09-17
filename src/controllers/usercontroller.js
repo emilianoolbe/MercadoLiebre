@@ -1,9 +1,9 @@
 const controlador = {
     login: (req, res) => {
-        res.render("ingresa")
+        res.render("users/ingresa")
     },
     register: (req, res) => {
-        res.render('register')
+        res.render('users/register')
     }
 };
 

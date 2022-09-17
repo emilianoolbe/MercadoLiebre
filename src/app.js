@@ -6,16 +6,18 @@ const path = require("path");
 const router = require("./routes/homeRouter");
 const routerUser = require('./routes/userRouter'); 
 
-// Ejecuto express en variable app 
+// Ejecuto express
 let app = express();
-app.use(express.static(path.join(__dirname, "../public")));
 
-//Lineas EJS
+//Accediendo a recursos estáticos
+app.use(express.static("./public"));
+
+//Seteo de template Engine EJS
 app.set('views', path.join(__dirname, '../src/views'));
 app.set('view engine', 'ejs');
 
 
-//Detallo rutas
+//Rutas
 app.use("/", router);
 app.use("/user", routerUser);
 
