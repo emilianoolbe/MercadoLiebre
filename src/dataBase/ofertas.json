@@ -1,0 +1,23 @@
+[
+    {
+        "precio": "1490",
+        "descuento": "30",
+        "nombre": "TV-Samsung"
+        
+    },
+    {
+        "precio": "1500",
+        "descuento": "10",
+        "nombre": "MacBook Pro"
+    },
+    {
+        "precio": "400",
+        "descuento": "10",
+        "nombre": "Apple Watch"
+    },
+    {
+        "precio": "2500",
+        "descuento": "10",
+        "nombre": "Camiseta Uruguay"
+    }
+]

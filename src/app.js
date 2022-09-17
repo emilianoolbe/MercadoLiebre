@@ -4,7 +4,8 @@ const path = require("path");
 
 //Importo routes
 const router = require("./routes/homeRouter");
-const routerUser = require('./routes/userRouter'); 
+const routerUser = require('./routes/userRouter');
+const routerProducts = require('./routes/productsRouter');
 
 // Ejecuto express
 let app = express();
@@ -19,7 +20,9 @@ app.set('view engine', 'ejs');
 
 //Rutas
 app.use("/", router);
-app.use("/user", routerUser);
+app.use("/users", routerUser);
+app.use('/products', routerProducts);
+
 
 
 //Levanto servidor

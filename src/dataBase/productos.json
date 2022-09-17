@@ -1,0 +1,60 @@
+[
+    {
+        "id": "1",
+        "img": "img-tv-samsung-smart",
+        "precio": "1490",
+        "descuento": "30",
+        "nombre": "TV-Samsung"
+        
+    },
+    {
+        "id": "2",
+        "img": "img-macbook-pro-2019",
+        "precio": "1500",
+        "descuento": "10",
+        "nombre": "MacBook Pro"
+    },
+    {
+        "id": "3",
+        "img": "productonuevo1",
+        "precio": "400",
+        "descuento": "10",
+        "nombre": "Apple Watch"
+    },
+    {
+        "id": "4",
+        "img": "productonuevo2",
+        "precio": "2500",
+        "descuento": "10",
+        "nombre": "Camiseta Uruguay"
+    },
+    {
+        "id": "5",
+        "img": "img-samsung-galaxy-s10",
+        "precio": "700",
+        "descuento": "15",
+        "nombre": "Samsung Galaxy S10"
+    },
+    {
+        "id": "6",
+        "img": "productonuevo3",
+        "precio": "300",
+        "descuento": "30",
+        "nombre": "JBL Charge 5"
+    },
+    {
+        "id": "7",
+        "img": "img-tv-samsung-smart",
+        "precio": "40",
+        "descuento": "25",
+        "nombre": "img-cafetera-moulinex"
+    },
+    {
+        "id": "8",
+        "img": "productonuevo4",
+        "precio": "100",
+        "descuento": "30",
+        "nombre": "Joystick Xbox"
+    }
+
+]
