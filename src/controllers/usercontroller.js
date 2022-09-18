@@ -1,3 +1,4 @@
+//CONTROLADOR
 const controlador = {
     login: (req, res) => {
         res.render("users/ingresa")

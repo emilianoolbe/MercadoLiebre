@@ -2,7 +2,7 @@
 const express = require ("express");
 const path = require("path");
 
-//Importo routes
+//Importo enrutadores
 const router = require("./routes/homeRouter");
 const routerUser = require('./routes/userRouter');
 const routerProducts = require('./routes/productsRouter');
@@ -10,19 +10,17 @@ const routerProducts = require('./routes/productsRouter');
 // Ejecuto express
 let app = express();
 
-//Accediendo a recursos estáticos
+//Cambio a estatica a la carpeta public (para poder acceder)
 app.use(express.static("./public"));
 
 //Seteo de template Engine EJS
 app.set('views', path.join(__dirname, '../src/views'));
 app.set('view engine', 'ejs');
 
-
 //Rutas
 app.use("/", router);
 app.use("/users", routerUser);
 app.use('/products', routerProducts);
-
 
 
 //Levanto servidor

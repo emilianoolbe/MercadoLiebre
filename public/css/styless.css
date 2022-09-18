@@ -244,6 +244,17 @@ body{
     font-size: 1.125rem;
 }
 
+.links-Art{
+    text-decoration: none;
+    text-decoration-style: none;
+    color: #222222;
+    
+    
+}
+.links-Art:hover{
+    color: #222222;
+}
+
 
 /* --CREA TU CUENTA */
 
@@ -417,6 +428,43 @@ body{
 }
 
 
+/* OFERTAS */ 
+
+.main-ofertas {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.div-Ofertas{
+    width: 20%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+
+/* DETALLE PRODUCTO */
+
+.detalleProducto{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-top: 50px;
+    padding: 20px;;
+}
+
+
+.detalle-main{
+    display: flex;
+    justify-content: center;
+}
+
+
+
 @media (max-width: 767px){
 
     .header-compras{
@@ -484,6 +532,18 @@ body{
     #arrow{
         display: none;
     }
+    .main-ofertas{
+        display: flex;
+        flex-direction: column;
+    }
+    .div-Ofertas{
+        width: 50%;
+    }
+    
+    .detalleProducto{   
+        width: 85%;
+      
+    }   
     
 
 
@@ -543,6 +603,15 @@ body{
     #arrow:hover{
         background-color: white;
     }
+    .div-Ofertas{
+        width: 60%;
+    }
+
+    
+    .detalleProducto{   
+        width: 50%;
+      
+    }   
     
     
 }
@@ -648,5 +717,12 @@ body{
     #arrow:hover{
         background-color: white;
     }
+    .div-Ofertas{
+        width: 20%;
+    }
+    .detalleProducto{   
+        width: 25%;
+      
+    }  
 
 }
