@@ -17,6 +17,13 @@ app.use(express.static("./public"));
 app.set('views', path.join(__dirname, '../src/views'));
 app.set('view engine', 'ejs');
 
+//Seteo métodos Post
+app.use(express.urlencoded({ extended: false}));
+app.use(express.json());
+const methodOverride = require('method-override');
+app.use(methodOverride('_method')); 
+
+
 //Rutas
 app.use("/", router);
 app.use("/users", routerUser);
