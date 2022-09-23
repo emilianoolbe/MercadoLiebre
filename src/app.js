@@ -25,8 +25,8 @@ app.use(methodOverride('_method'));
 
 
 //Rutas
-app.use("/", router);
-app.use("/users", routerUser);
+app.use('/', router);
+app.use('/users', routerUser);
 app.use('/products', routerProducts);
 
 

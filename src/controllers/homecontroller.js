@@ -13,7 +13,7 @@ let productosParseados = JSON.parse(productosJson);
 //CONTROLADOR
 const controlador = {
     home: (req, res) => {
-        res.render("home", {productos: productosParseados})
+        res.render('home', {productos: productosParseados});
     },
 
 }

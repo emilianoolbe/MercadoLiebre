@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head-->
+<%- include('../partials/head.ejs') %>
+<!-- Head-->
+<body>
+<!-- Header-->
+<header class="header">
+    <div class="hedear-crea-tu-cuenta"> 
+        <div class="header-top-bar ">    
+            <a href="/"><img  src="/imagenes/logo-mercado-liebre.svg" alt="Logo Mercado Liebre" id="logo"></a>
+        </div>
+  
+        <button class="btn btn-outline-dark"><i class="fa-solid fa-bars"></i></button>
+
+        <nav class="header-bottom-bar"> 
+            <ul class="nav-var">        
+                <li><a href="#"> Ayuda |</a></li>
+            </ul>     
+        </nav>           
+    </div>
+</header>
+<!-- Header-->
+
+<!--Main-->
+
+<main class="container main-login">
+    <section class="w-100 h-100">
+
+        <form action="/products/crear" method="post">
+            <div class="row justify-content-center aling-items-center m-5 p-5">
+
+                <div class="row  m-1  p-2">
+                    <div class="col-md-6 col-sm-12 ">
+                    <input type="text" class="form-control" placeholder="Nombre:" aria-label="Nombre" name="nombre" required>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                    <input type="number" class="form-control" placeholder="Precio del producto:" aria-label="Precio" name="precio" required>
+                    </div>
+                </div>
+
+                <div class="row m-1 p-2">
+                    <div class="col-md-6 col-sm-12 ">
+                    <input type="text" class="form-control" placeholder="Descuento" aria-label="Descuento" name="descuento" required>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <select class="form-select" aria-label="Default select example" name="categoria" required>
+                            <option selected>Categoría</option>
+                            <option value="1">Ofertas</option>
+                            <option value="2">Últimos Agregados</option>
+                        </select>
+                    </div>
+                </div> 
+                <div class=" row m-1 p-2">
+                    <div class="col-12">
+                        <textarea class="form-control" placeholder="Descripción" name="descripcion"></textarea>
+                    </div>
+                    <div class="col mt-2">
+                        <button type="submit" class="submit-button col-12"> Enviar</button>
+                        <button type="reset" class="detele-button col-12 mt-2">Resetear</button>
+                    </div>
+                </div>    
+            </div>
+        </form>
+    </section>
+</main>
+<!--Main-->
+
+<!--Footer-->
+<%- include('../partials/footer.ejs') %>
+<!--Footer-->
+</body>
+</html>

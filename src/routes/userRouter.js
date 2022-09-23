@@ -8,10 +8,8 @@ const express = require("express");
 const router = express.Router();
 
 //Ruteo (ruta + controlador.método)
-router.get("/ingresa", userController.login);
+router.get('/ingresa', userController.login);
 router.get('/register', userController.register);
-router.get('/editar/:id', userController.edit);
-router.put('/editar', userController.update);
-router.delete('/editar/:id', userController.delete);
+
 
 module.exports = router;

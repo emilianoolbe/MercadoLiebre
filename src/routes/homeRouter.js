@@ -8,6 +8,6 @@ const express = require("express");
 const router = express.Router();
 
 //Ruteo (ruta + controlador.método)
-router.get("/", homeController.home);
+router.get('/', homeController.home);
 
 module.exports = router;
