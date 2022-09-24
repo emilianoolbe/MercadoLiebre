@@ -27,33 +27,41 @@
 <main class="container main-login">
     <section class="w-100 h-100">
 
-        <form action="/products/crear" method="post">
+        <h2 class="text-black-50 mt-2 p-2">Editar producto : <%= producto.nombre%></h2>
+        
+        <!--Como necesito el ID - en el action le envio ID por R.P.-->
+        <form action="/products/editar/<%= producto.id%>?_method=PUT" method="post">
             <div class="row justify-content-center aling-items-center m-5 p-5">
 
                 <div class="row  m-1  p-2">
                     <div class="col-md-6 col-sm-12 ">
-                    <input type="text" class="form-control" placeholder="Nombre:" aria-label="Nombre" name="nombre" required>
+                    <input type="text" class="form-control" placeholder="Nombre:" aria-label="Nombre" name="nombre" value="<%= producto.nombre %>" required>
                     </div>
                     <div class="col-md-6 col-sm-12">
-                    <input type="number" class="form-control" placeholder="Precio del producto:" aria-label="Precio" name="precio" required>
+                    <input type="number" class="form-control" placeholder="Precio del producto:" aria-label="Precio" name="precio" value="<%= producto.precio %>" required>
                     </div>
                 </div>
 
                 <div class="row m-1 p-2">
                     <div class="col-md-6 col-sm-12 ">
-                    <input type="text" class="form-control" placeholder="Descuento" aria-label="Descuento" name="descuento" required>
+                    <input type="text" class="form-control" placeholder="Descuento" aria-label="Descuento" name="descuento" value="<%= producto.descuento %>" required>
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <select class="form-select" aria-label="Default select example" name="categoria" required>
-                            <option selected>Categoría</option>
-                            <option value="1">Ofertas</option>
-                            <option value="2">Últimos Agregados</option>
+                            <% if (producto.categoria == 'Últimos Agregados') { %> 
+                                <option value="En oferta">En oferta</option>
+                                <option value="Últimos Agregados" selected>Últimos Agregados</option>
+                            <% } %> 
+                            <% if (producto.categoria == 'En oferta') { %> 
+                                <option value="Últimos Agregados" >Últimos Agregados</option>
+                                <option value="En oferta"selected>En oferta</option>
+                            <% } %> 
                         </select>
                     </div>
                 </div> 
                 <div class=" row m-1 p-2">
                     <div class="col-12">
-                        <textarea class="form-control" placeholder="Descripción" name="descripcion"></textarea>
+                        <textarea class="form-control" placeholder="Descripción" name="descripcion"> <%= producto.descripcion %>"</textarea>
                     </div>
                     <div class="col mt-2">
                         <button type="submit" class="submit-button col-12"> Enviar</button>

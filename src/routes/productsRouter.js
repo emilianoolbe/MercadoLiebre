@@ -7,27 +7,24 @@ const express = require('express');
 //Ejectuo método router
 const router = express.Router();
 
-/*Ruteo (ruta + controlador.método)
+//Rutas
 
-Muestro productos */
+//Muestro productos 
 router.get('/ofertas', productsController.ofertas);
-
 
 //Creación de producto
 router.get('/crear', productsController.crear);
 router.post('/crear', productsController.guardar);
 
 //Detalle de producto
-router.get('/detalle/:id?', productsController.detalle);
+router.get('/detalle/:id', productsController.detalle);
 
 //Edición de producto
-//router.get('/editar/:id', userController.edit);
-//router.put('/editar', userController.update);
+router.get('/editar/:id', productsController.editar);
+router.put('/editar/:id', productsController.update);
 
-/*
 //Borrado de producto
-router.delete('/editar/:id', userController.delete);
+router.delete('/:id', productsController.borrar);
 
 
-*/
 module.exports = router;

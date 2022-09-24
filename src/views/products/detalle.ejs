@@ -40,8 +40,13 @@
 
                             <div class="col-12 row justify-content-center w-100 ">
                                 <div  class="row col-12 h-50 p-1">
-                                    <button type="submit" class="submit-button col-6"> Editar </button>
-                                    <button type="reset" class="detele-button col-6"> Eliminar </button>
+
+                                    <a href="/products/editar/<%= producto.id %>" class="text-decoration-none"><button type="submit" class="submit-button col-5 "> Editar </button></a>
+
+                                    <form action="/products/<%= producto.id %>?_method=DELETE" method="post">
+                                        <button type="submit" class="detele-button col-5 "> Eliminar </button>
+                                    </form>
+
                                 </div>
                             </div>
                             

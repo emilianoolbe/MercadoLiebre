@@ -70,14 +70,5 @@
   "nombre": "Joystick Xbox",
   "descripcion": "La mejor del mercado",
   "categoria": "En oferta"
- },
- {
-  "id": 9,
-  "img": "qqqq.jpg",
-  "precio": 120,
-  "descuento": 10,
-  "nombre": "Camiseta Club Nacional de Football",
-  "descripcion": "La mejor camiseta del Mundo",
-  "categoria": "1"
  }
 ]
