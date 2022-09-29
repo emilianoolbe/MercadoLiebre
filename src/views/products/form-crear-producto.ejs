@@ -27,7 +27,7 @@
 <main class="container main-login">
     <section class="w-100 h-100">
 
-        <form action="/products/crear" method="post">
+        <form action="/products/crear" method="post" enctype="multipart/form-data">
             <div class="row justify-content-center aling-items-center m-5 p-5">
 
                 <div class="row  m-1  p-2">
@@ -54,6 +54,9 @@
                 <div class=" row m-1 p-2">
                     <div class="col-12">
                         <textarea class="form-control" placeholder="Descripción" name="descripcion"></textarea>
+                    </div>
+                    <div class="col-12 mt-3 mb-3">
+                        <input type="file" enctype="" class="form-control" name="img">
                     </div>
                     <div class="col mt-2">
                         <button type="submit" class="submit-button col-12"> Enviar</button>

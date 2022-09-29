@@ -30,7 +30,7 @@
         <h2 class="text-black-50 mt-2 p-2">Editar producto : <%= producto.nombre%></h2>
         
         <!--Como necesito el ID - en el action le envio ID por R.P.-->
-        <form action="/products/editar/<%= producto.id%>?_method=PUT" method="post">
+        <form action="/products/editar/<%= producto.id%>?_method=PUT" method="post" enctype="multipart/form-data">
             <div class="row justify-content-center aling-items-center m-5 p-5">
 
                 <div class="row  m-1  p-2">
@@ -63,10 +63,14 @@
                     <div class="col-12">
                         <textarea class="form-control" placeholder="Descripción" name="descripcion"> <%= producto.descripcion %>"</textarea>
                     </div>
+                    <div class="col-12 mt-3 mb-3">
+                        <input type="file" class="form-control" enctype="" name="img">
+                    </div>
                     <div class="col mt-2">
-                        <button type="submit" class="submit-button col-12"> Enviar</button>
+                        <button type="submit" class="submit-button col-12">Enviar</button>
                         <button type="reset" class="detele-button col-12 mt-2">Resetear</button>
                     </div>
+                    
                 </div>    
             </div>
         </form>

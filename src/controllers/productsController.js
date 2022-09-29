@@ -8,6 +8,7 @@ const path = require('path');
 let productosJsonPath = path.join(__dirname,'../dataBase/productos.json');
 let productos = JSON.parse(fs.readFileSync(productosJsonPath , "utf-8"));
 
+
 //CONTROLADOR
 let controlador = {
 
@@ -16,65 +17,61 @@ let controlador = {
 
         //vuelve a leer productos (por modificaciones)
         let productos = JSON.parse(fs.readFileSync(productosJsonPath , "utf-8"));
-        res.render('products/ofertas', {productosOferta: productos})
+        res.render('products/ofertas', {productos: productos})
     },
+
     //Vista detalles del producto
     detalle: (req, res) => {
-        let productoElegido = null;
-        for (cadaElemento of productos){
-            if(cadaElemento.id == req.params.id){
-                productoElegido = cadaElemento;
-                break;
-            }
-        }
-        if(productoElegido != null){
-            res.render('products/detalle', {producto: productoElegido});
+
+        let productoAEncontrar = productos.find((cadaElemento) => cadaElemento.id == req.params.id)
+        
+        if(productoAEncontrar){
+            res.render('products/detalle', {producto: productoAEncontrar});
         }else{
             res.send('Producto no encontrado')
         }
     },
+
     //Vista formulario de Crear Producto
     crear: (req, res) => {
         res.render('products/form-crear-producto');
+
     },
 
     //Creación de producto
     guardar: (req, res) => {
 
-        //Objeto del producto nuevo 
-        let imagenNuevoProducto = "qqqq.jpg"
-        let productoNuevo = {    
-            "id" : (productos[productos.length - 1].id) +1,
-            "img" : imagenNuevoProducto,
-            "precio" : parseInt(req.body.precio),
-            "descuento" : parseInt(req.body.descuento),
-            "nombre" : req.body.nombre,
-            "descripcion" : req.body.descripcion,
-            "categoria" : req.body.categoria
-        }
-        //Guardado lógico 
-        productos.push(productoNuevo);
+        if (req.file){
+            let productoNuevo = {    
+                "id" : (productos[productos.length - 1].id) +1,
+                "img" : req.file.filename,
+                "precio" : parseInt(req.body.precio),
+                "descuento" : parseInt(req.body.descuento),
+                "nombre" : req.body.nombre,
+                "descripcion" : req.body.descripcion,
+                "categoria" : req.body.categoria
+            }
+            //Guardado lógico 
+            productos.push(productoNuevo);
+            //Guardado fisico en JSON
+            fs.writeFileSync((path.join(__dirname,'../dataBase/productos.json')), JSON.stringify(productos, null, 4), 'utf-8');
 
-        //Guardado fisico en JSON
-        fs.writeFileSync((path.join(__dirname,'../dataBase/productos.json')), JSON.stringify(productos, null, " "), 'utf-8');
-        
+        }else{
+            res.render('products/form-crear-producto');
+        }
         //Redirecciono al home
         res.redirect('/products/ofertas')
     },
 
-    //Editar producto vista form
+    //Editar producto form vista
     editar: (req, res) =>{
-        let productoElegido = null;
-        for (cadaElemento of productos){
-            if(cadaElemento.id == req.params.id){
-                productoElegido = cadaElemento;
-                break;
-            }
-        }
-        if(productoElegido != null){
-            res.render('products/form-editar-producto', {producto: productoElegido});
+
+        let productoAEncontrar = productos.find((cadaElemento) => cadaElemento.id == req.params.id)
+ 
+        if(productoAEncontrar){
+            res.render('products/form-editar-producto', {producto: productoAEncontrar});
         }else{
-            res.send('Producto no encontrado');
+            res.send('Producto no encontrado')
         }
     },
 
@@ -82,37 +79,42 @@ let controlador = {
     update:(req, res) => {
         
         //Edición lógica
+        let nombreImagenAntigua;
         for (cadaElemento of productos){
             if (cadaElemento.id == req.params.id){
-                cadaElemento.nombre= req.body.nombre;
+                nombreImagenAntigua = cadaElemento.img;
+                cadaElemento.nombre = req.body.nombre;
                 cadaElemento.precio = parseInt(req.body.precio);
                 cadaElemento.descuento = parseInt(req.body.descuento);
                 cadaElemento.categoria = req.body.categoria;
                 cadaElemento.descripcion = req.body.descripcion;
+                cadaElemento.img = req.file.filename;
                 break;
-            }
+             }
         }
-        //ediciónn fisica
-        fs.writeFileSync((path.join(__dirname,'../dataBase/productos.json')), JSON.stringify(productos, null, " "), 'utf-8');
-        
+        //edición fisica
+        fs.unlinkSync(path.join(__dirname, '../../public/imagenes/') + nombreImagenAntigua );//borrado img al editar de la carpeta img
+        fs.writeFileSync((path.join(__dirname,'../dataBase/productos.json')), JSON.stringify(productos, null, 4), 'utf-8');
+    
         //redirecciono
         res.redirect('/products/ofertas');
+        
     },
 
     //Borrado de producto
-
     borrar: (req, res) =>{
-        console.log(productos);
-        let id  = req.params.id
-        console.log(id);
+      
+       let productoABorrar = productos.find((cadaElemento) => cadaElemento.id == req.params.id); //Busco el producto por ID con find()
+       let imgABorrar = path.join(__dirname, '../../public/imagenes/') + productoABorrar.img; //Ruteo la img a Borrar
 
-        let productosFiltrados = productos.filter(cadaElemento => { return cadaElemento.id != id});
-        console.log(productosFiltrados);
-        
+       if (fs.existsSync(imgABorrar)){
+        fs.unlinkSync(imgABorrar) //Si existe archivo lo borra --- unlinkSync() recibe como parametro la ruta del archivo a eliminar + nombre
+       }
+       let productoFinal = productos.filter((cadaElemento) => cadaElemento.id != req.params.id); //Todos los productos dinstintos al ID
 
-        fs.writeFileSync((path.join(__dirname,'../dataBase/productos.json')), JSON.stringify(productosFiltrados, null, " "), 'utf-8');
+       fs.writeFileSync((path.join(__dirname,'../dataBase/productos.json')), JSON.stringify(productoFinal, null, 4), 'utf-8');
 
-        res.redirect('/products/ofertas');
+       res.redirect('/products/ofertas');
     }
 }
 

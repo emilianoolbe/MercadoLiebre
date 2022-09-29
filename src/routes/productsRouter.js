@@ -14,17 +14,17 @@ const path = require('path');
 //Importo Multer
 const multer = require('multer');
 
-//Seteo multer (indico donde guardo file + nombre)
+//Seteo multer (indico donde guardo file + nome)
 const storage = multer.diskStorage({
     destination:(req, file, cb) => {
-        cb(null, path.join(__dirname, '../../public/imagenes'))
+        cb(null, path.join(__dirname, '../../public/imagenes'));
     },
     filename: (req, file, cb) =>{
         //creo el nombre de la imagen (concateno el string + fecha en ms + extensión original)
         let nuevaImg = 'products-' + Date.now() + path.extname(file.originalname);
-        cb(null, nuevaImg)
+        cb(null, nuevaImg);
     }
-})
+});
 
 //Ejecuto multer con la config anterior para agregarlo a la ruta
 const upload = multer({storage : storage});
@@ -36,14 +36,14 @@ router.get('/ofertas', productsController.ofertas);
 
 //Creación de producto
 router.get('/crear', productsController.crear);
-router.post('/crear', productsController.guardar); // upload.método('name del input')
+router.post('/crear', upload.single('img'), productsController.guardar); // upload.método('name del input')
 
 //Detalle de producto
 router.get('/detalle/:id', productsController.detalle);
 
 //Edición de producto
 router.get('/editar/:id', productsController.editar);
-router.put('/editar/:id', productsController.update);
+router.put('/editar/:id', upload.single('img'), productsController.update); // upload.método('name del input')
 
 //Borrado de producto
 router.delete('/:id', productsController.borrar);

@@ -1,74 +1,92 @@
 [
- {
-  "id": 1,
-  "img": "img-tv-samsung-smart",
-  "precio": 1490,
-  "descuento": 30,
-  "nombre": "TV-Samsung",
-  "descripcion": "La mejor del mercado",
-  "categoria": "En oferta"
- },
- {
-  "id": 2,
-  "img": "img-macbook-pro-2019",
-  "precio": 1500,
-  "descuento": 10,
-  "nombre": "MacBook Pro",
-  "descripcion": "La mejor del mercado",
-  "categoria": "En oferta"
- },
- {
-  "id": 3,
-  "img": "productonuevo1",
-  "precio": 400,
-  "descuento": 10,
-  "nombre": "Apple Watch",
-  "descripcion": "La mejor del mercado",
-  "categoria": "En oferta"
- },
- {
-  "id": 4,
-  "img": "productonuevo2",
-  "precio": 120,
-  "descuento": 10,
-  "nombre": "Camiseta Uruguay",
-  "descripcion": "La mejor del mercado",
-  "categoria": "Últimos Agregados"
- },
- {
-  "id": 5,
-  "img": "img-samsung-galaxy-s10",
-  "precio": 700,
-  "descuento": 15,
-  "nombre": "Samsung Galaxy S10",
-  "descripcion": "La mejor del mercado",
-  "categoria": "Últimos Agregados"
- },
- {
-  "id": 6,
-  "img": "productonuevo3",
-  "precio": 300,
-  "descuento": 30,
-  "nombre": "JBL Charge 5",
-  "descripcion": "La mejor del mercado",
-  "categoria": "Últimos Agregados"
- },
- {
-  "id": 7,
-  "img": "img-tv-samsung-smart",
-  "precio": 40,
-  "descuento": 25,
-  "nombre": "img-cafetera-moulinex",
-  "descripcion": "La mejor del mercado",
-  "categoria": "Últimos Agregados"
- },
- {
-  "id": 8,
-  "img": "productonuevo4",
-  "precio": 100,
-  "descuento": 10,
-  "nombre": "Joystick Xbox",
-  "descripcion": "La mejor del mercado",
-  "categoria": "En oferta"
- }
+    {
+        "id": 1,
+        "img": "img-tv-samsung-smart.jpg",
+        "precio": 1490,
+        "descuento": 30,
+        "nombre": "TV-Samsung",
+        "descripcion": "La mejor del mercado",
+        "categoria": "En oferta"
+    },
+    {
+        "id": 2,
+        "img": "img-macbook-pro-2019.jpg",
+        "precio": 1500,
+        "descuento": 10,
+        "nombre": "MacBook Pro",
+        "descripcion": "La mejor del mercado",
+        "categoria": "En oferta"
+    },
+    {
+        "id": 3,
+        "img": "productonuevo1.jpg",
+        "precio": 400,
+        "descuento": 10,
+        "nombre": "Apple Watch",
+        "descripcion": "La mejor del mercado",
+        "categoria": "En oferta"
+    },
+    {
+        "id": 4,
+        "img": "productonuevo2.jpg",
+        "precio": 120,
+        "descuento": 10,
+        "nombre": "Camiseta Uruguay",
+        "descripcion": "La mejor del mercado",
+        "categoria": "Últimos Agregados"
+    },
+    {
+        "id": 5,
+        "img": "img-samsung-galaxy-s10.jpg",
+        "precio": 700,
+        "descuento": 15,
+        "nombre": "Samsung Galaxy S10",
+        "descripcion": "La mejor del mercado",
+        "categoria": "Últimos Agregados"
+    },
+    {
+        "id": 6,
+        "img": "productonuevo3.jpg",
+        "precio": 300,
+        "descuento": 30,
+        "nombre": "JBL Charge 5",
+        "descripcion": "La mejor del mercado",
+        "categoria": "Últimos Agregados"
+    },
+    {
+        "id": 7,
+        "img": "img-tv-samsung-smart.jpg",
+        "precio": 40,
+        "descuento": 25,
+        "nombre": "img-cafetera-moulinex",
+        "descripcion": "La mejor del mercado",
+        "categoria": "Últimos Agregados"
+    },
+    {
+        "id": 8,
+        "img": "productonuevo4.jpg",
+        "precio": 100,
+        "descuento": 10,
+        "nombre": "Joystick Xbox",
+        "descripcion": "La mejor del mercado",
+        "categoria": "En oferta"
+    },
+    {
+        "id": 9,
+        "img": "products-1664423436637.jpg",
+        "precio": 4500,
+        "descuento": 10,
+        "nombre": "Championes Addidas",
+        "descripcion": "    Las Mejores Zapatillas del Mercado\"\"\"\"",
+        "categoria": "En oferta"
+    },
+    {
+        "id": 10,
+        "img": "products-1664420050322.jpg",
+        "precio": 5000,
+        "descuento": 0,
+        "nombre": "Championes Nike",
+        "descripcion": "Las zapatillas más divertidas multiculores",
+        "categoria": "Últimos Agregados"
+    }
 ]
