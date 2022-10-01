@@ -27,7 +27,7 @@
         <main class="main-login">
             <section class=" section-crea-tu-cuenta">
                 <article class="formulario-crear-cuenta borde-fondo-2">
-                    <form action="/" method="get" id="form">
+                    <form action="/users/form-crear-usuario" method="post" id="form" enctype="multipart/form-data">
                         <div class=>      
                             <input type="text" name="nombre" id="nombre" required placeholder="Nombre - Completo" minlength="3" pattern="[A-Za-z0-9_-]{1,15}" >
                         </div>
@@ -63,7 +63,7 @@
                         </div>
                         <div>
                             <label for="foto">Seleccionar una imagen para el perfil :</label>
-                            <input type="file" name="foto" accept=".jpg" class="input-img-usuario">
+                            <input type="file" name="img" accept=".jpg" class="input-img-usuario">
                         </div>
                         <div>                
                             <input type="password" name="password" id="contraseña" placeholder="Contraseña :" required minlength="6">
