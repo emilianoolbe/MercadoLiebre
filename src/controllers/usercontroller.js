@@ -1,10 +1,13 @@
+//Importo Fs
 const fs = require('fs');
+
+//Importo Path
 const path = require('path');
 
+//Leo usuariosJSON
 let userJsonPath = path.join(__dirname, '../dataBase/users.json');
 let usuarios = JSON.parse(fs.readFileSync(userJsonPath, 'utf-8'));
 
-console.log(usuarios);
 //CONTROLADOR
 const controlador = {
 
@@ -80,10 +83,11 @@ const controlador = {
     //Eliminar usuario
 
     delete: (req, res) => {
+
         let usuarioAborrar = usuarios.find((cadaElemento) => cadaElemento.id == req.params.id);
         let imgABorrar = path.join(__dirname, '../../public/imagenes/img-users') + usuarioAborrar.img;
 
-        fs.existsSync(imgABorrar) ? fs.unlinkSync(imgABorrar) : "";
+        fs.existsSync(imgABorrar) ? fs.unlinkSync(imgABorrar) : null;
 
         let usuariosActualizados = usuarios.filter((cadaElemento) => cadaElemento.id != req.params.id);
 

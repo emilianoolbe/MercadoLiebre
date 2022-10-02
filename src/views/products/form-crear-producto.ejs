@@ -32,31 +32,55 @@
 
                 <div class="row  m-1  p-2">
                     <div class="col-md-6 col-sm-12 ">
-                    <input type="text" class="form-control" placeholder="Nombre:" aria-label="Nombre" name="nombre" required>
+
+                        <input type="text" class="form-control <%= locals.errors && errors.nombre ? 'is-invalid' : null %> " placeholder="Nombre:" aria-label="Nombre" name="nombre" value="<%= locals.oldData ? oldData.nombre : null %>">
+                        <% if (locals.errors && errors.nombre) { %>
+                        <div class="text-danger">
+                                <%= errors.nombre.msg %>   
+                        </div>
+                        <% } %>
+
                     </div>
                     <div class="col-md-6 col-sm-12">
-                    <input type="number" class="form-control" placeholder="Precio del producto:" aria-label="Precio" name="precio" required>
+                        <input type="number" class="form-control <%= locals.errors && errors.precio ? 'is-invalid' : null %>" placeholder="Precio del producto:" aria-label="Precio" name="precio" value="<%= locals.oldData ? oldData.precio : null %>">
+                        <% if (locals.errors && errors.precio) { %>
+                            <div class="text-danger">
+                                    <%= errors.precio.msg %>   
+                            </div>
+                            <% } %>
                     </div>
                 </div>
 
                 <div class="row m-1 p-2">
                     <div class="col-md-6 col-sm-12 ">
-                    <input type="text" class="form-control" placeholder="Descuento" aria-label="Descuento" name="descuento" required>
+                    <input type="text" class="form-control" placeholder="Descuento" aria-label="Descuento" name="descuento">
                     </div>
                     <div class="col-md-6 col-sm-12">
-                        <select class="form-select" aria-label="Default select example" name="categoria" required>
+                        <select class="form-select" aria-label="Default select example" name="categoria">
                             <option selected>Categoría</option>
                             <option name="En oferta">En oferta</option>
                             <option name="Últimos Agregados">Últimos Agregados</option>
+                          
                         </select>
+                        
                     </div>
                 </div> 
                 <div class=" row m-1 p-2">
                     <div class="col-12">
                         <textarea class="form-control" placeholder="Descripción" name="descripcion"></textarea>
+                        <% if (locals.errors && errors.descripcion) { %>
+                            <div class="text-danger">
+                                    <%= errors.descripcion.msg %>   
+                            </div>
+                            <% } %>
                     </div>
                     <div class="col-12 mt-3 mb-3">
                         <input type="file" enctype="" class="form-control" name="img">
+                        <% if (locals.errors && errors.img) { %>
+                            <div class="text-danger">
+                                    <%= errors.img.msg %>   
+                            </div>
+                            <% } %>
                     </div>
                     <div class="col mt-2">
                         <button type="submit" class="submit-button col-12"> Enviar</button>

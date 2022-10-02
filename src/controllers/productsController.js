@@ -4,6 +4,9 @@ const fs = require('fs');
 //Importo Path
 const path = require('path');
 
+//Importo Express-validator
+const { validationResult } = require('express-validator');
+
 //readFileSync + join para rutear JSON + PARSEO
 let productosJsonPath = path.join(__dirname,'../dataBase/productos.json');
 let productos = JSON.parse(fs.readFileSync(productosJsonPath , "utf-8"));
@@ -25,11 +28,8 @@ let controlador = {
 
         let productoAEncontrar = productos.find((cadaElemento) => cadaElemento.id == req.params.id)
         
-        if(productoAEncontrar){
-            res.render('products/detalle', {producto: productoAEncontrar});
-        }else{
-            res.send('Producto no encontrado')
-        }
+        productoAEncontrar ? res.render('products/detalle', {producto: productoAEncontrar}) : res.send('Producto no encontrado');
+
     },
 
     //Vista formulario de Crear Producto
@@ -41,7 +41,8 @@ let controlador = {
     //Creación de producto
     guardar: (req, res) => {
 
-        if (req.file){
+        let errors = validationResult(req);
+        if(errors.isEmpty()){
             let productoNuevo = {    
                 "id" : (productos[productos.length - 1].id) +1,
                 "img" : req.file.filename,
@@ -55,12 +56,12 @@ let controlador = {
             productos.push(productoNuevo);
             //Guardado fisico en JSON
             fs.writeFileSync((path.join(__dirname,'../dataBase/productos.json')), JSON.stringify(productos, null, 4), 'utf-8');
+            //Redirecciono al home
+            res.redirect('/products/ofertas')
 
         }else{
-            res.render('products/form-crear-producto');
-        }
-        //Redirecciono al home
-        res.redirect('/products/ofertas')
+            res.render('products/form-crear-producto', {errors : errors.mapped(), oldData: req.body});
+        }           
     },
 
     //Editar producto form vista
@@ -68,11 +69,8 @@ let controlador = {
 
         let productoAEncontrar = productos.find((cadaElemento) => cadaElemento.id == req.params.id)
  
-        if(productoAEncontrar){
-            res.render('products/form-editar-producto', {producto: productoAEncontrar});
-        }else{
-            res.send('Producto no encontrado')
-        }
+        productoAEncontrar ? res.render('products/form-editar-producto', {producto: productoAEncontrar}) : res.send('Producto no encontrado');
+        
     },
 
     //Editar producto 
@@ -107,9 +105,9 @@ let controlador = {
        let productoABorrar = productos.find((cadaElemento) => cadaElemento.id == req.params.id); //Busco el producto por ID con find()
        let imgABorrar = path.join(__dirname, '../../public/imagenes/') + productoABorrar.img; //Ruteo la img a Borrar
 
-       if (fs.existsSync(imgABorrar)){
-        fs.unlinkSync(imgABorrar) //Si existe archivo lo borra --- unlinkSync() recibe como parametro la ruta del archivo a eliminar + nombre
-       }
+        //Si existe archivo lo borra --- unlinkSync() recibe como parametro la ruta del archivo a eliminar + nombre
+       fs.existsSync(imgABorrar) ? fs.unlinkSync(imgABorrar) : null;
+
        let productoFinal = productos.filter((cadaElemento) => cadaElemento.id != req.params.id); //Todos los productos dinstintos al ID
 
        fs.writeFileSync((path.join(__dirname,'../dataBase/productos.json')), JSON.stringify(productoFinal, null, 4), 'utf-8');
