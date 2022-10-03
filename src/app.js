@@ -10,7 +10,7 @@ const routerProducts = require('./routes/productsRouter');
 // Ejecuto express
 let app = express();
 
-//Cambio a estatica a la carpeta public (para poder acceder)
+//Cambio a estatica la carpeta public (para poder acceder)
 app.use(express.static("./public"));
 
 //Seteo de template Engine EJS

@@ -4,7 +4,7 @@ const fs = require('fs');
 //Importo Path
 const path = require('path');
 
-//Importo Express-validator
+//Importo resultados de Express-validator
 const { validationResult } = require('express-validator');
 
 //readFileSync + join para rutear JSON + PARSEO
@@ -76,27 +76,34 @@ let controlador = {
     //Editar producto 
     update:(req, res) => {
         
-        //Edición lógica
-        let nombreImagenAntigua;
-        for (cadaElemento of productos){
-            if (cadaElemento.id == req.params.id){
-                nombreImagenAntigua = cadaElemento.img;
-                cadaElemento.nombre = req.body.nombre;
-                cadaElemento.precio = parseInt(req.body.precio);
-                cadaElemento.descuento = parseInt(req.body.descuento);
-                cadaElemento.categoria = req.body.categoria;
-                cadaElemento.descripcion = req.body.descripcion;
-                cadaElemento.img = req.file.filename;
-                break;
-             }
-        }
-        //edición fisica
-        fs.unlinkSync(path.join(__dirname, '../../public/imagenes/') + nombreImagenAntigua );//borrado img al editar de la carpeta img
-        fs.writeFileSync((path.join(__dirname,'../dataBase/productos.json')), JSON.stringify(productos, null, 4), 'utf-8');
-    
-        //redirecciono
-        res.redirect('/products/ofertas');
+        let errors = validationResult(req);
+        if (errors.isEmpty()){
+            //Edición lógica
+            let nombreImagenAntigua;
+            for (cadaElemento of productos){
+                if (cadaElemento.id == req.params.id){
+                    nombreImagenAntigua = cadaElemento.img;
+                    cadaElemento.nombre = req.body.nombre;
+                    cadaElemento.precio = parseInt(req.body.precio);
+                    cadaElemento.descuento = parseInt(req.body.descuento);
+                    cadaElemento.categoria = req.body.categoria;
+                    cadaElemento.descripcion = req.body.descripcion;
+                    cadaElemento.img = req.file.filename;
+                    break;
+                }
+            }
+            //edición fisica
+            fs.unlinkSync(path.join(__dirname, '../../public/imagenes/img-products/') + nombreImagenAntigua );//borrado img al editar de la carpeta img
+            fs.writeFileSync((path.join(__dirname,'../dataBase/productos.json')), JSON.stringify(productos, null, 4), 'utf-8');
         
+            //redirecciono
+            res.redirect('/products/ofertas');
+
+        }else{
+            let productoAEncontrar = productos.find((cadaElemento) => cadaElemento.id == req.params.id)
+ 
+            productoAEncontrar ? res.render('products/form-editar-producto', {producto: productoAEncontrar, errors : errors.mapped(), oldData : req.body }) : res.send('Producto no encontrado');   
+        }    
     },
 
     //Borrado de producto

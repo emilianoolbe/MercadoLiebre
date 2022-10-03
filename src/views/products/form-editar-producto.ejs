@@ -8,7 +8,7 @@
 <header class="header">
     <div class="hedear-crea-tu-cuenta"> 
         <div class="header-top-bar ">    
-            <a href="/"><img  src="/imagenes/logo-mercado-liebre.svg" alt="Logo Mercado Liebre" id="logo"></a>
+            <a href="/"><img  src="/imagenes/img-main/logo-mercado-liebre.svg" alt="Logo Mercado Liebre" id="logo"></a>
         </div>
   
         <button class="btn btn-outline-dark"><i class="fa-solid fa-bars"></i></button>
@@ -35,19 +35,31 @@
 
                 <div class="row  m-1  p-2">
                     <div class="col-md-6 col-sm-12 ">
-                    <input type="text" class="form-control" placeholder="Nombre:" aria-label="Nombre" name="nombre" value="<%= producto.nombre %>" required>
+                    <input type="text" class="form-control  <%= locals.errors && errors.nombre ? 'is-invalid' : null %> "" placeholder="Nombre:" aria-label="Nombre" name="nombre" value="<%= locals.oldData  && oldData.nombre ? oldData.nombre : producto.nombre %>">
+                    <% if (locals.errors && errors.nombre) { %>
+                        <div class="text-danger">
+                           <%= errors.nombre.msg %> 
+                        </div>
+                    <% } %> 
+                        
                     </div>
                     <div class="col-md-6 col-sm-12">
-                    <input type="number" class="form-control" placeholder="Precio del producto:" aria-label="Precio" name="precio" value="<%= producto.precio %>" required>
+                    <input type="number" class="form-control  <%= locals.errors && errors.precio ? 'is-invalid' : null %> "" placeholder="Precio del producto:" aria-label="Precio" name="precio" value="<%= locals.oldData  && oldData.precio ? oldData.precio : producto.precio %>">
+                    <% if (locals.errors && errors.precio) { %>
+                        <div class="text-danger">
+                           <%= errors.precio.msg %>
+                        </div> 
+                    <% } %> 
+                        
                     </div>
                 </div>
 
                 <div class="row m-1 p-2">
                     <div class="col-md-6 col-sm-12 ">
-                    <input type="text" class="form-control" placeholder="Descuento" aria-label="Descuento" name="descuento" value="<%= producto.descuento %>" required>
+                    <input type="text" class="form-control" placeholder="Descuento" aria-label="Descuento" name="descuento" value=" <%= locals.oldData && oldData.descuento ? oldData.descuento : producto.descuento %>">
                     </div>
                     <div class="col-md-6 col-sm-12">
-                        <select class="form-select" aria-label="Default select example" name="categoria" required>
+                        <select class="form-select" aria-label="Default select example" name="categoria">
                             <% if (producto.categoria == 'Últimos Agregados') { %> 
                                 <option value="En oferta">En oferta</option>
                                 <option value="Últimos Agregados" selected>Últimos Agregados</option>
@@ -61,10 +73,22 @@
                 </div> 
                 <div class=" row m-1 p-2">
                     <div class="col-12">
-                        <textarea class="form-control" placeholder="Descripción" name="descripcion"> <%= producto.descripcion %>"</textarea>
+                        <textarea class="form-control  <%= locals.errors && errors.descripcion ? 'is-invalid' : null %> "" placeholder="Descripción" name="descripcion"> <%= locals.oldData && oldData.descripcion ? oldData.descripcion : producto.descripcion %></textarea>
+                        <% if (locals.errors && errors.descripcion) { %>
+                            <div class="text-danger">
+                               <%= errors.descripcion.msg %> 
+                            </div>
+                        <% } %> 
+                            
                     </div>
                     <div class="col-12 mt-3 mb-3">
-                        <input type="file" class="form-control" enctype="" name="img">
+                        <input type="file" class="form-control  <%= locals.errors && errors.img ? 'is-invalid' : null %> "" enctype="" name="img">
+                        <% if (locals.errors && errors.img) { %>
+                            <div class="text-danger">
+                               <%= errors.img.msg %> 
+                            </div>
+                        <% } %> 
+        
                     </div>
                     <div class="col mt-2">
                         <button type="submit" class="submit-button col-12">Enviar</button>

@@ -73,20 +73,38 @@
     },
     {
         "id": 9,
-        "img": "products-1664423436637.jpg",
-        "precio": 4500,
-        "descuento": 10,
+        "img": "products-1664830919811.jpg",
+        "precio": 3000,
+        "descuento": 15,
         "nombre": "Championes Addidas",
-        "descripcion": "Las Mejores Zapatillas del Mercado",
+        "descripcion": " Las Mejores Zapatillas del Mercado\"",
         "categoria": "En oferta"
     },
     {
-        "id": 10,
-        "img": "products-1664420050322.jpg",
-        "precio": 5000,
+        "id": 11,
+        "img": "products-1664827619666.jpg",
+        "precio": 120,
         "descuento": 0,
-        "nombre": "Championes Nike",
-        "descripcion": "Las zapatillas más divertidas multiculores",
+        "nombre": "Camiseta Club Nacional de Football ",
+        "descripcion": "Camiseta de Suarez 9 - Bolso",
         "categoria": "Últimos Agregados"
+    },
+    {
+        "id": 12,
+        "img": "products-1664835778444.jpg",
+        "precio": 1500,
+        "descuento": 10,
+        "nombre": "PlayStation 5",
+        "descripcion": "  Sony Playstation 5",
+        "categoria": "En oferta"
+    },
+    {
+        "id": 13,
+        "img": "products-1664834766869.jpg",
+        "precio": 110,
+        "descuento": 0,
+        "nombre": "Balón del Mundial",
+        "descripcion": "  Pelota Qatar 2022 Final",
+        "categoria": "En oferta"
     }
 ]
