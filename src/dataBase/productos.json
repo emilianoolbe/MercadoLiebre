@@ -99,12 +99,30 @@
         "categoria": "En oferta"
     },
     {
-        "id": 13,
-        "img": "products-1664834766869.jpg",
-        "precio": 110,
+        "id": 14,
+        "img": "products-1664915569745.jpg",
+        "precio": 500,
+        "descuento": null,
+        "nombre": "Cámara de foto Nikon",
+        "descripcion": "Cámara de foto profesional Nikon",
+        "categoria": "Últimos Agregados"
+    },
+    {
+        "id": 15,
+        "img": "products-1664929067250.jpg",
+        "precio": 200,
         "descuento": 0,
-        "nombre": "Balón del Mundial",
-        "descripcion": "  Pelota Qatar 2022 Final",
-        "categoria": "En oferta"
+        "nombre": "Silla Gamer",
+        "descripcion": "      Silla Gamer Cougar  -Color : Naranja y Negra",
+        "categoria": "Últimos Agregados"
+    },
+    {
+        "id": 16,
+        "img": "products-1664934515997.jpg",
+        "precio": 1500,
+        "descuento": 0,
+        "nombre": "Iphone 14",
+        "descripcion": "         Iphone 14 Pro Max",
+        "categoria": "Últimos Agregados"
     }
 ]

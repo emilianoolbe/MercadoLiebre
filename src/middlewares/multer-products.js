@@ -17,6 +17,12 @@ const storage = multer.diskStorage({
 });
 
 //Ejecuto multer con la config anterior para agregarlo a la ruta
-const upload = multer({storage : storage});
+const upload = multer({storage : storage, 
+    fileFilter: (req, file, cb) => {
+        let extensionesAceptadas = ['.jpg', '.png', '.gif' ];
+        let fileExtension = path.extname(file.originalname);
+        extensionesAceptadas.includes(fileExtension) ? cb(null, true) : cb(null, false);
+    }
+});
 
-module.exports = upload;
+module.exports = upload; 

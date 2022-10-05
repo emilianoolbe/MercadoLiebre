@@ -27,7 +27,7 @@ router.get('/detalle/:id', productsController.detalle);
 
 //Edición de producto
 router.get('/editar/:id', productsController.editar);
-router.put('/editar/:id', upload.single('img'),validationProducts, productsController.update); // upload.método('name del input')
+router.put('/editar/:id', upload.single('img'), validationProducts, productsController.update); // upload.método('name del input')
 
 //Borrado de producto
 router.delete('/:id', productsController.borrar);

@@ -61,7 +61,8 @@ let controlador = {
 
         }else{
             res.render('products/form-crear-producto', {errors : errors.mapped(), oldData: req.body});
-        }           
+        }    
+        console.log(req.body);       
     },
 
     //Editar producto form vista
@@ -77,6 +78,7 @@ let controlador = {
     update:(req, res) => {
         
         let errors = validationResult(req);
+       
         if (errors.isEmpty()){
             //Edición lógica
             let nombreImagenAntigua;
@@ -104,6 +106,7 @@ let controlador = {
  
             productoAEncontrar ? res.render('products/form-editar-producto', {producto: productoAEncontrar, errors : errors.mapped(), oldData : req.body }) : res.send('Producto no encontrado');   
         }    
+        
     },
 
     //Borrado de producto

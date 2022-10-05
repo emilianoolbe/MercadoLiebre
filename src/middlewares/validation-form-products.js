@@ -13,13 +13,7 @@ const errors = [
     body('img').custom((value, {req}) =>{
         let file = req.file;
         if (!file) {
-            throw new Error('Debe agregar una imagen')
-        }else{
-            let extensionesAceptadas = ['.jpg', '.png', '.gif' ];
-            let fileExtension = path.extname(file.originalname);
-            if (!extensionesAceptadas.includes(fileExtension)) {
-                throw new Error('Las extensiones de imagenes permitidas son ' + extensionesAceptadas.join(', '));
-            }
+            throw new Error('Debe agregar una imagen, (*) Las extensiones de imagenes permitidas son: .jpg  .png .gif')
         }
         return true;
     })

@@ -53,15 +53,32 @@
 
                 <div class="row m-1 p-2">
                     <div class="col-md-6 col-sm-12 ">
-                    <input type="text" class="form-control" placeholder="Descuento" aria-label="Descuento" name="descuento">
-                    </div>
+                        <input type="text" class="form-control" placeholder="Descuento" aria-label="Descuento" name="descuento" value="<%= locals.oldData ? oldData.descuento : null %>">
+                        </div>
                     <div class="col-md-6 col-sm-12">
-                        <select class="form-select" aria-label="Default select example" name="categoria">
-                            <option selected>Categoría</option>
-                            <option name="En oferta">En oferta</option>
-                            <option name="Últimos Agregados">Últimos Agregados</option>
-                          
+                        <select class="form-select  <%= locals.errors && errors.categoria ? 'is-invalid' : null %>" aria-label="Default select example" name="categoria">
+                        
+                        <% if (locals.errors && errors.categoria) { %>
+                             <div class="text-danger">
+                                 <%= errors.categoria.msg %>   
+                            </div>
+                         <% } %>
+                        <option value="">Seleccione Categoría</option>
+
+                         <% let category = ['Últimos Agregados', 'En oferta'] %> 
+                         <% for (const cadaElemento of category) { %> 
+                
+                         <option
+                         <%= locals.oldData && (cadaElemento === oldData.categoria) ? 'selected' : null %> 
+                         > <%= cadaElemento %>  </option>
+                                
+                        <% } %> 
                         </select>
+                        <% if (locals.errors && errors.categoria) { %>
+                            <div class="text-danger">
+                                <%= errors.categoria.msg %>   
+                           </div>
+                        <% } %>
                         
                     </div>
                 </div> 

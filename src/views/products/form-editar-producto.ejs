@@ -59,16 +59,24 @@
                     <input type="text" class="form-control" placeholder="Descuento" aria-label="Descuento" name="descuento" value=" <%= locals.oldData && oldData.descuento ? oldData.descuento : producto.descuento %>">
                     </div>
                     <div class="col-md-6 col-sm-12">
-                        <select class="form-select" aria-label="Default select example" name="categoria">
-                            <% if (producto.categoria == 'Últimos Agregados') { %> 
-                                <option value="En oferta">En oferta</option>
-                                <option value="Últimos Agregados" selected>Últimos Agregados</option>
+                        <select class="form-select  <%= locals.errors && errors.categoria ? 'is-invalid' : null %>" name="categoria">
+                        
+                            <option value="">Seleccione Categoría</option>
+                             <% let category = ['Últimos Agregados', 'En oferta'] %> 
+                             <% for (const cadaElemento of category) { %> 
+                    
+                             <option 
+                             <%= locals.oldData && (cadaElemento === oldData.categoria) ? 'selected' : null %> 
+                             > <%= cadaElemento %>  </option>
+                                    
                             <% } %> 
-                            <% if (producto.categoria == 'En oferta') { %> 
-                                <option value="Últimos Agregados" >Últimos Agregados</option>
-                                <option value="En oferta"selected>En oferta</option>
-                            <% } %> 
-                        </select>
+                        
+                            </select>
+                            <% if (locals.errors && errors.categoria) { %>
+                                <div class="text-danger">
+                                    <%= errors.categoria.msg %>   
+                               </div>
+                            <% } %>
                     </div>
                 </div> 
                 <div class=" row m-1 p-2">
