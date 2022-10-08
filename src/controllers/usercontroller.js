@@ -4,6 +4,9 @@ const fs = require('fs');
 //Importo Path
 const path = require('path');
 
+//Importo ResultValidation
+const { validationResult } = require('express-validator');
+
 //Leo usuariosJSON
 let userJsonPath = path.join(__dirname, '../dataBase/users.json');
 let usuarios = JSON.parse(fs.readFileSync(userJsonPath, 'utf-8'));
@@ -30,25 +33,31 @@ const controlador = {
 
     //Guardado Registro
     newUser: (req, res) => {
+        let errors = validationResult(req);
+        if (errors.isEmpty()){
+            let usuarioNuevo = {
+                "id" : (usuarios[usuarios.length - 1].id) + 1,
+                'nombre': req.body.nombre,
+                'usuario': req.body.usuario,
+                'fechanacimiento' : req.body.fechanacimiento,
+                'domicilio' : req.body.domicilio,
+                'tipotransaccion' : req.body.tipotransaccion,
+                'interes' : req.body.interes,
+                'img' : req.file.filename,
+                'password' : req.body.password
+            }
+    
+            //Guardado lógico
+            usuarios.push(usuarioNuevo);
+            //Guardadi físico
+            fs.writeFileSync(userJsonPath, JSON.stringify(usuarios, null, 4) , 'utf-8');
 
-        let usuarioNuevo = {
-            "id" : (usuarios[usuarios.length - 1].id) + 1,
-            'nombre': req.body.nombre,
-            'usuario': req.body.usuario,
-            'fechanacimiento' : req.body.fechanacimiento,
-            'domicilio' : req.body.domicilio,
-            'tipotransaccion' : req.body.tipotransaccion,
-            'interes' : req.body.interes,
-            'img' : req.file.filename,
-            'password' : req.body.password
+            res.redirect('/users/ingresa')
+
+        }else{
+            res.render('users/form-crear-usuario', {errors: errors.mapped(), oldData: req.body});
         }
-        console.log(usuarioNuevo);
-        //Guardado lógico
-        usuarios.push(usuarioNuevo);
-        //Guardadi físico
-        fs.writeFileSync(userJsonPath, JSON.stringify(usuarios, null, 4) , 'utf-8');
-
-        res.redirect('/users/ingresa')
+        
     },
 
     //Vista form editar

@@ -24,52 +24,97 @@
   
         </header>
 
-        <main class="main-login">
-            <section class=" section-crea-tu-cuenta">
+        <main class="main-login row">
+            <section class=" section-crea-tu-cuenta container col-sm-12 col-md-6 col-lg-8">
                 <article class="formulario-crear-cuenta borde-fondo-2">
                     <form action="/users/form-crear-usuario" method="post" id="form" enctype="multipart/form-data">
-                        <div class=>      
-                            <input type="text" name="nombre" id="nombre" required placeholder="Nombre - Completo" minlength="3" pattern="[A-Za-z0-9_-]{1,15}" >
+                        <div>     
+                            <input type="text" name="nombre"  placeholder="Nombre Completo :" value="<%= locals.oldData ? oldData.nombre: null %> ">
+                            <% if (locals.errors && errors.nombre) { %>
+                                <span class="text-danger">
+                                        <%= errors.nombre.msg %>   
+                                </span>
+                                <% } %>
                         </div>
                         <div>        
-                            <input type="text" name="usuario" id="usuario" placeholder="Usuario" required pattern="[A-Za-z0-9_-]{1,15}" minlength="6">
+                            <input type="text" name="usuario"  placeholder="Usuario :" value="<%= locals.oldData ? oldData.usuario : null %>" >
+                            <% if (locals.errors && errors.usuario) { %>
+                                <div class="text-danger">
+                                        <%= errors.usuario.msg %>   
+                                </div>
+                                <% } %>
                         </div>
                         <div>
                             <label for="fecha">Fecha de nacimiento :</label>
-                            <input type="date" name="fechanacimiento" id="fecha">
+                            <input type="date" name="fechanacimiento" value="<%= locals.oldData ? oldData.fechanacimiento : null %> ">
+                            <% if (locals.errors && errors.fechanacimiento) { %>
+                                <div class="text-danger">
+                                        <%= errors.fechanacimiento.msg %>   
+                                </div>
+                                <% } %>
                         </div>
                         <div>    
-                            <input type="text" name="domicilio" id="domicilio" placeholder="Domicilio" required>
+                            <input type="text" name="domicilio"  placeholder="Domicilio :" value="<%= locals.oldData ? oldData.domicilio : null %> " >
+                            <% if (locals.errors && errors.domicilio) { %>
+                                <div class="text-danger">
+                                        <%= errors.domicilio.msg %>   
+                                </div>
+                                <% } %>
                         </div>
                         <div>
                             Perfil de usuario: <br><br>
                             <label for="tipotransaccion">Voy a comprar </label>
-                            <input type="radio" name="tipotransaccion" value="comprar">
+                            <input type="radio" name="tipotransaccion" value="<%= locals.oldData ? oldData.tipotransaccion : 'comprar' %> ">
                         
                             <label for="domicilio">Voy a vender </label>
-                            <input type="radio" name="tipotransaccion" value="vender">
+                            <input type="radio" name="tipotransaccion" value="<%= locals.oldData ? oldData.tipotransaccion : 'vender' %> ">
+                            <% if (locals.errors && errors.tipotransaccion) { %>
+                                <div class="text-danger">
+                                        <%= errors.tipotransaccion.msg %>   
+                                </div>
+                                <% } %>
                         </div>
                         <div>
                             <label>Seleccione categorías de interés :</label> <br>
-                            Electrónica <input type="checkbox" name="interes" value="Electro">
+                            Electrónica <input type="checkbox" name="interes" value="<%= locals.oldData ? oldData.interes : 'Electro' %> ">
                             <br>
-                            Moda <input type="checkbox" name="interes" value="Moda">
+                            Moda <input type="checkbox" name="interes" value="<%= locals.oldData ? oldData.interes : 'Moda' %>" >
                             <br>
-                            Hogar <input type="checkbox" name="interes" value="Hogar">
+                            Hogar <input type="checkbox" name="interes" value="<%= locals.oldData ? oldData.interes : 'Hogar' %>" >
                             <br>
-                            Juguetería <input type="checkbox" name="interes" value="Jugueteria">
+                            Juguetería <input type="checkbox" name="interes" value="<%= locals.oldData ? oldData.interes : 'Jugeteria' %>" >
                             <br>
-                            Vida Santa <input type="checkbox" name="interes" value="Vida Sana">
+                            Vida Santa <input type="checkbox" name="interes" value="<%= locals.oldData ? oldData.interes : 'Vida Sana' %>" >
+                            <% if (locals.errors && errors.interes) { %>
+                                <div class="text-danger">
+                                        <%= errors.interes.msg %>   
+                                </div>
+                                <% } %>
                         </div>
                         <div>
                             <label for="foto">Seleccionar una imagen para el perfil :</label>
-                            <input type="file" name="img" accept=".jpg" class="input-img-usuario">
+                            <input type="file" name="img" class="input-img-usuario">
+                            <% if (locals.errors && errors.img) { %>
+                                <div class="text-danger">
+                                        <%= errors.img.msg %>   
+                                </div>
+                                <% } %>
                         </div>
                         <div>                
-                            <input type="password" name="password" id="contraseña" placeholder="Contraseña :" required minlength="6">
+                            <input type="password" name="password" id="contraseña" placeholder="Contraseña :" >
+                            <% if (locals.errors && errors.password) { %>
+                                <div class="text-danger">
+                                        <%= errors.password.msg %>   
+                                </div>
+                                <% } %>
                         </div>
                         <div>                 
-                            <input type="password" name="password" id="contraseña" placeholder="Confirme contraseña :" required minlength="6">
+                            <input type="password" name="password" id="contraseña" placeholder="Confirme contraseña :">
+                            <% if (locals.errors && errors.password) { %>
+                                <div class="text-danger">
+                                        <%= errors.password.msg %>   
+                                </div>
+                                <% } %>
                         </div>
                         <div>
                             <button type="reset" class="detele-button">Borrar</button>
@@ -81,7 +126,7 @@
             
         </main>
 
-        <footer >
+        <footer class="mt-4">
             <%- include('../partials/footer.ejs') %>
         </footer>
         

@@ -7,6 +7,9 @@ const router = express.Router();
 //Importo Multer
 const upload = require('../middlewares/multer-users');
 
+//Importo Validaciones
+const validationUsers = require('../middlewares/validation-form-users');
+
 //Importo controlador
 const userController = require("../controllers/usercontroller"); 
 
@@ -17,11 +20,11 @@ router.get('/allUsers', userController.allUsers);
 
 //Nuevo usuario
 router.get('/form-crear-usuario', userController.register);
-router.post('/form-crear-usuario', upload.single('img'), userController.newUser);
+router.post('/form-crear-usuario', upload.single('img'), validationUsers, userController.newUser);
 
 //Edición usuario
 router.get('/form-editar-usuario/:id', userController.edit);
-router.put('/form-editar-usuario/:id', upload.single('img'), userController.update);
+router.put('/form-editar-usuario/:id', upload.single('img'), validationUsers, userController.update);
 
 //Borrado usuario
 router.delete('/:id', userController.delete);

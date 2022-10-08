@@ -117,10 +117,10 @@ let controlador = {
 
         //Si existe archivo lo borra --- unlinkSync() recibe como parametro la ruta del archivo a eliminar + nombre
        fs.existsSync(imgABorrar) ? fs.unlinkSync(imgABorrar) : null;
-
+     
        let productoFinal = productos.filter((cadaElemento) => cadaElemento.id != req.params.id); //Todos los productos dinstintos al ID
 
-       fs.writeFileSync((path.join(__dirname,'../dataBase/productos.json')), JSON.stringify(productoFinal, null, 4), 'utf-8');
+       fs.writeFileSync((path.join(__dirname, '../dataBase/productos.json')) , JSON.stringify(productoFinal, null, 4) , 'utf-8');
 
        res.redirect('/products/ofertas');
     }
