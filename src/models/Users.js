@@ -63,14 +63,19 @@ const User = {
      },
 
      //Edición de usuario
-     update: function(userData){
+     update: function(id,userData){
       let allUsers = this.findAllUsers();
       for (cadaElemento of allUsers) {
-         if(this.findUserbyPk()){
-            userData.id = this.generateId();
-         
+         if(cadaElemento.id == id){
+            let updateUser = {
+               id : this.generateId(),
+               ...userData,
+            }
          }
+         return updateUser;
       }
+      allUsers.push(updateUser);
+
      }
 
 }
