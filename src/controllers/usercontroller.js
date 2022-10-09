@@ -36,7 +36,7 @@ const controlador = {
         let errors = validationResult(req);
         if (errors.isEmpty()){
             let usuarioNuevo = {
-                "id" : (usuarios[usuarios.length - 1].id) + 1,
+                'id' : (usuarios[usuarios.length - 1].id) + 1,
                 'nombre': req.body.nombre,
                 'usuario': req.body.usuario,
                 'fechanacimiento' : req.body.fechanacimiento,

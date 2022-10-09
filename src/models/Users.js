@@ -65,6 +65,7 @@ const User = {
      //Edición de usuario
      update: function(id,userData){
       let allUsers = this.findAllUsers();
+      let updateUser;
       for (cadaElemento of allUsers) {
          if(cadaElemento.id == id){
             let updateUser = {
@@ -75,6 +76,8 @@ const User = {
          return updateUser;
       }
       allUsers.push(updateUser);
+      fs.writeFileSync(this.fileName, JSON.stringify(allUsers, null, 4), 'utf-8');
+      return true;
 
      }
 
