@@ -7,7 +7,7 @@ const path = require('path');
 const errors = [
     body('nombre').notEmpty().withMessage('El campo no puede estar vacío').bail()
         .isLength({min: 5}).withMessage('El nombre debe contener al menos 5 caractéres'),
-    body('usuario').notEmpty().withMessage('El campo no puede estar vacío').bail()
+    body('email').isEmail().withMessage('El campo no puede estar vacío y debe ser tipo email').bail()
         .isLength({min: 2}).withMessage('El usuario debe contener al menos 2 caractéres'),
     body('fechanacimiento').notEmpty().withMessage('Seleccione una fecha de nacimiento'),
     body('tipotransaccion').notEmpty().withMessage('Debe seleccionar si va a comprar o vender'),

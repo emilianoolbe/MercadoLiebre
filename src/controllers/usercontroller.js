@@ -1,8 +1,10 @@
-//Importo Fs
+//Importo Fs + Path + bcrypt
 const fs = require('fs');
-
-//Importo Path
 const path = require('path');
+const bcryptjs = require('bcryptjs');
+
+//Importo Modelo
+const User = require('../models/Users');
 
 //Importo ResultValidation
 const { validationResult } = require('express-validator');
@@ -13,11 +15,6 @@ let usuarios = JSON.parse(fs.readFileSync(userJsonPath, 'utf-8'));
 
 //CONTROLADOR
 const controlador = {
-
-    //Vista Login
-    login: (req, res) => {
-        res.render('users/ingresa')
-    },
 
     //Detalle Usuarios
 
@@ -38,18 +35,18 @@ const controlador = {
             let usuarioNuevo = {
                 'id' : (usuarios[usuarios.length - 1].id) + 1,
                 'nombre': req.body.nombre,
-                'usuario': req.body.usuario,
+                'email': req.body.email,
                 'fechanacimiento' : req.body.fechanacimiento,
                 'domicilio' : req.body.domicilio,
                 'tipotransaccion' : req.body.tipotransaccion,
                 'interes' : req.body.interes,
                 'img' : req.file.filename,
-                'password' : req.body.password
+                'password' : bcryptjs.hashSync(toString(req.body.password), 12)
             }
     
             //Guardado lógico
             usuarios.push(usuarioNuevo);
-            //Guardadi físico
+            //Guardado físico
             fs.writeFileSync(userJsonPath, JSON.stringify(usuarios, null, 4) , 'utf-8');
 
             res.redirect('/users/ingresa')
@@ -75,13 +72,13 @@ const controlador = {
             if(cadaElemento.id == req.params.id){
                 imagenAntigua = cadaElemento.img;
                 cadaElemento.nombre = req.body.nombre;
-                cadaElemento.usuario = req.body.usuario;
+                cadaElemento.email = req.body.email;
                 cadaElemento.fechanacimiento = req.body.fechanacimiento;
                 cadaElemento.domicilio = req.body.domicilio;
                 cadaElemento.tipotransaccion = req.body.tipotransaccion;
                 cadaElemento.interes = req.body.interes;
                 cadaElemento.img = req.file.filename;
-                cadaElemento.password = req.body.password;
+                cadaElemento.password = bcryptjs.hashSync(toString(req.body.password), 12);
             }
         }
         fs.unlinkSync(path.join(__dirname, '../../public/imagenes/img-users/') + imagenAntigua);
@@ -103,7 +100,36 @@ const controlador = {
         fs.writeFileSync(userJsonPath, JSON.stringify(usuariosActualizados, null, 4) , 'utf-8');
 
         res.redirect('/users/usuarios');
+    },
+
+     //Login
+     login: (req, res) => {
+        res.render('users/ingresa')
+    },
+
+    processLogin: (req, res) => {
+        let errors = validationResult(req);       
+        if (errors.isEmpty()) {
+
+            let userToLogin = User.findUserByField('email', req.body.email); 
+            let passwordOk = bcryptjs.compareSync(req.body.password, userToLogin.password);
+            console.log(passwordOk);
+            if (bcrypt.compareSync(req.body.password, userToLogin.password)) { 
+                delete userToLogin.password;            
+                req.session.userLogged = userToLogin;
+                return res.send('Estas en sesión')
+            }else{
+                res.render('users/ingresa', {errors: {email: {msg: 'Credenciales inválidas'}}}) 
+            }
+            //Busco si el mail se encuentra en database
+            //Si lo encuentra comparo contraseñas (envío mensaje de error si no coinciden)
+            //Elimino el password para no guardarlo en session
+
+        }else{
+            res.render('users/ingresa', { errors: errors.mapped() });
+        }
     }
+
 };
 
 module.exports = controlador;

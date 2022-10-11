@@ -1,6 +1,7 @@
 //Importo fs - path
 const fs = require('fs');
 const path = require('path');
+const { uptdateProduct } = require('./Products');
 
 const User = {
 
@@ -23,7 +24,7 @@ const User = {
      },
 
      //Busqueda por campo (email, pass, usuario...)
-     findUserByFild: function (field, text){
+     findUserByField: function (field, text){
         let allUsers = this.findAllUsers();
 
         let userFound = allUsers.find((cadaElemento) => cadaElemento[field] == text);
@@ -40,7 +41,7 @@ const User = {
     },
 
      //Creación usuario
-     create: function (userData) {
+     createNewUser: function (userData) {
         let allUsers = this.findAllUsers();
 
         let newUser = {
@@ -63,26 +64,23 @@ const User = {
      },
 
      //Edición de usuario
-     update: function(id,userData){
-      let allUsers = this.findAllUsers();
-      let updateUser;
-      for (cadaElemento of allUsers) {
-         if(cadaElemento.id == id){
-            let updateUser = {
-               id : this.generateId(),
-               ...userData,
+     updateAUser: function(id, userData) {
+     
+      for ( let eachElement of this.findAllUsers() ){
+         if (eachElement.id == id){
+            eachElement = {
+               ...userData
             }
+            break;
          }
-         return updateUser;
       }
-      allUsers.push(updateUser);
-      fs.writeFileSync(this.fileName, JSON.stringify(allUsers, null, 4), 'utf-8');
+      
+      fs.writeFileSync(this.fileName, JSON.stringify( this.findAllUsers(), null, 4), 'utf-8');
       return true;
-
      }
 
-}
-
-console.log(User.findUserByFild('id', 1));
+};
+console.log(User.updateAUser(2, {nombre: 'PEPE', email: 'prueba2@prueba.com'}));
 
 module.exports = User;
+

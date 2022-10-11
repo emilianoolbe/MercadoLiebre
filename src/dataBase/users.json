@@ -2,7 +2,7 @@
     {
         "id": 1,
         "nombre": "Emiliano Francisco Olivera Bezón",
-        "usuario": "emilianoolbe",
+        "email": "emilianoolbe",
         "fechanacimiento": "21/03/1995",
         "domicilio": "Diagonal 8 esquina Calle 24 - Parque del Plata",
         "tipotransaccion": "Comprador",
@@ -12,16 +12,13 @@
     },
     {
         "id": 2,
-        "nombre": "Pepe",
-        "usuario": "pepe123",
-        "fechanacimiento": "1990-10-10",
-        "domicilio": "18 de julio 1111",
-        "tipotransaccion": "vender",
-        "interes": "Electro",
-        "img": "user-1664596060378.jpg",
-        "password": [
-            "213123",
-            "213123"
-        ]
+        "nombre": " prueba",
+        "email": "prueba@prueba.com",
+        "fechanacimiento": "2022-09-30",
+        "domicilio": "  prueba",
+        "tipotransaccion": "comprar ",
+        "interes": "Electro ",
+        "img": "user-1665446656638.jpg",
+        "password": "$2a$12$uK5.VdfYmmd9O1gj3hzR9.M7SrUp8ocpO1lqezGPmwu2SEoufzjU."
     }
 ]

@@ -1,8 +1,9 @@
-//Importo File System
+//Importo File System + Path 
 const fs = require('fs');
-
-//Importo Path
 const path = require('path');
+
+//Importo Modelo
+const Product = require('../models/Products');
 
 //Importo resultados de Express-validator
 const { validationResult } = require('express-validator');

@@ -37,10 +37,10 @@
                                 <% } %>
                         </div>
                         <div>        
-                            <input type="text" name="usuario"  placeholder="Usuario :" value="<%= locals.oldData ? oldData.usuario : null %>" >
-                            <% if (locals.errors && errors.usuario) { %>
+                            <input type="email" name="email"  placeholder="email :" value="<%= locals.oldData ? oldData.email : null %>" >
+                            <% if (locals.errors && errors.email) { %>
                                 <div class="text-danger">
-                                        <%= errors.usuario.msg %>   
+                                        <%= errors.email.msg %>   
                                 </div>
                                 <% } %>
                         </div>
@@ -101,15 +101,7 @@
                                 <% } %>
                         </div>
                         <div>                
-                            <input type="password" name="password" id="contraseña" placeholder="Contraseña :" >
-                            <% if (locals.errors && errors.password) { %>
-                                <div class="text-danger">
-                                        <%= errors.password.msg %>   
-                                </div>
-                                <% } %>
-                        </div>
-                        <div>                 
-                            <input type="password" name="password" id="contraseña" placeholder="Confirme contraseña :">
+                            <input type="password" name="password" id="contraseña" placeholder="Contraseña:" >
                             <% if (locals.errors && errors.password) { %>
                                 <div class="text-danger">
                                         <%= errors.password.msg %>   
