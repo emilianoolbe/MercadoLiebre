@@ -1,11 +1,11 @@
-//Importo File System
+//Importo File System + Path
 const fs = require('fs');
-
-//Importo Path
 const path = require('path');
 
 //Importo resultados de Express-validator
 const { validationResult } = require('express-validator');
+
+const Product
 
 //readFileSync + join para rutear JSON + PARSEO
 let productosJsonPath = path.join(__dirname,'../dataBase/productos.json');

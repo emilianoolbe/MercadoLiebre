@@ -77,7 +77,6 @@ const User = {
       allUsers.push(updateUser);
 
      }
-
 }
 
 console.log(User.findUserByFild('id', 1));
