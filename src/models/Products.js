@@ -7,6 +7,9 @@ const Product = {
     //Path of Json
     filleName: path.join(__dirname, '../dataBase/productos.json'),
 
+    fileNameImg: path.join(__dirname, '../../public/imgagenes/img-products%'),
+
+
     //Reading all products
     getData : function () { return JSON.parse(fs.readFileSync(this.filleName, 'utf-8')) },
 
@@ -57,7 +60,7 @@ const Product = {
 
     //Update a product
     uptdateProduct: function(id, getData){
-    /*
+    
         for (let eachElement of this.findAllProducts()){
             if (eachElement.id == id) {
                 eachElement = getData;
@@ -66,7 +69,6 @@ const Product = {
         }
         fs.writeFileSync(this.filleName, JSON.stringify(this.findAllProducts(), null, 4), 'utf-8');
         return true;
-    */
     },
 };
 

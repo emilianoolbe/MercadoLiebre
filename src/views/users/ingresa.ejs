@@ -24,12 +24,12 @@
     
         <main class="main-login">
 
-            <section class="form-login">
-                <article class="form-login-hijo borde-fondo-2 container">
+            <section class="form-login row">
+                <article class="form-login-hijo borde-fondo-2 container col-sm-12 col-md-6 col-lg-4">
 
                     <h2 class="titulo-login">Bienvenidos</h2>
                     <div class="row">
-                        <div class="col-6"> </div>
+                      
                         <form action="/users/ingresa" method="post" class="col-12">
                             <div class="row justify-content-center aling-items-center">
                                 <div class="div-form-hijo col-12">
@@ -50,6 +50,8 @@
                                           </div>
                                       <% } %>
                                 </div>
+                                <label for="remember" class="form-label">Recordarme</label>
+                                <input type="checkbox" name="remember" id="remember" >
                                 <div class="col-12">
                                    <input type="submit" value="Login" class="div-form-hijo button-login-siging">
                                 </div>

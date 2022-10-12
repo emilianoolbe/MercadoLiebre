@@ -19,7 +19,7 @@ router.get('/allUsers', userController.allUsers);
 
 //Nuevo usuario
 router.get('/form-crear-usuario', userController.register);
-router.post('/form-crear-usuario', upload.single('img'), validationUsers, userController.newUser);
+router.post('/form-crear-usuario', validationUsers, upload.single('img'), userController.newUser);
 
 //Edición usuario
 router.get('/form-editar-usuario/:id', userController.edit);
@@ -32,5 +32,9 @@ router.delete('/:id', userController.delete);
 router.get('/ingresa', userController.login);
 router.post('/ingresa', validationLoggin, userController.processLogin);
 
+//Profile
+router.get('/profile', (req, res) => {
+    req.session.userLogged ? res.send('Estas loqueado') : res.send('Error') 
+})
 
 module.exports = router;

@@ -1,12 +1,14 @@
 //Importo fs - path
 const fs = require('fs');
 const path = require('path');
-const { uptdateProduct } = require('./Products');
 
 const User = {
 
     //Ruta absoluta de JSON
     fileName: path.join(__dirname, '../dataBase/users.json'),
+
+    //Ruta absoluta img
+    fileNameImg: path.join(__dirname, '../../public/imagenes/img-users/'),
 
     //Parseo + lectura de JSON
     getData: function () { return JSON.parse(fs.readFileSync(this.fileName, 'utf-8')); },
@@ -17,17 +19,15 @@ const User = {
     //Busqueda por ID
     findUserbyPk : function (id){
         let allUsers = this.findAllUsers();
-
-        let userFound = allUsers.find((cadaElemento) => cadaElemento.id == id);
-
+        let userFound = allUsers.find((eachElement) => eachElement.id == id);
+        
         return userFound;
      },
 
      //Busqueda por campo (email, pass, usuario...)
      findUserByField: function (field, text){
         let allUsers = this.findAllUsers();
-
-        let userFound = allUsers.find((cadaElemento) => cadaElemento[field] == text);
+        let userFound = allUsers.find((eachElement) => eachElement[field] == text);
 
         return userFound;
      },
@@ -37,50 +37,45 @@ const User = {
      generateId: function () { 
         let allUsers = this.findAllUsers(); 
         let lastUser = allUsers.pop();
+
         return lastUser ? lastUser.id + 1 : 1;
     },
 
      //Creación usuario
      createNewUser: function (userData) {
         let allUsers = this.findAllUsers();
-
         let newUser = {
             id: this.generateId(),
             ...userData
         };
-
         allUsers.push(newUser);
 
-        fs.writeFileSync(this.fileName, JSON.stringify(allUsers, null , 4));
-        return true;
+        fs.writeFileSync(this.fileName, JSON.stringify(allUsers, null , 4), 'utf-8');
+        return newUser;
      },
 
      //Elimiación de usuario
      delete: function (id) {
       let allUsers = this.findAllUsers();
-      let finalUsers = allUsers.filter((cadaElemento) => cadaElemento.id != id);
+      let finalUsers = allUsers.filter((eachElement) => eachElement.id != id);
+
       fs.writeFileSync(this.fileName, JSON.stringify(finalUsers, null, 4), 'utf-8');
-      return true;
+      return finalUsers;
      },
 
      //Edición de usuario
      updateAUser: function(id, userData) {
-     
-      for ( let eachElement of this.findAllUsers() ){
-         if (eachElement.id == id){
-            eachElement = {
-               ...userData
-            }
+      let allUsers = this.findAllUsers();
+      for (let eachElement of allUsers){
+         if (eachElement.id = id){
+            eachElement = userData;
             break;
+            }
          }
-      }
-      
-      fs.writeFileSync(this.fileName, JSON.stringify( this.findAllUsers(), null, 4), 'utf-8');
+      fs.writeFileSync(this.fileName, JSON.stringify( allUsers, null, 4), 'utf-8');
       return true;
-     }
-
+   }
+   
 };
-console.log(User.updateAUser(2, {nombre: 'PEPE', email: 'prueba2@prueba.com'}));
-
 module.exports = User;
 

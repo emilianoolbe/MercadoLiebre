@@ -273,7 +273,7 @@ body{
 }
 
 .formulario-crear-cuenta{
-    max-width: 90%;
+    width: 100%;
     background-color: rgba(66, 63, 64, 0.11);
     margin-top: 45px;
 }
@@ -285,8 +285,8 @@ body{
 }
 
 .formulario-crear-cuenta div  {
-    margin: 10px;
-    padding: 5px;
+    margin: 5px;
+    padding: 10px;
 }
 
 

@@ -12,10 +12,14 @@ const routerProducts = require('./routes/productsRouter');
 
 //Importo Middlewares de aplicación
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const rememberMeMiddleware = require('./middlewares/rememberMeMiddleware');
 
 //Middlewares()
 app.use(express.static("./public"));
 app.use(session({secret: 'SECRET', resave : false, saveUninitialized: false }));
+app.use(cookieParser());
+app.use(rememberMeMiddleware);
 
 
 

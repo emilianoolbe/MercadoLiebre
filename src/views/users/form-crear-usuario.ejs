@@ -25,58 +25,64 @@
         </header>
 
         <main class="main-login row">
-            <section class=" section-crea-tu-cuenta container col-sm-12 col-md-6 col-lg-8">
-                <article class="formulario-crear-cuenta borde-fondo-2">
+            <section class="  section-crea-tu-cuenta container col-sm-12 col-md-6 col-lg-4">
+                <article class=" formulario-crear-cuenta borde-fondo-2">
                     <form action="/users/form-crear-usuario" method="post" id="form" enctype="multipart/form-data">
-                        <div>     
-                            <input type="text" name="nombre"  placeholder="Nombre Completo :" value="<%= locals.oldData ? oldData.nombre: null %> ">
+                        <div class="col-sm-12">
+                            <label for="nombre" class="form-label">Nombre completo</label>    
+                            <input id="nombre" class="form-control <%= locals.errors && errors.nombre ? 'is-invalid' : null %>" type="text" name="nombre" value="<%= locals.oldData ? oldData.nombre: null %> ">
                             <% if (locals.errors && errors.nombre) { %>
-                                <span class="text-danger">
+                                <div class="text-danger">
                                         <%= errors.nombre.msg %>   
-                                </span>
+                                </div>
                                 <% } %>
                         </div>
-                        <div>        
-                            <input type="email" name="email"  placeholder="email :" value="<%= locals.oldData ? oldData.email : null %>" >
+                        <div class="col-sm-12">
+                            <label for="email" class="form-label">Correo Electrónico</label>        
+                            <input id="email" type="email" name="email" class="form-control  <%= locals.errors && errors.email ? 'is-invalid' : null %>" value="<%= locals.oldData ? oldData.email : null %>" >
                             <% if (locals.errors && errors.email) { %>
                                 <div class="text-danger">
                                         <%= errors.email.msg %>   
                                 </div>
                                 <% } %>
                         </div>
-                        <div>
-                            <label for="fecha">Fecha de nacimiento :</label>
-                            <input type="date" name="fechanacimiento" value="<%= locals.oldData ? oldData.fechanacimiento : null %> ">
+                        <div class="col-sm-12">
+                            <label for="fecha" class="form-label" >Fecha de nacimiento:</label>
+                            <input type="date" name="fechanacimiento" class="form-control <%= locals.errors && errors.fechanacimiento ? 'is-invalid' : null %>" value="<%= locals.oldData ? oldData.fechanacimiento : null %>">
                             <% if (locals.errors && errors.fechanacimiento) { %>
+
                                 <div class="text-danger">
                                         <%= errors.fechanacimiento.msg %>   
                                 </div>
                                 <% } %>
                         </div>
-                        <div>    
-                            <input type="text" name="domicilio"  placeholder="Domicilio :" value="<%= locals.oldData ? oldData.domicilio : null %> " >
+                        <div class="col-sm-12">
+                            <label for="domicilio" for="form-label">Direccion:</label>    
+                            <input id="domicilio" type="text" name="domicilio" value="<%= locals.oldData ? oldData.domicilio : null %>" class="form-control <%= locals.errors && errors.domicilio ? 'is-invalid' : null %>">
+
                             <% if (locals.errors && errors.domicilio) { %>
                                 <div class="text-danger">
-                                        <%= errors.domicilio.msg %>   
+                                    <%= errors.domicilio.msg %>   
                                 </div>
                                 <% } %>
                         </div>
-                        <div>
+                        <div class="col-sm-12">
                             Perfil de usuario: <br><br>
-                            <label for="tipotransaccion">Voy a comprar </label>
-                            <input type="radio" name="tipotransaccion" value="<%= locals.oldData ? oldData.tipotransaccion : 'comprar' %> ">
+                            <label for="tipotransaccion" for="form-label">Voy a comprar </label>
+                            <input type="radio" name="tipotransaccion" value="<%= locals.oldData ? oldData.tipotransaccion : 'comprar' %>">
                         
-                            <label for="domicilio">Voy a vender </label>
-                            <input type="radio" name="tipotransaccion" value="<%= locals.oldData ? oldData.tipotransaccion : 'vender' %> ">
+                            <label for="form-label">Voy a vender </label>
+                            <input type="radio"  name="tipotransaccion" value="<%= locals.oldData ? oldData.tipotransaccion : 'vender' %>">
                             <% if (locals.errors && errors.tipotransaccion) { %>
+
                                 <div class="text-danger">
-                                        <%= errors.tipotransaccion.msg %>   
+                                    <%= errors.tipotransaccion.msg %>   
                                 </div>
                                 <% } %>
                         </div>
-                        <div>
+                        <div class="col-sm-12">
                             <label>Seleccione categorías de interés :</label> <br>
-                            Electrónica <input type="checkbox" name="interes" value="<%= locals.oldData ? oldData.interes : 'Electro' %> ">
+                            Electrónica <input type="checkbox" name="interes" value="<%= locals.oldData ? oldData.interes : 'Electro' %>">
                             <br>
                             Moda <input type="checkbox" name="interes" value="<%= locals.oldData ? oldData.interes : 'Moda' %>" >
                             <br>
@@ -91,22 +97,24 @@
                                 </div>
                                 <% } %>
                         </div>
-                        <div>
-                            <label for="foto">Seleccionar una imagen para el perfil :</label>
-                            <input type="file" name="img" class="input-img-usuario">
+                        <div class="col-sm-12">
+                            <label for="fileform" class="form-label">Ávatar</label>
+                            <input type="file" name="img" class=" form-control input-img-usuario <%= locals.errors && errors.img ? 'is-invalid' : null %>" id="fileform">
                             <% if (locals.errors && errors.img) { %>
                                 <div class="text-danger">
                                         <%= errors.img.msg %>   
                                 </div>
                                 <% } %>
                         </div>
-                        <div>                
-                            <input type="password" name="password" id="contraseña" placeholder="Contraseña:" >
+                        <div class="col-sm-12">
+                            <label for="inputPassword4">Contraseña</label>
+                            <input type="password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" id="inputPassword4" name="password">
+          
                             <% if (locals.errors && errors.password) { %>
-                                <div class="text-danger">
-                                        <%= errors.password.msg %>   
-                                </div>
-                                <% } %>
+                              <h5 class = "text-danger">
+                                  <%= errors.password.msg %> 
+                              </h5>
+                              <% } %>
                         </div>
                         <div>
                             <button type="reset" class="detele-button">Borrar</button>
