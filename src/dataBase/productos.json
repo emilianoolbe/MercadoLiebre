@@ -1,23 +1,5 @@
 [
     {
-        "id": 1,
-        "img": "img-tv-samsung-smart.jpg",
-        "precio": 1490,
-        "descuento": 30,
-        "nombre": "TV-Samsung",
-        "descripcion": "La mejor del mercado",
-        "categoria": "En oferta"
-    },
-    {
-        "id": 2,
-        "img": "img-macbook-pro-2019.jpg",
-        "precio": 1500,
-        "descuento": 10,
-        "nombre": "MacBook Pro",
-        "descripcion": "La mejor del mercado",
-        "categoria": "En oferta"
-    },
-    {
         "id": 3,
         "img": "productonuevo1.jpg",
         "precio": 400,
@@ -117,13 +99,12 @@
         "categoria": "Últimos Agregados"
     },
     {
-        "id": 16,
-        "img": "products-1664934515997.jpg",
-        "precio": 1500,
-        "descuento": 0,
-        "nombre": "Iphone 14",
-        "descripcion": "         Iphone 14 Pro Max",
-        "categoria": "Últimos Agregados"
+        "img": "products-1665627011617.jpg",
+        "nombre": "Cuadro minimalista",
+        "precio": "50",
+        "descuento": "0",
+        "categoria": "Últimos Agregados",
+        "descripcion": "           Cuadro de pared ",
+        "id": 16
     }
 ]
-

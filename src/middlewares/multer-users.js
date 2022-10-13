@@ -1,7 +1,5 @@
-//Importo Multer
-const multer = require('multer');
-
-//Importo path
+//Importo Multer + Path
+const multer = require('multer'); 
 const path = require('path');
 
 const storage = multer.diskStorage({

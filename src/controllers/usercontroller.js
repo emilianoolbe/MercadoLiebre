@@ -1,108 +1,114 @@
-//Importo Fs
+//Importo Fs + Path + bcrypt
 const fs = require('fs');
-
-//Importo Path
 const path = require('path');
+const bcryptjs = require('bcryptjs');
+
+//Importo Modelo
+const User = require('../models/Users');
 
 //Importo ResultValidation
 const { validationResult } = require('express-validator');
 
-//Leo usuariosJSON
-let userJsonPath = path.join(__dirname, '../dataBase/users.json');
-let usuarios = JSON.parse(fs.readFileSync(userJsonPath, 'utf-8'));
-
 //CONTROLADOR
 const controlador = {
-
-    //Vista Login
-    login: (req, res) => {
-        res.render('users/ingresa')
-    },
 
     //Detalle Usuarios
 
     allUsers: (req, res) => {
         let usuarios = JSON.parse(fs.readFileSync(userJsonPath, 'utf-8'));
-        res.render('/users/usuarios' , {usuarios : usuarios});
+        return res.render('users/usuarios' , {usuarios : usuarios});
     },
 
     //Vista form Registro
     register: (req, res) => {
-        res.render('users/form-crear-usuario')
+        return res.render('users/form-crear-usuario')
     },
 
     //Guardado Registro
     newUser: (req, res) => {
         let errors = validationResult(req);
+
         if (errors.isEmpty()){
-            let usuarioNuevo = {
-                "id" : (usuarios[usuarios.length - 1].id) + 1,
-                'nombre': req.body.nombre,
-                'usuario': req.body.usuario,
-                'fechanacimiento' : req.body.fechanacimiento,
-                'domicilio' : req.body.domicilio,
-                'tipotransaccion' : req.body.tipotransaccion,
-                'interes' : req.body.interes,
-                'img' : req.file.filename,
-                'password' : req.body.password
-            }
-    
-            //Guardado lógico
-            usuarios.push(usuarioNuevo);
-            //Guardadi físico
-            fs.writeFileSync(userJsonPath, JSON.stringify(usuarios, null, 4) , 'utf-8');
-
-            res.redirect('/users/ingresa')
-
+            let newUser = {
+                ...req.body,
+                password : bcryptjs.hashSync(req.body.password, 10),
+                img: req.file.filename
+            };
+            User.createNewUser(newUser);
+            return res.redirect('users/ingresa')
         }else{
-            res.render('users/form-crear-usuario', {errors: errors.mapped(), oldData: req.body});
-        }
-        
+            return res.render('users/form-crear-usuario', {errors: errors.mapped(), oldData: req.body});
+        }   
     },
 
     //Vista form editar
     edit: (req, res) =>{
-        let usuarioEncontrado = usuarios.find((cadaElemento) => cadaElemento.id == req.params.id)
-
-        usuarioEncontrado ? res.render('/users/register-edit-form', {usuario: usuarioEncontrado}) : res.send('Usuario no existe'); 
+        User.findUserbyPk(req.params.id) ? res.render('users/form-editar-usuario', {usuario: usuarioEncontrado}) : res.send('Usuario no existe'); 
     },
 
     //Edición
     update: (req, res) => {
-        
-        let imagenAntigua;
-        for (let cadaElemento of usuarios){
-            if(cadaElemento.id == req.params.id){
-                imagenAntigua = cadaElemento.img;
-                cadaElemento.nombre = req.body.nombre;
-                cadaElemento.usuario = req.body.usuario;
-                cadaElemento.fechanacimiento = req.body.fechanacimiento;
-                cadaElemento.domicilio = req.body.domicilio;
-                cadaElemento.tipotransaccion = req.body.tipotransaccion;
-                cadaElemento.interes = req.body.interes;
-                cadaElemento.img = req.file.filename;
-                cadaElemento.password = req.body.password;
-            }
+        let errors = validationResult(req);
+        if (erros.isEmpty()) {
+            let userToUpdate = User.findUserbyPk(req.params.id);
+            fs.unlinkSync(User.fileNameImg + userToUpdate.img);
+            userToUpdate = {
+                img: req.file.filename,
+                ...req.body
+            };
+            User.updateAUser(req.params.id, req.body);
+            return res.redirect('users/profile')
+        }else{
+            User.findUserbyPk(req.params.id) ? res.render('users/form-editar-usuario', {usuario: usuarioEncontrado, errors: errors.mapped(), oldData: req.body}) : res.send('Usuario no encontrado'); 
         }
-        fs.unlinkSync(path.join(__dirname, '../../public/imagenes/img-users/') + imagenAntigua);
-        fs.writeFileSync(userJsonPath, JSON.stringify(usuarios, null, 4) , 'utf-8');
-
     },
-
     //Eliminar usuario
-
     delete: (req, res) => {
 
-        let usuarioAborrar = usuarios.find((cadaElemento) => cadaElemento.id == req.params.id);
-        let imgABorrar = path.join(__dirname, '../../public/imagenes/img-users') + usuarioAborrar.img;
-
+        let usuarioEncontrado = User.findUserbyPk(req.params.id);
+        console.log(usuarioEncontrado);
+        let imgABorrar = User.fileNameImg + usuarioEncontrado.img;
         fs.existsSync(imgABorrar) ? fs.unlinkSync(imgABorrar) : null;
+        User.delete(req.params.id)
+        return res.redirect('/')      
+    },
 
-        let usuariosActualizados = usuarios.filter((cadaElemento) => cadaElemento.id != req.params.id);
+     //Login
+     login: (req, res) => {
+        res.render('users/ingresa')
+    },
 
-        fs.writeFileSync(userJsonPath, JSON.stringify(usuariosActualizados, null, 4) , 'utf-8');
+    processLogin: (req, res) => {
+        let errors = validationResult(req);       
+        if (errors.isEmpty()) {
 
-        res.redirect('/users/usuarios');
+            let usuarioALoguearse = User.findUserByField('email', req.body.email); 
+            let passwordOk = bcryptjs.compareSync(req.body.password, usuarioALoguearse.password);
+            console.log(passwordOk);
+            if (bcryptjs.compareSync(req.body.password, usuarioALoguearse.password)) { 
+                delete usuarioALoguearse.password;            
+                req.session.userLogged = usuarioALoguearse;
+
+                if(req.body.remember != undefined){
+                    res.cookie('remember', req.session.userLogged.email, {maxAge: ((1000 * 60) * 60)});
+                }
+                return res.redirect('/profile')
+
+            }else{
+                res.render('users/ingresa', {errors: {email: {msg: 'Credenciales inválidas'}}}) 
+            }
+            //Busco si el mail se encuentra en database
+            //Si lo encuentra comparo contraseñas (envío mensaje de error si no coinciden)
+            //Elimino el password para no guardarlo en session
+
+        }else{
+            res.render('users/ingresa', { errors: errors.mapped() });
+        }
+    },
+
+    //profile
+    profile: (req, res) => {
+        return res.render('users/profile')
     }
 };
 

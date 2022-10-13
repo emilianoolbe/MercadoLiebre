@@ -1,14 +1,11 @@
-//Importo express
+//Importo express + Router()
 const express = require("express");
-
-//Ejectuo método router
 const router = express.Router();
-
-//Importo Multer
-const upload = require('../middlewares/multer-users');
 
 //Importo Validaciones
 const validationUsers = require('../middlewares/validation-form-users');
+const upload = require('../middlewares/multer-users');
+const validationLoggin = require('../middlewares/validation-Loggin');
 
 //Importo controlador
 const userController = require("../controllers/usercontroller"); 
@@ -20,7 +17,7 @@ router.get('/allUsers', userController.allUsers);
 
 //Nuevo usuario
 router.get('/form-crear-usuario', userController.register);
-router.post('/form-crear-usuario', upload.single('img'), validationUsers, userController.newUser);
+router.post('/form-crear-usuario', validationUsers, upload.single('img'), userController.newUser);
 
 //Edición usuario
 router.get('/form-editar-usuario/:id', userController.edit);
@@ -29,8 +26,11 @@ router.put('/form-editar-usuario/:id', upload.single('img'), validationUsers, us
 //Borrado usuario
 router.delete('/:id', userController.delete);
 
-//Vista login
+//Login
 router.get('/ingresa', userController.login);
+router.post('/ingresa', validationLoggin, userController.processLogin);
 
+//Profile
+router.get('/profile', userController.profile)
 
 module.exports = router;

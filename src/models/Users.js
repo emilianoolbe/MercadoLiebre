@@ -7,6 +7,9 @@ const User = {
     //Ruta absoluta de JSON
     fileName: path.join(__dirname, '../dataBase/users.json'),
 
+    //Ruta absoluta img
+    fileNameImg: path.join(__dirname, '../../public/imagenes/img-users/'),
+
     //Parseo + lectura de JSON
     getData: function () { return JSON.parse(fs.readFileSync(this.fileName, 'utf-8')); },
 
@@ -16,17 +19,15 @@ const User = {
     //Busqueda por ID
     findUserbyPk : function (id){
         let allUsers = this.findAllUsers();
-
-        let userFound = allUsers.find((cadaElemento) => cadaElemento.id == id);
-
+        let userFound = allUsers.find((eachElement) => eachElement.id == id);
+        
         return userFound;
      },
 
      //Busqueda por campo (email, pass, usuario...)
-     findUserByFild: function (field, text){
+     findUserByField: function (field, text){
         let allUsers = this.findAllUsers();
-
-        let userFound = allUsers.find((cadaElemento) => cadaElemento[field] == text);
+        let userFound = allUsers.find((eachElement) => eachElement[field] == text);
 
         return userFound;
      },
@@ -36,49 +37,45 @@ const User = {
      generateId: function () { 
         let allUsers = this.findAllUsers(); 
         let lastUser = allUsers.pop();
+
         return lastUser ? lastUser.id + 1 : 1;
     },
 
      //Creación usuario
-     create: function (userData) {
+     createNewUser: function (userData) {
         let allUsers = this.findAllUsers();
-
         let newUser = {
             id: this.generateId(),
             ...userData
         };
-
         allUsers.push(newUser);
 
-        fs.writeFileSync(this.fileName, JSON.stringify(allUsers, null , 4));
-        return true;
+        fs.writeFileSync(this.fileName, JSON.stringify(allUsers, null , 4), 'utf-8');
+        return newUser;
      },
 
      //Elimiación de usuario
      delete: function (id) {
       let allUsers = this.findAllUsers();
-      let finalUsers = allUsers.filter((cadaElemento) => cadaElemento.id != id);
+      let finalUsers = allUsers.filter((eachElement) => eachElement.id != id);
+
       fs.writeFileSync(this.fileName, JSON.stringify(finalUsers, null, 4), 'utf-8');
-      return true;
+      return finalUsers;
      },
 
      //Edición de usuario
-     update: function(id,userData){
+     updateAUser: function(id, userData) {
       let allUsers = this.findAllUsers();
-      for (cadaElemento of allUsers) {
-         if(cadaElemento.id == id){
-            let updateUser = {
-               id : this.generateId(),
-               ...userData,
-            }
-         }
-         return updateUser;
+      for ( let i = 0; i < allUsers.length; i++ ){
+         if (allUsers[i].id == id) {
+            allUsers[i] = userData;
+            allUsers[i].id = parseInt(id);
+         };
       }
-      allUsers.push(updateUser);
-
-     }
-}
-
-console.log(User.findUserByFild('id', 1));
-
+      fs.writeFileSync(this.fileName, JSON.stringify( allUsers, null, 4), 'utf-8');
+      return true;
+   }
+   
+};
 module.exports = User;
+

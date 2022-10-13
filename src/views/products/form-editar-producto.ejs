@@ -37,9 +37,9 @@
                     <div class="col-md-6 col-sm-12 ">
                     <input type="text" class="form-control  <%= locals.errors && errors.nombre ? 'is-invalid' : null %> "" placeholder="Nombre:" aria-label="Nombre" name="nombre" value="<%= locals.oldData  && oldData.nombre ? oldData.nombre : producto.nombre %>">
                     <% if (locals.errors && errors.nombre) { %>
-                        <div class="text-danger">
+                        <h5 class="text-danger">
                            <%= errors.nombre.msg %> 
-                        </div>
+                        </h5>
                     <% } %> 
                         
                     </div>

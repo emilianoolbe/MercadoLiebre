@@ -24,53 +24,108 @@
   
         </header>
 
-        <main class="main-login">
-            <section class=" section-crea-tu-cuenta">
-                <article class="formulario-crear-cuenta borde-fondo-2">
-                    <form action="/" method="get" id="form">
-                        <div class=>      
-                            <input type="text" name="nombre" id="nombre" required placeholder="Nombre - Completo" minlength="3" pattern="[A-Za-z0-9_-]{1,15}" >
+        <main class="main-login row">
+            <section class="  section-crea-tu-cuenta container col-sm-12 col-md-6 col-lg-4">
+                <article class=" formulario-crear-cuenta borde-fondo-2">
+                    <form action="/users/form-crear-usuario" method="post" id="form" enctype="multipart/form-data">
+                        <div class="col-sm-12">
+                            <label for="nombre" class="form-label">Nombre completo</label>    
+                            <input id="nombre" class="form-control" type="text" name="nombre" value="<%= locals.oldData && oldData.nombre ? oldData.nombre : usuario.nombre %>" >
+                            <% if (locals.errors && errors.nombre) { %>
+                                <div class="text-danger">
+                                        <%= errors.nombre.msg %>   
+                                </div>
+                                <% } %>
                         </div>
-                        <div>        
-                            <input type="text" name="usuario" id="usuario" placeholder="Usuario" required pattern="[A-Za-z0-9_-]{1,15}" minlength="6">
+                        <div class="col-sm-12">
+                            <label for="email" class="form-label">Correo Electrónico</label>        
+                            <input id="email" type="email" name="email" class="form-control" value="<%= locals.oldData && oldData.email ? oldData.email : usuario.email %>" >
+                            <% if (locals.errors && errors.email) { %>
+                                <div class="text-danger">
+                                        <%= errors.email.msg %>   
+                                </div>
+                                <% } %>
                         </div>
-                        <div>
-                            <label for="fecha">Fecha de nacimiento :</label>
-                            <input type="date" name="fechanacimiento" id="fecha">
+                        <div class="col-sm-12">
+                            <label for="fecha" class="form-label" >Fecha de nacimiento:</label>
+                            <input type="date" name="fechanacimiento" class="form-control" value="<%= locals.oldData ? oldData.fechanacimiento : null %>">
+                            <% if (locals.errors && errors.fechanacimiento) { %>
+
+                                <div class="text-danger">
+                                        <%= errors.fechanacimiento.msg %>   
+                                </div>
+                                <% } %>
                         </div>
-                        <div>    
-                            <input type="text" name="domicilio" id="domicilio" placeholder="Domicilio" required>
+                        <div class="col-sm-12">
+                            <label for="domicilio" for="form-label">Direccion:</label>    
+                            <input id="domicilio" type="text" name="domicilio"  value="<%= locals.oldData && oldData.domicilio ? oldData.domicilio : usuario.domicilio %>" class="form-control">
+
+                            <% if (locals.errors && errors.domicilio) { %>
+                                <div class="text-danger">
+                                    <%= errors.domicilio.msg %>   
+                                </div>
+                                <% } %>
                         </div>
-                        <div>
+                        <div class="col-sm-12">
                             Perfil de usuario: <br><br>
-                            <label for="tipotransaccion">Voy a comprar </label>
-                            <input type="radio" name="tipotransaccion" value="comprar">
+                            <label for="tipotransaccion" for="form-label">Voy a comprar </label>
+                            <input type="radio" name="tipotransaccion">
                         
-                            <label for="domicilio">Voy a vender </label>
-                            <input type="radio" name="tipotransaccion" value="vender">
+                            <label for="form-label">Voy a vender </label>
+                            <input type="radio"  name="tipotransaccion">
+                            <% if (locals.errors && errors.tipotransaccion) { %>
+
+                                <div class="text-danger">
+                                    <%= errors.tipotransaccion.msg %>   
+                                </div>
+                                <% } %>
                         </div>
-                        <div>
+                        <div class="col-sm-12">
                             <label>Seleccione categorías de interés :</label> <br>
-                            Electrónica <input type="checkbox" name="interes" value="Electro">
+                            Electrónica <input type="checkbox" name="interes">
                             <br>
-                            Moda <input type="checkbox" name="interes" value="Moda">
+                            Moda <input type="checkbox" name="interes">
                             <br>
-                            Hogar <input type="checkbox" name="interes" value="Hogar">
+                            Hogar <input type="checkbox" name="interes">
                             <br>
-                            Juguetería <input type="checkbox" name="interes" value="Jugueteria">
+                            Juguetería <input type="checkbox" name="interes">
                             <br>
-                            Vida Santa <input type="checkbox" name="interes" value="Vida Sana">
+                            Vida Santa <input type="checkbox" name="interes">
+                            <% if (locals.errors && errors.interes) { %>
+                                <div class="text-danger">
+                                        <%= errors.interes.msg %>   
+                                </div>
+                                <% } %>
                         </div>
-                        <div>
-                            <label for="foto">Seleccionar una imagen para el perfil :</label>
-                            <input type="file" name="img" accept=".jpg" class="input-img-usuario">
+                        <div class="col-sm-12">
+                            <label for="fileform" class="form-label">Ávatar</label>
+                            <input type="file" name="img" class=" form-control input-img-usuario" id="fileform">
+                            <% if (locals.errors && errors.img) { %>
+                                <div class="text-danger">
+                                        <%= errors.img.msg %>   
+                                </div>
+                                <% } %>
                         </div>
-                        <div>                
-                            <input type="password" name="password" id="contraseña" placeholder="Contraseña :" required minlength="6">
-                        </div>
-                        <div>                 
-                            <input type="password" name="password" id="contraseña" placeholder="Confirme contraseña :" required minlength="6">
-                        </div>
+                        <div class="col-sm-12">
+                            <label for="inputPassword4" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" id="inputPassword4" name="password">
+          
+                            <% if (locals.errors && errors.password) { %>
+                              <h5 class = "text-danger">
+                                  <%= errors.password.msg %> 
+                              </h5>
+                              <% } %>
+                          </div>
+                          <div class="col-sm-12">
+                              <label for="inputPassword2" class="form-label">Repita su contraseña</label>
+                              <input type="password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" id="inputPassword2" name="password2">
+          
+                              <% if (locals.errors && errors.password) { %>
+                                  <h5 class = "text-danger">
+                                      <%= errors.password.msg %> 
+                                  </h5>
+                                  <% } %>
+                            </div>
                         <div>
                             <button type="reset" class="detele-button">Borrar</button>
                             <button type="submit" class="submit-button"> Enviar</button>
@@ -81,7 +136,7 @@
             
         </main>
 
-        <footer >
+        <footer class="mt-4">
             <%- include('../partials/footer.ejs') %>
         </footer>
         
