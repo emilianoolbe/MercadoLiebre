@@ -1,13 +1,9 @@
-//Importo express
+//Importo express + ejecución Router
 const express = require('express');
-
-//Ejectuo método router
 const router = express.Router();
 
-//Importo Multer 
+//Importo Middlewares 
 const upload = require('../middlewares/multer-products');
-
-//Importo Express-validator
 const validationProducts = require('../middlewares/validation-form-products');
 
 //Importo controlador

@@ -1,1 +1,14 @@
-[]
+[
+    {
+        "id": 1,
+        "nombre": "PRUEBA",
+        "email": "prueba@prueba.com",
+        "fechanacimiento": "2000-10-10",
+        "domicilio": "11111111",
+        "tipotransaccion": "comprar",
+        "interes": "on",
+        "password": "$2a$10$qYxLONFR9Np8BKP3ugEbSu8Ub/as4V0TxSEg8Yk.tPQ7M090jfDVm",
+        "password2": "$2a$10$IklwQ44UEZ468EQx43awUOaudc9dgrZkJplE.vHpE.cMk3Wz0BuxO",
+        "img": "user-1665693692608.jpg"
+    }
+]

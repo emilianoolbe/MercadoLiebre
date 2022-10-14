@@ -2,6 +2,7 @@
 
     <head>
         <%- include('../partials/head.ejs') %>
+        <title>registro</title>
     </head>
     <body>
 
@@ -82,15 +83,15 @@
                         </div>
                         <div class="col-sm-12">
                             <label>Seleccione categorías de interés :</label> <br>
-                            Electrónica <input type="checkbox" name="interes" value="<%= locals.oldData ? oldData.interes : 'Electro' %>">
+                            Electrónica <input type="checkbox" name="interes">
                             <br>
-                            Moda <input type="checkbox" name="interes" value="<%= locals.oldData ? oldData.interes : 'Moda' %>" >
+                            Moda <input type="checkbox" name="interes">
                             <br>
-                            Hogar <input type="checkbox" name="interes" value="<%= locals.oldData ? oldData.interes : 'Hogar' %>" >
+                            Hogar <input type="checkbox" name="interes">
                             <br>
-                            Juguetería <input type="checkbox" name="interes" value="<%= locals.oldData ? oldData.interes : 'Jugeteria' %>" >
+                            Juguetería <input type="checkbox" name="interes">
                             <br>
-                            Vida Santa <input type="checkbox" name="interes" value="<%= locals.oldData ? oldData.interes : 'Vida Sana' %>" >
+                            Vida Santa <input type="checkbox" name="interes">
                             <% if (locals.errors && errors.interes) { %>
                                 <div class="text-danger">
                                         <%= errors.interes.msg %>   
@@ -109,6 +110,9 @@
                         <div class="col-sm-12">
                             <label for="inputPassword4">Contraseña</label>
                             <input type="password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" id="inputPassword4" name="password">
+
+                            <label for="inputPassword4">Repetita contraseña</label>
+                            <input type="password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" id="inputPassword4" name="password2">
           
                             <% if (locals.errors && errors.password) { %>
                               <h5 class = "text-danger">

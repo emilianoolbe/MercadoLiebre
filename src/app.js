@@ -20,7 +20,7 @@ const error404 = require('./middlewares/404ErrorMiddlleware');
 app.use(express.static("./public"));
 app.use(session({secret: 'SECRET', resave : false, saveUninitialized: false }));
 app.use(cookieParser());
-app.use(rememberMeMiddleware);
+//app.use(rememberMeMiddleware);
 
 
 

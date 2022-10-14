@@ -2,6 +2,7 @@
 
     <head>
         <%- include('../partials/head.ejs') %>
+        <title>edición de usuario</title>
     </head>
     <body>
 
@@ -27,7 +28,7 @@
         <main class="main-login row">
             <section class="  section-crea-tu-cuenta container col-sm-12 col-md-6 col-lg-4">
                 <article class=" formulario-crear-cuenta borde-fondo-2">
-                    <form action="/users/form-crear-usuario" method="post" id="form" enctype="multipart/form-data">
+                    <form action="/users/form-editar-usuario/<%=usuario.id%>?_method=PUT" method="post" id="form" enctype="multipart/form-data">
                         <div class="col-sm-12">
                             <label for="nombre" class="form-label">Nombre completo</label>    
                             <input id="nombre" class="form-control" type="text" name="nombre" value="<%= locals.oldData && oldData.nombre ? oldData.nombre : usuario.nombre %>" >

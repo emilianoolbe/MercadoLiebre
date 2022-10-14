@@ -74,7 +74,11 @@ const User = {
       }
       fs.writeFileSync(this.fileName, JSON.stringify( allUsers, null, 4), 'utf-8');
       return true;
-   }
+   },
+   
+      //ProcessLogin
+   
+
    
 };
 module.exports = User;

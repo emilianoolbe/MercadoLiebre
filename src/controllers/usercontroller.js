@@ -32,10 +32,11 @@ const controlador = {
             let newUser = {
                 ...req.body,
                 password : bcryptjs.hashSync(req.body.password, 10),
+                password2: bcryptjs.hashSync(req.body.password2, 10),
                 img: req.file.filename
             };
             User.createNewUser(newUser);
-            return res.redirect('users/ingresa')
+            return res.redirect('ingresa')
         }else{
             return res.render('users/form-crear-usuario', {errors: errors.mapped(), oldData: req.body});
         }   
@@ -43,23 +44,25 @@ const controlador = {
 
     //Vista form editar
     edit: (req, res) =>{
-        User.findUserbyPk(req.params.id) ? res.render('users/form-editar-usuario', {usuario: usuarioEncontrado}) : res.send('Usuario no existe'); 
+        User.findUserbyPk(req.params.id) ? res.render('users/form-editar-usuario', {usuario: User.findUserbyPk(req.params.id) }) : res.send('Usuario no existe'); 
     },
 
     //Edición
     update: (req, res) => {
         let errors = validationResult(req);
-        if (erros.isEmpty()) {
+        if (errors.isEmpty()) {
             let userToUpdate = User.findUserbyPk(req.params.id);
             fs.unlinkSync(User.fileNameImg + userToUpdate.img);
             userToUpdate = {
                 img: req.file.filename,
+                password: bcryptjs.hashSync(req.body.password, 10),
+                password2: bcryptjs.hashSync(req.body.password2, 10),
                 ...req.body
             };
-            User.updateAUser(req.params.id, req.body);
-            return res.redirect('users/profile')
+            User.updateAUser(req.params.id, userToUpdate);
+            return res.render('users/profile', {user: userToUpdate})
         }else{
-            User.findUserbyPk(req.params.id) ? res.render('users/form-editar-usuario', {usuario: usuarioEncontrado, errors: errors.mapped(), oldData: req.body}) : res.send('Usuario no encontrado'); 
+            User.findUserbyPk(req.params.id) ? res.render('users/form-editar-usuario', {usuario: User.findUserbyPk(req.params.id), errors: errors.mapped(), oldData: req.body}) : res.send('Usuario no encontrado'); 
         }
     },
     //Eliminar usuario
@@ -79,37 +82,37 @@ const controlador = {
     },
 
     processLogin: (req, res) => {
-        let errors = validationResult(req);       
+        let errors = validationResult(req)
         if (errors.isEmpty()) {
+            let userToLogin = User.findUserByField('email', req.body.email)
 
-            let usuarioALoguearse = User.findUserByField('email', req.body.email); 
-            let passwordOk = bcryptjs.compareSync(req.body.password, usuarioALoguearse.password);
-            console.log(passwordOk);
-            if (bcryptjs.compareSync(req.body.password, usuarioALoguearse.password)) { 
-                delete usuarioALoguearse.password;            
-                req.session.userLogged = usuarioALoguearse;
-
-                if(req.body.remember != undefined){
-                    res.cookie('remember', req.session.userLogged.email, {maxAge: ((1000 * 60) * 60)});
-                }
-                return res.redirect('/profile')
-
+            if (userToLogin == undefined || !(bcryptjs.compareSync(req.body.password, userToLogin.password))){
+                
+                return res.render('users/ingresa', {errors:{email:{msg: 'Email o contraseña inválidos'}}})
             }else{
-                res.render('users/ingresa', {errors: {email: {msg: 'Credenciales inválidas'}}}) 
+                delete userToLogin.password;
+                delete userToLogin.password2;
+                req.session.userLogged = userToLogin;
+                if (req.body.remember) {
+                    res.cookie('remember', userToLogin.email, {maxAge: (1000 * 60) * 60});
+                }
+                return res.redirect('profile');
             }
-            //Busco si el mail se encuentra en database
-            //Si lo encuentra comparo contraseñas (envío mensaje de error si no coinciden)
-            //Elimino el password para no guardarlo en session
-
         }else{
-            res.render('users/ingresa', { errors: errors.mapped() });
+            return res.render('users/ingresa', {errors: errors.mapped()});
         }
-    },
+    }, 
 
     //profile
     profile: (req, res) => {
-        return res.render('users/profile')
-    }
+        console.log(req.session);
+        return res.render('users/profile', {user : req.session.userLogged})
+    },
+
+    //Logout
+    //logout: (req, res) => {
+       // 
+    //}
 };
 
 module.exports = controlador;

@@ -2,7 +2,7 @@
 const express = require("express");
 const router = express.Router();
 
-//Importo Validaciones
+//Importo Middlewares
 const validationUsers = require('../middlewares/validation-form-users');
 const upload = require('../middlewares/multer-users');
 const validationLoggin = require('../middlewares/validation-Loggin');
@@ -17,7 +17,7 @@ router.get('/allUsers', userController.allUsers);
 
 //Nuevo usuario
 router.get('/form-crear-usuario', userController.register);
-router.post('/form-crear-usuario', validationUsers, upload.single('img'), userController.newUser);
+router.post('/form-crear-usuario', upload.single('img'), validationUsers, userController.newUser);
 
 //Edición usuario
 router.get('/form-editar-usuario/:id', userController.edit);
@@ -31,6 +31,9 @@ router.get('/ingresa', userController.login);
 router.post('/ingresa', validationLoggin, userController.processLogin);
 
 //Profile
-router.get('/profile', userController.profile)
+router.get('/profile', userController.profile);
+
+//Logout
+//router.get('/logout', userController.logut);
 
 module.exports = router;
