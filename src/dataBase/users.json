@@ -10,5 +10,17 @@
         "password": "$2a$10$qYxLONFR9Np8BKP3ugEbSu8Ub/as4V0TxSEg8Yk.tPQ7M090jfDVm",
         "password2": "$2a$10$IklwQ44UEZ468EQx43awUOaudc9dgrZkJplE.vHpE.cMk3Wz0BuxO",
         "img": "user-1665693692608.jpg"
+    },
+    {
+        "id": 2,
+        "nombre": "Jon Snow",
+        "email": "prueba2@prueba.com",
+        "fechanacimiento": "2000-02-20",
+        "domicilio": "15dsfdsf",
+        "tipotransaccion": "comprar",
+        "interes": "on",
+        "password": "$2a$10$Ow.GUXmts/MwdPRiagcDWulazH7Ggle58gYJYDtwOd/SO4wY7N.1W",
+        "password2": "$2a$10$ibAsxNrBPHwtFUWVtlCM8e24rA7TwqAfWdxjXzbt2rH5UhxI8eJde",
+        "img": "user-1665874578038.png"
     }
 ]

@@ -7,25 +7,31 @@
       
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
         <ul class="navbar-nav ">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="../../../imagenes/img-users/user-1665693692608.jpg" class="rounded-circle icono-user" alt="">
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a href="/products/crear" class="nav-link"> <i class="fa-solid fa-sack-dollar"></i> Vender </a></li>
-              <li><a href="/products/ofertas" class="nav-link"><i class="fa-solid fa-heart"></i> Comprar </a></li>
-              <li><a href="#" class="nav-link"> <i class="fas fa-shopping-basket"></i> Carrito </a></li>
-              <li><a href="#" class="nav-link"><i class="fa-solid fa-person-walking-arrow-right"></i></i> Salir </a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="/users/form-crear-usuario" class="nav-link"> <i class="far fa-id-card"></i> Creá tu cuenta |</a>
-          </li>
-          <li class="nav-item">
-            <a href="/users/ingresa" class="nav-link"> <i class="fas fa-sign-in-alt"></i> Ingresa |</a>
-          </li>
-          <li class="nav-item">
-          </li>
+          <% if (locals.isLogged) { %>
+            
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="../../../imagenes/img-users/<%= locals.userLogged.img %>" class="rounded-circle icono-user" alt=""> Hola <%= locals.userLogged.nombre %> 
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <li><a href="/users/profile" class="nav-link"> <i class="fa-solid fa-sack-dollar"></i> Mi perfil </a></li>
+                  <li><a href="/products/crear" class="nav-link"> <i class="fa-solid fa-sack-dollar"></i> Vender </a></li>
+                  <li><a href="/products/ofertas" class="nav-link"><i class="fa-solid fa-heart"></i> Comprar </a></li>
+                  <li><a href="#" class="nav-link"> <i class="fas fa-shopping-basket"></i> Carrito </a></li>
+                  <li><a href="/users/logout" class="nav-link"><i class="fa-solid fa-person-walking-arrow-right"></i></i> Salir </a></li>
+                </ul>
+              </li>
+              
+          <% } else { %>
+            <li class="nav-item">
+              <a href="/users/form-crear-usuario" class="nav-link"> <i class="far fa-id-card"></i> Creá tu cuenta |</a>
+            </li>
+            <li class="nav-item">
+              <a href="/users/ingresa" class="nav-link"> <i class="fas fa-sign-in-alt"></i> Ingresa |</a>
+            </li>
+            <li class="nav-item">
+            </li>
+          <% }%>
         </ul>
       </div>
       <div class="">

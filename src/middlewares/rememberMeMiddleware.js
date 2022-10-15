@@ -10,7 +10,7 @@ function rememberMeMiddleware(req, res, next) {
                  break;   
             }
         }
-        req.session.userLogged= userToLogin;
+        req.session.userLogged = userToLogin;
         next();
     };
 };

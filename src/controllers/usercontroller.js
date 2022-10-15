@@ -89,6 +89,7 @@ const controlador = {
             if (userToLogin == undefined || !(bcryptjs.compareSync(req.body.password, userToLogin.password))){
                 
                 return res.render('users/ingresa', {errors:{email:{msg: 'Email o contraseña inválidos'}}})
+                
             }else{
                 delete userToLogin.password;
                 delete userToLogin.password2;
@@ -105,14 +106,14 @@ const controlador = {
 
     //profile
     profile: (req, res) => {
-        console.log(req.session);
         return res.render('users/profile', {user : req.session.userLogged})
     },
 
     //Logout
-    //logout: (req, res) => {
-       // 
-    //}
+    logout: (req, res) => {
+       req.session.destroy();
+       res.redirect('/');
+    }
 };
 
 module.exports = controlador;

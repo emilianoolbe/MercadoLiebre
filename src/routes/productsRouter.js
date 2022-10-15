@@ -2,9 +2,10 @@
 const express = require('express');
 const router = express.Router();
 
-//Importo Middlewares 
+// Middlewares 
 const upload = require('../middlewares/multer-products');
 const validationProducts = require('../middlewares/validation-form-products');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 //Importo controlador
 const productsController = require('../controllers/productsController');
@@ -15,18 +16,18 @@ const productsController = require('../controllers/productsController');
 router.get('/ofertas', productsController.ofertas);
 
 //Creación de producto
-router.get('/crear', productsController.crear);
+router.get('/crear', authMiddleware, productsController.crear);
 router.post('/crear', upload.single('img'), validationProducts, productsController.guardar); // upload.método('name del input')
 
 //Detalle de producto
 router.get('/detalle/:id', productsController.detalle);
 
 //Edición de producto
-router.get('/editar/:id', productsController.editar);
+router.get('/editar/:id', authMiddleware, productsController.editar);
 router.put('/editar/:id', upload.single('img'), validationProducts, productsController.update); // upload.método('name del input')
 
 //Borrado de producto
-router.delete('/:id', productsController.borrar);
+router.delete('/:id', authMiddleware, productsController.borrar);
 
 
 module.exports = router;
