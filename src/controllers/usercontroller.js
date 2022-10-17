@@ -1,6 +1,5 @@
 //Importo Fs + Path + bcrypt
 const fs = require('fs');
-const path = require('path');
 const bcryptjs = require('bcryptjs');
 
 //Importo Modelo
@@ -82,6 +81,7 @@ const controlador = {
     },
 
     processLogin: (req, res) => {
+      
         let errors = validationResult(req)
         if (errors.isEmpty()) {
             let userToLogin = User.findUserByField('email', req.body.email)
@@ -111,8 +111,9 @@ const controlador = {
 
     //Logout
     logout: (req, res) => {
-       req.session.destroy();
-       res.redirect('/');
+        res.clearCookie('remember');
+        req.session.destroy();
+        res.redirect('/');
     }
 };
 

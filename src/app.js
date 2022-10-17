@@ -23,14 +23,13 @@ app.use(methodOverride('_method'));
 //Session
 const session = require('express-session');
 app.use(session({secret: 'SECRET', resave : false, saveUninitialized: false }));
+
 //Cookies
-const cookieParser = require('cookie-parser');
-app.use(cookieParser());
+const cookies = require('cookie-parser');
+app.use(cookies());
 
 const userLoggedMiddleware = require('./middlewares/userLoggedMiddleware');
 app.use(userLoggedMiddleware);
-//const rememberMeMiddleware = require('./middlewares/rememberMeMiddleware');
-//app.use(rememberMeMiddleware);
 app.use(express.static("./public"));
 
 //Rutas
