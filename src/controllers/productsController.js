@@ -41,6 +41,7 @@ let controlador = {
             Product.newProduct(newProduct);
             return res.redirect('/products/ofertas')
         }else{
+            req.file ? fs.unlinkSync(Product.fileNameImg + req.file.filename) : null;
             return res.render('products/form-crear-producto', {errors : errors.mapped(), oldData: req.body});
         }          
     },
@@ -67,6 +68,7 @@ let controlador = {
             Product.uptdateProduct(req.params.id, productFound)
             return res.redirect('/products/ofertas');
         }else{
+            req.file ? fs.unlinkSync(Product.fileNameImg + req.file.filename) : null;
             return Product.finProductByPk(req.params.id) ? res.render('products/form-editar-producto', {producto: Product.finProductByPk(req.params.id), errors : errors.mapped(), oldData : req.body }) : res.send('Producto no encontrado');   
         }     
     },

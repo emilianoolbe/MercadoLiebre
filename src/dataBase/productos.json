@@ -106,5 +106,14 @@
         "categoria": "Últimos Agregados",
         "descripcion": "           Cuadro de pared ",
         "id": 16
+    },
+    {
+        "img": "products-1666219480144.jpg",
+        "nombre": "pelota",
+        "precio": "1234",
+        "descuento": "   0",
+        "categoria": "En oferta",
+        "descripcion": "   sdfasdfasdf",
+        "id": 17
     }
 ]

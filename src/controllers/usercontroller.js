@@ -37,6 +37,7 @@ const controlador = {
             User.createNewUser(newUser);
             return res.redirect('ingresa')
         }else{
+            req.file ? fs.unlinkSync(User.fileNameImg + req.file.filename) : null;
             return res.render('users/form-crear-usuario', {errors: errors.mapped(), oldData: req.body});
         }   
     },
@@ -61,7 +62,8 @@ const controlador = {
             User.updateAUser(req.params.id, userToUpdate);
             return res.render('users/profile', {user: userToUpdate})
         }else{
-            User.findUserbyPk(req.params.id) ? res.render('users/form-editar-usuario', {usuario: User.findUserbyPk(req.params.id), errors: errors.mapped(), oldData: req.body}) : res.send('Usuario no encontrado'); 
+            req.file ? fs.unlinkSync(User.fileNameImg + req.file.filename) : null;
+            return User.findUserbyPk(req.params.id) ? res.render('users/form-editar-usuario', {usuario: User.findUserbyPk(req.params.id), errors: errors.mapped(), oldData: req.body}) : res.send('Usuario no encontrado'); 
         }
     },
     //Eliminar usuario
