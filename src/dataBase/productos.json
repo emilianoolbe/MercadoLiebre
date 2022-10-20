@@ -108,12 +108,19 @@
         "id": 16
     },
     {
-        "img": "products-1666219480144.jpg",
-        "nombre": "pelota",
-        "precio": "1234",
-        "descuento": "   0",
-        "categoria": "En oferta",
-        "descripcion": "   sdfasdfasdf",
-        "id": 17
+        "id": 17,
+        "img": {
+            "format": "jpeg",
+            "width": 500,
+            "height": 500,
+            "channels": 3,
+            "premultiplied": false,
+            "size": 20831
+        },
+        "nombre": "Camiseta Club Nacional de Football",
+        "precio": "12345",
+        "descuento": "1",
+        "categoria": "Últimos Agregados",
+        "descripcion": "sdasdasd"
     }
 ]

@@ -1,12 +1,14 @@
-//Importo Fs + Path + bcrypt
+//Importo Fs + Path + bcrypt + Sharp
 const fs = require('fs');
 const bcryptjs = require('bcryptjs');
+const sharp = require('sharp');
 
 //Importo Modelo
 const User = require('../models/Users');
 
 //Importo ResultValidation
 const { validationResult } = require('express-validator');
+const path = require('path');
 
 //CONTROLADOR
 const controlador = {
@@ -28,16 +30,17 @@ const controlador = {
         let errors = validationResult(req);
 
         if (errors.isEmpty()){
+            let imgSharp = sharp(req.file.buffer).resize(500, 500).jpeg({quality : 50, chromaSubsampling: '4:4:4'}).toFile(User.fileNameImg + 'user-' + Date.now() + path.extname(file.originalname));
+
             let newUser = {
                 ...req.body,
                 password : bcryptjs.hashSync(req.body.password, 10),
                 password2: bcryptjs.hashSync(req.body.password2, 10),
-                img: req.file.filename
+                img: imgSharp
             };
             User.createNewUser(newUser);
             return res.redirect('ingresa')
         }else{
-            req.file ? fs.unlinkSync(User.fileNameImg + req.file.filename) : null;
             return res.render('users/form-crear-usuario', {errors: errors.mapped(), oldData: req.body});
         }   
     },
@@ -53,8 +56,10 @@ const controlador = {
         if (errors.isEmpty()) {
             let userToUpdate = User.findUserbyPk(req.params.id);
             fs.unlinkSync(User.fileNameImg + userToUpdate.img);
+
+            let imgSharp = sharp(req.file.buffer).resize(500, 500).jpeg({quality : 50, chromaSubsampling: '4:4:4'}).toFile(User.fileNameImg + 'user-' + Date.now() + path.extname(file.originalname));
             userToUpdate = {
-                img: req.file.filename,
+                img: imgSharp,
                 password: bcryptjs.hashSync(req.body.password, 10),
                 password2: bcryptjs.hashSync(req.body.password2, 10),
                 ...req.body
@@ -62,7 +67,6 @@ const controlador = {
             User.updateAUser(req.params.id, userToUpdate);
             return res.render('users/profile', {user: userToUpdate})
         }else{
-            req.file ? fs.unlinkSync(User.fileNameImg + req.file.filename) : null;
             return User.findUserbyPk(req.params.id) ? res.render('users/form-editar-usuario', {usuario: User.findUserbyPk(req.params.id), errors: errors.mapped(), oldData: req.body}) : res.send('Usuario no encontrado'); 
         }
     },

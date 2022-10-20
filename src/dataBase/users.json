@@ -22,5 +22,17 @@
         "password": "$2a$10$Ow.GUXmts/MwdPRiagcDWulazH7Ggle58gYJYDtwOd/SO4wY7N.1W",
         "password2": "$2a$10$ibAsxNrBPHwtFUWVtlCM8e24rA7TwqAfWdxjXzbt2rH5UhxI8eJde",
         "img": "user-1665874578038.png"
+    },
+    {
+        "id": 3,
+        "nombre": " DASDASD",
+        "email": "correo@correo.com",
+        "fechanacimiento": "2000-02-22",
+        "domicilio": "asdasd",
+        "tipotransaccion": "comprar",
+        "interes": "on",
+        "password": "$2a$10$rGWKhnoxIWOVAatiRfoM0eQSasff/NHqOK50xF8ANUEzgABIdlQnq",
+        "password2": "$2a$10$ZMy1ayl1yaWcVPNIiy8nquMgP6odijiB23XeajfCPw0j2kY5ZA1qW",
+        "img": "user-1666237459254.jpg"
     }
 ]

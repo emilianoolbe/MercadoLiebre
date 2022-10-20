@@ -8,14 +8,14 @@
     "express-validator": "^6.14.2",
     "method-override": "^3.0.0",
     "multer": "^1.4.5-lts.1",
-    "nodemon": "^2.0.19"
+    "sharp": "^0.31.1"
   },
   "name": "mercadoliebre",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./src/app.js"
+    "dev": "nodemon ./src/app.js"
   },
   "repository": {
     "type": "git",
@@ -28,5 +28,8 @@
     "url": "https://github.com/emilianoolbe/MercadoLiebre/issues"
   },
   "homepage": "https://github.com/emilianoolbe/MercadoLiebre#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
 }

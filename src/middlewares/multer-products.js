@@ -1,28 +1,17 @@
-//Importo Multer
+//Importo Multer + path
 const multer = require('multer');
-
-//Importo path
 const path = require('path');
 
-//Seteo multer (indico donde guardo file + nome)
-const storage = multer.diskStorage({
-    destination:(req, file, cb) => {
-        cb(null, path.join(__dirname, '../../public/imagenes/img-products'));
-    },
-    filename: (req, file, cb) =>{
-        //creo el nombre de la imagen (concateno el string + fecha en ms + extensión original)
-        let nuevaImg = 'products-' + Date.now() + path.extname(file.originalname);
-        cb(null, nuevaImg);
-    }
-});
+const storage = multer.memoryStorage();
 
-//Ejecuto multer con la config anterior para agregarlo a la ruta
-const upload = multer({storage : storage, 
-    fileFilter: (req, file, cb) => {
-        let extensionesAceptadas = ['.jpg', '.png', '.gif' ];
-        let fileExtension = path.extname(file.originalname);
-        extensionesAceptadas.includes(fileExtension) ? cb(null, true) : cb(null, false);
-    }
-});
+const fileFilter = (req, file, cb) => {
+    let type = file.mimetype.startsWith('image/'); // --> startsWith devuelve true o false
+    let extensionesAceptadas = ['.jpg', '.png', '.gif' ];
+    let fileExtension = path.extname(file.originalname);
+    return type && extensionesAceptadas.includes(fileExtension) ? cb(null, true) : cb(null, false);
+}
+
+//Ejecuto multer con la config anterior para exportarlo al enrutador
+const upload = multer({storage : storage, fileFilter: fileFilter});
 
 module.exports = upload; 
