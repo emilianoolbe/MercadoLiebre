@@ -1,38 +1,14 @@
 [
     {
         "id": 1,
-        "nombre": "PRUEBA",
+        "nombre": " prueba123",
         "email": "prueba@prueba.com",
-        "fechanacimiento": "2000-10-10",
-        "domicilio": "11111111",
+        "fechanacimiento": "1990-10-10",
+        "domicilio": "18 de julio 1111",
         "tipotransaccion": "comprar",
         "interes": "on",
-        "password": "$2a$10$qYxLONFR9Np8BKP3ugEbSu8Ub/as4V0TxSEg8Yk.tPQ7M090jfDVm",
-        "password2": "$2a$10$IklwQ44UEZ468EQx43awUOaudc9dgrZkJplE.vHpE.cMk3Wz0BuxO",
-        "img": "user-1665693692608.jpg"
-    },
-    {
-        "id": 2,
-        "nombre": "Jon Snow",
-        "email": "prueba2@prueba.com",
-        "fechanacimiento": "2000-02-20",
-        "domicilio": "15dsfdsf",
-        "tipotransaccion": "comprar",
-        "interes": "on",
-        "password": "$2a$10$Ow.GUXmts/MwdPRiagcDWulazH7Ggle58gYJYDtwOd/SO4wY7N.1W",
-        "password2": "$2a$10$ibAsxNrBPHwtFUWVtlCM8e24rA7TwqAfWdxjXzbt2rH5UhxI8eJde",
-        "img": "user-1665874578038.png"
-    },
-    {
-        "id": 3,
-        "nombre": " DASDASD",
-        "email": "correo@correo.com",
-        "fechanacimiento": "2000-02-22",
-        "domicilio": "asdasd",
-        "tipotransaccion": "comprar",
-        "interes": "on",
-        "password": "$2a$10$rGWKhnoxIWOVAatiRfoM0eQSasff/NHqOK50xF8ANUEzgABIdlQnq",
-        "password2": "$2a$10$ZMy1ayl1yaWcVPNIiy8nquMgP6odijiB23XeajfCPw0j2kY5ZA1qW",
-        "img": "user-1666237459254.jpg"
+        "password": "$2a$10$wNhB4W1nAyyxOO2y3Vyyeu0hQou3nuz6M40kZ2bb00kczdz6EYFhi",
+        "password2": "$2a$10$rY3JdGQ1BTXjjS4qPaHZIuk9.AB.bonQ8.KJIMY.Csvd3PPW9IafO",
+        "img": "user-1666395591155 .png"
     }
 ]

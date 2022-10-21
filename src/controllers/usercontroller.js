@@ -1,5 +1,6 @@
 //Importo Fs + Path + bcrypt + Sharp
 const fs = require('fs');
+const path = require('path');
 const bcryptjs = require('bcryptjs');
 const sharp = require('sharp');
 
@@ -8,7 +9,6 @@ const User = require('../models/Users');
 
 //Importo ResultValidation
 const { validationResult } = require('express-validator');
-const path = require('path');
 
 //CONTROLADOR
 const controlador = {
@@ -20,23 +20,25 @@ const controlador = {
         return res.render('users/usuarios' , {usuarios : usuarios});
     },
 
-    //Vista form Registro
+    //Vista Registro
     register: (req, res) => {
         return res.render('users/form-crear-usuario')
     },
 
     //Guardado Registro
-    newUser: (req, res) => {
+    newUser: async (req, res) => {
         let errors = validationResult(req);
 
         if (errors.isEmpty()){
-            let imgSharp = sharp(req.file.buffer).resize(500, 500).jpeg({quality : 50, chromaSubsampling: '4:4:4'}).toFile(User.fileNameImg + 'user-' + Date.now() + path.extname(file.originalname));
+
+            let fileName = `${'user-'}${Date.now()} ${path.extname(req.file.originalname)}`;
+            await sharp(req.file.buffer).resize(500, 500).jpeg({quality : 50, chromaSubsampling: '4:4:4'}).toFile(`${User.fileNameImg}${fileName}`);
 
             let newUser = {
                 ...req.body,
                 password : bcryptjs.hashSync(req.body.password, 10),
                 password2: bcryptjs.hashSync(req.body.password2, 10),
-                img: imgSharp
+                img: fileName
             };
             User.createNewUser(newUser);
             return res.redirect('ingresa')
@@ -45,27 +47,32 @@ const controlador = {
         }   
     },
 
-    //Vista form editar
+    //Vista editar
     edit: (req, res) =>{
         User.findUserbyPk(req.params.id) ? res.render('users/form-editar-usuario', {usuario: User.findUserbyPk(req.params.id) }) : res.send('Usuario no existe'); 
     },
 
     //Edición
-    update: (req, res) => {
+    update: async (req, res) => {
         let errors = validationResult(req);
         if (errors.isEmpty()) {
+
+            //Busco al usuario para borrar la img
             let userToUpdate = User.findUserbyPk(req.params.id);
             fs.unlinkSync(User.fileNameImg + userToUpdate.img);
 
-            let imgSharp = sharp(req.file.buffer).resize(500, 500).jpeg({quality : 50, chromaSubsampling: '4:4:4'}).toFile(User.fileNameImg + 'user-' + Date.now() + path.extname(file.originalname));
+            //Sharp
+            let fileName = `${'user-'}${Date.now()}${path.extname(req.file.originalname)}`;
+            await sharp(req.file.buffer).resize(500, 500).jpeg({quality : 50, chromaSubsampling: '4:4:4'}).toFile(`${User.fileNameImg}${fileName}`);
+
             userToUpdate = {
-                img: imgSharp,
+                img: fileName,
                 password: bcryptjs.hashSync(req.body.password, 10),
                 password2: bcryptjs.hashSync(req.body.password2, 10),
                 ...req.body
             };
             User.updateAUser(req.params.id, userToUpdate);
-            return res.render('users/profile', {user: userToUpdate})
+            return res.redirect('profile');
         }else{
             return User.findUserbyPk(req.params.id) ? res.render('users/form-editar-usuario', {usuario: User.findUserbyPk(req.params.id), errors: errors.mapped(), oldData: req.body}) : res.send('Usuario no encontrado'); 
         }
@@ -74,18 +81,15 @@ const controlador = {
     delete: (req, res) => {
 
         let usuarioEncontrado = User.findUserbyPk(req.params.id);
-        console.log(usuarioEncontrado);
         let imgABorrar = User.fileNameImg + usuarioEncontrado.img;
         fs.existsSync(imgABorrar) ? fs.unlinkSync(imgABorrar) : null;
         User.delete(req.params.id)
         return res.redirect('/')      
     },
-
      //Login
      login: (req, res) => {
         res.render('users/ingresa')
     },
-
     processLogin: (req, res) => {
       
         let errors = validationResult(req)
@@ -109,12 +113,10 @@ const controlador = {
             return res.render('users/ingresa', {errors: errors.mapped()});
         }
     }, 
-
     //profile
     profile: (req, res) => {
         return res.render('users/profile', {user : req.session.userLogged})
     },
-
     //Logout
     logout: (req, res) => {
         res.clearCookie('remember');

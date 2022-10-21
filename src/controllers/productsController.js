@@ -36,10 +36,14 @@ let controlador = {
         let errors = validationResult(req);
         if(errors.isEmpty()){
             
-            let imgSharp = await sharp(req.file.buffer).resize(500, 500).jpeg({quality: 50, chromaSubsampling: '4:4:4'}).toFile(Product.fileNameImg + 'pruduct-' + Date.now() + path.extname(req.file.originalname));         
-
+            //Nombre img para poder guardalo 
+            let fileName = ('pruduct-' + Date.now() + path.extname(req.file.originalname)); 
+            
+            //SHARP rezising
+            await sharp(req.file.buffer).resize(500, 500).jpeg({quality: 50, chromaSubsampling: '4:4:4'}).toFile(Product.fileNameImg + fileName);  
+            
             let newProduct = {    
-               img: imgSharp,
+               img: fileName,
                ...req.body
             };
             Product.newProduct(newProduct);
@@ -61,12 +65,19 @@ let controlador = {
         
         let errors = validationResult(req);
         if (errors.isEmpty()){
+
+            //Busco el producto y borro la img
             let productFound = Product.finProductByPk(req.params.id);
             fs.unlinkSync(Product.fileNameImg + productFound.img);
-
-            let imgSharp = await sharp(req.file.buffer).resize(500, 500).jpeg({quality: 50, chromaSubsampling: '4:4:4'}).toFile(Product.fileNameImg + 'pruduct-' + Date.now() + path.extname(req.file.originalname));
+            
+            //Nombre de img
+            let fileName = ('pruduct-' + Date.now() + path.extname(req.file.originalname));
+            
+            //Nombre de img como parámetro toFile()
+            await sharp(req.file.buffer).resize(500, 500 , {fit:"contain",background:'#fff'}).jpeg({quality: 50, chromaSubsampling: '4:4:4'}).toFile(Product.fileNameImg + fileName);  
+            
             productFound = {
-                img: imgSharp,
+                img: fileName,
                 ...req.body
             };
             Product.uptdateProduct(req.params.id, productFound)
@@ -82,8 +93,7 @@ let controlador = {
        let imgABorrar = Product.fileNameImg + productoABorrar.img; 
        //Ruteo la img a Borrar
        //Si existe archivo lo borra --- unlinkSync() recibe como parametro la ruta del archivo a eliminar + nombre
-       fs.unlinkSync(imgABorrar)
-       console.log(imgABorrar);
+       fs.existsSync(imgABorrar) ? fs.unlinkSync(imgABorrar) : null;
        Product.deleteProduct(req.params.id)
        return res.redirect('/products/ofertas');
     }

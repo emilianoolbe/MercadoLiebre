@@ -1,126 +1,137 @@
 [
     {
-        "id": 3,
-        "img": "productonuevo1.jpg",
-        "precio": 400,
-        "descuento": 10,
+        "img": "pruduct-1666388300861.jpg",
         "nombre": "Apple Watch",
-        "descripcion": "La mejor del mercado",
-        "categoria": "En oferta"
+        "precio": "400",
+        "descuento": " 10",
+        "categoria": "En oferta",
+        "descripcion": " La mejor del mercado",
+        "id": 3
     },
     {
-        "id": 4,
-        "img": "productonuevo2.jpg",
-        "precio": 120,
-        "descuento": 10,
+        "img": "pruduct-1666388312993.jpg",
         "nombre": "Camiseta Uruguay",
-        "descripcion": "La mejor del mercado",
-        "categoria": "Últimos Agregados"
+        "precio": "120",
+        "descuento": " 10",
+        "categoria": "En oferta",
+        "descripcion": " La mejor del mercado",
+        "id": 4
     },
     {
-        "id": 5,
-        "img": "img-samsung-galaxy-s10.jpg",
-        "precio": 700,
-        "descuento": 15,
+        "img": "pruduct-1666388329223.jpg",
         "nombre": "Samsung Galaxy S10",
-        "descripcion": "La mejor del mercado",
-        "categoria": "Últimos Agregados"
+        "precio": "700",
+        "descuento": " 15",
+        "categoria": "En oferta",
+        "descripcion": "El mejor del mercado",
+        "id": 5
     },
     {
-        "id": 6,
-        "img": "productonuevo3.jpg",
-        "precio": 300,
-        "descuento": 30,
+        "img": "pruduct-1666388342500.jpg",
         "nombre": "JBL Charge 5",
-        "descripcion": "La mejor del mercado",
-        "categoria": "Últimos Agregados"
+        "precio": "300",
+        "descuento": " 30",
+        "categoria": "En oferta",
+        "descripcion": " La mejor del mercado",
+        "id": 6
     },
     {
-        "id": 7,
-        "img": "img-tv-samsung-smart.jpg",
-        "precio": 40,
-        "descuento": 25,
+        "img": "pruduct-1666388358597.jpg",
         "nombre": "img-cafetera-moulinex",
-        "descripcion": "La mejor del mercado",
-        "categoria": "Últimos Agregados"
-    },
-    {
-        "id": 8,
-        "img": "productonuevo4.jpg",
-        "precio": 100,
-        "descuento": 10,
-        "nombre": "Joystick Xbox",
-        "descripcion": "La mejor del mercado",
-        "categoria": "En oferta"
-    },
-    {
-        "id": 9,
-        "img": "products-1664830919811.jpg",
-        "precio": 3000,
-        "descuento": 15,
-        "nombre": "Championes Addidas",
-        "descripcion": " Las Mejores Zapatillas del Mercado\"",
-        "categoria": "En oferta"
-    },
-    {
-        "id": 11,
-        "img": "products-1664827619666.jpg",
-        "precio": 120,
-        "descuento": 0,
-        "nombre": "Camiseta Club Nacional de Football ",
-        "descripcion": "Camiseta de Suarez 9 - Bolso",
-        "categoria": "Últimos Agregados"
-    },
-    {
-        "id": 12,
-        "img": "products-1664835778444.jpg",
-        "precio": 1500,
-        "descuento": 10,
-        "nombre": "PlayStation 5",
-        "descripcion": "  Sony Playstation 5",
-        "categoria": "En oferta"
-    },
-    {
-        "id": 14,
-        "img": "products-1664915569745.jpg",
-        "precio": 500,
-        "descuento": null,
-        "nombre": "Cámara de foto Nikon",
-        "descripcion": "Cámara de foto profesional Nikon",
-        "categoria": "Últimos Agregados"
-    },
-    {
-        "id": 15,
-        "img": "products-1664929067250.jpg",
-        "precio": 200,
-        "descuento": 0,
-        "nombre": "Silla Gamer",
-        "descripcion": "      Silla Gamer Cougar  -Color : Naranja y Negra",
-        "categoria": "Últimos Agregados"
-    },
-    {
-        "img": "products-1665627011617.jpg",
-        "nombre": "Cuadro minimalista",
-        "precio": "50",
-        "descuento": "0",
+        "precio": "40",
+        "descuento": "'",
         "categoria": "Últimos Agregados",
-        "descripcion": "           Cuadro de pared ",
+        "descripcion": " La mejor del mercado",
+        "id": 7
+    },
+    {
+        "img": "pruduct-1666388380247.jpg",
+        "nombre": "Joystick Xbox",
+        "precio": "100",
+        "descuento": "",
+        "categoria": "Últimos Agregados",
+        "descripcion": " La mejor del mercado",
+        "id": 8
+    },
+    {
+        "img": "pruduct-1666388399633.jpg",
+        "nombre": "Championes Addidas",
+        "precio": "3000",
+        "descuento": " 15",
+        "categoria": "En oferta",
+        "descripcion": "  Las Mejores Zapatillas del Mercado",
+        "id": 9
+    },
+    {
+        "img": "pruduct-1666388274921.jpg",
+        "nombre": "Camiseta Club Nacional de Football ",
+        "precio": "120",
+        "descuento": " 0",
+        "categoria": "Últimos Agregados",
+        "descripcion": " Camiseta de Suarez 9 - Bolso",
+        "id": 11
+    },
+    {
+        "img": "pruduct-1666388434189.jpg",
+        "nombre": "PlayStation 5",
+        "precio": "1500",
+        "descuento": " 10",
+        "categoria": "En oferta",
+        "descripcion": "   Sony Playstation 5",
+        "id": 12
+    },
+    {
+        "img": "pruduct-1666388450111.jpg",
+        "nombre": "Cámara de foto Nikon",
+        "precio": "500",
+        "descuento": " ",
+        "categoria": "Últimos Agregados",
+        "descripcion": " Cámara de foto profesional Nikon",
+        "id": 14
+    },
+    {
+        "img": "pruduct-1666388469112.jpg",
+        "nombre": "Silla Gamer",
+        "precio": "200",
+        "descuento": " 0",
+        "categoria": "Últimos Agregados",
+        "descripcion": "       Silla Gamer Cougar  -Color : Naranja y Negra",
+        "id": 15
+    },
+    {
+        "img": "pruduct-1666396375759.jpg",
+        "nombre": "Tabla de Surf",
+        "precio": "50",
+        "descuento": "         0",
+        "categoria": "Últimos Agregados",
+        "descripcion": "   Tabla de surf fibra",
         "id": 16
     },
     {
-        "id": 17,
-        "img": {
-            "format": "jpeg",
-            "width": 500,
-            "height": 500,
-            "channels": 3,
-            "premultiplied": false,
-            "size": 20831
-        },
-        "nombre": "Camiseta Club Nacional de Football",
-        "precio": "12345",
-        "descuento": "1",
+        "img": "pruduct-1666386662710.jpg",
+        "nombre": "111111",
+        "precio": "11",
+        "descuento": "  1",
         "categoria": "Últimos Agregados",
-        "descripcion": "sdasdasd"
+        "descripcion": "  asdasd",
+        "id": 20
+    },
+    {
+        "id": 22,
+        "img": "pruduct-1666388797062.jpg",
+        "nombre": "MacBook Pro Air",
+        "precio": "1250",
+        "descuento": "10",
+        "categoria": "En oferta",
+        "descripcion": "i7 10400H 16gb Ram"
+    },
+    {
+        "id": 23,
+        "img": "pruduct-1666388939305.jpg",
+        "nombre": "Cafetera Moulinex",
+        "precio": "22",
+        "descuento": "0",
+        "categoria": "Últimos Agregados",
+        "descripcion": "Cafetera"
     }
 ]
