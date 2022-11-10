@@ -12,10 +12,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 //Controlador
 const userController = require("../controllers/usercontroller"); 
 
-//Ruteo
-
-//Todos los usuarios
-router.get('/allUsers', userController.allUsers);
+// ---> Ruteo <---
 
 //Nuevo usuario
 router.get('/form-crear-usuario', guestMiddleware, userController.register);

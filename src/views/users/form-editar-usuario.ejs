@@ -119,16 +119,6 @@
                               </h5>
                               <% } %>
                           </div>
-                          <div class="col-sm-12">
-                              <label for="inputPassword2" class="form-label">Repita su contraseña</label>
-                              <input type="password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" id="inputPassword2" name="password2">
-          
-                              <% if (locals.errors && errors.password) { %>
-                                  <h5 class = "text-danger">
-                                      <%= errors.password.msg %> 
-                                  </h5>
-                                  <% } %>
-                            </div>
                         <div>
                             <button type="reset" class="detele-button">Borrar</button>
                             <button type="submit" class="submit-button"> Enviar</button>

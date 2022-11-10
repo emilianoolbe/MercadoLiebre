@@ -28,6 +28,7 @@ app.use(session({secret: 'SECRET', resave : false, saveUninitialized: false }));
 const cookies = require('cookie-parser');
 app.use(cookies());
 
+//Usuario logueado
 const userLoggedMiddleware = require('./middlewares/userLoggedMiddleware');
 app.use(userLoggedMiddleware);
 app.use(express.static("./public"));
@@ -43,6 +44,6 @@ app.use(error404);
 
 //Levanto servidor
 app.listen(process.env.PORT || 3010, function() {
-    console.log("Servidor corriendo en el puerto 3010");});
+console.log("Servidor corriendo en el puerto 3010");});
     
     

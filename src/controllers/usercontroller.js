@@ -1,24 +1,18 @@
-//Importo Fs + Path + bcrypt + Sharp
+//Importo Fs + Path + bcrypt + Sharp * Express-validator
 const fs = require('fs');
 const path = require('path');
 const bcryptjs = require('bcryptjs');
 const sharp = require('sharp');
+const { validationResult } = require('express-validator');
 
 //Importo Modelo
-const User = require('../models/Users');
-
-//Importo ResultValidation
-const { validationResult } = require('express-validator');
+const db = require('../database/models');
 
 //CONTROLADOR
 const controlador = {
 
-    //Detalle Usuarios
-
-    allUsers: (req, res) => {
-        let usuarios = JSON.parse(fs.readFileSync(userJsonPath, 'utf-8'));
-        return res.render('users/usuarios' , {usuarios : usuarios});
-    },
+    //Ruta img-users
+    fileNameAvatar:path.join(__dirname, '../../public/imagenes/img-users/'),
 
     //Vista Registro
     register: (req, res) => {
@@ -32,16 +26,19 @@ const controlador = {
         if (errors.isEmpty()){
 
             let fileName = `${'user-'}${Date.now()} ${path.extname(req.file.originalname)}`;
-            await sharp(req.file.buffer).resize(500, 500).jpeg({quality : 50, chromaSubsampling: '4:4:4'}).toFile(`${User.fileNameImg}${fileName}`);
+            await sharp(req.file.buffer).resize(500, 500).jpeg({quality : 50, chromaSubsampling: '4:4:4'}).toFile(`${this.fileNameAvatar}${fileName}`);
 
-            let newUser = {
-                ...req.body,
-                password : bcryptjs.hashSync(req.body.password, 10),
-                password2: bcryptjs.hashSync(req.body.password2, 10),
-                img: fileName
-            };
-            User.createNewUser(newUser);
-            return res.redirect('ingresa')
+            db.User.create({
+                username: req.body.nombre,
+                email: req.body.email,
+                birth_day: req.body.fechanacimiento,
+                address: req.body.domicilio,
+                password: bcryptjs.hashSync(req.body.password, 10),
+                avatar: fileName
+            })
+            .then(() => {
+                return res.redirect('ingresa')
+            });
         }else{
             return res.render('users/form-crear-usuario', {errors: errors.mapped(), oldData: req.body});
         }   
@@ -49,7 +46,12 @@ const controlador = {
 
     //Vista editar
     edit: (req, res) =>{
-        User.findUserbyPk(req.params.id) ? res.render('users/form-editar-usuario', {usuario: User.findUserbyPk(req.params.id) }) : res.send('Usuario no existe'); 
+        db.User.findByPk(req.params.id)
+            .then((usuario) => {
+                res.render('users/form-editar-usuario', {usuario:  usuario})
+            }).catch((err) => {
+                res.send(`${'Usuario no existe'}${err}`);
+            })
     },
 
     //Edición
@@ -58,57 +60,81 @@ const controlador = {
         if (errors.isEmpty()) {
 
             //Busco al usuario para borrar la img
-            let userToUpdate = User.findUserbyPk(req.params.id);
-            fs.unlinkSync(User.fileNameImg + userToUpdate.img);
-
+            db.User.findByPk(req.params.id)
+                .then((user) => {
+                    let avatarToDelete = `${this.fileNameAvatar}${user.avatar}`
+                    fs.existsSync(avatarToDelete) ? fs.unlinkSync(avatarToDelete) : null;   
+                }).catch((err) => {
+                    res.send(`${'Usuario no existe'}${err}`);
+                })
+            
             //Sharp
             let fileName = `${'user-'}${Date.now()}${path.extname(req.file.originalname)}`;
-            await sharp(req.file.buffer).resize(500, 500).jpeg({quality : 50, chromaSubsampling: '4:4:4'}).toFile(`${User.fileNameImg}${fileName}`);
-
-            userToUpdate = {
-                img: fileName,
+            await sharp(req.file.buffer).resize(500, 500).jpeg({quality : 50, chromaSubsampling: '4:4:4'}).toFile(`${this.fileNameAvatar}${fileName}`);
+            
+            db.User.update({
+                username: req.body.nombre,
+                email: req.body.email,
+                birth_day: req.body.fechanacimiento,
+                address: req.body.domicilio,
                 password: bcryptjs.hashSync(req.body.password, 10),
-                password2: bcryptjs.hashSync(req.body.password2, 10),
-                ...req.body
-            };
-            User.updateAUser(req.params.id, userToUpdate);
-            return res.redirect('profile');
+                avatar: fileName
+            },{
+                where: {id: req.params.id}
+            })
+                .then(() => {
+                    return res.redirect('profile');
+                })
         }else{
-            return User.findUserbyPk(req.params.id) ? res.render('users/form-editar-usuario', {usuario: User.findUserbyPk(req.params.id), errors: errors.mapped(), oldData: req.body}) : res.send('Usuario no encontrado'); 
+            db.User.findByPk(req.params.id)
+                .then((user) => {
+                    return res.render('users/form-editar-usuario', {usuario: user, errors: errors.mapped(), oldData: req.body})
+                }).catch((err => {
+                    res.send(`${'Usuario no existe'}${err}`);
+                }));
         }
     },
     //Eliminar usuario
     delete: (req, res) => {
 
-        let usuarioEncontrado = User.findUserbyPk(req.params.id);
-        let imgABorrar = User.fileNameImg + usuarioEncontrado.img;
-        fs.existsSync(imgABorrar) ? fs.unlinkSync(imgABorrar) : null;
-        User.delete(req.params.id)
-        return res.redirect('/')      
+        db.User.findByPk(req.params.id)
+            .then((user) => {
+                let imgToDelete = `${this.fileNameAvatar}${user.avatar}`
+                fs.existsSync(imgToDelete) ? fs.unlinkSync(imgToDelete) : null; 
+            }).catch((err) => {
+                res.send(`${'Usuario no existe'}${err}`);
+            })
+
+        db.User.destroy({
+            where: {id : req.params.id}
+        })
+            .then(() => {
+                return res.redirect('/')      
+            });
     },
-     //Login
-     login: (req, res) => {
+
+    //Login
+    login: (req, res) => {
         res.render('users/ingresa')
     },
     processLogin: (req, res) => {
       
         let errors = validationResult(req)
         if (errors.isEmpty()) {
-            let userToLogin = User.findUserByField('email', req.body.email)
-
-            if (userToLogin == undefined || !(bcryptjs.compareSync(req.body.password, userToLogin.password))){
-                
-                return res.render('users/ingresa', {errors:{email:{msg: 'Email o contraseña inválidos'}}})
-                
-            }else{
-                delete userToLogin.password;
-                delete userToLogin.password2;
-                req.session.userLogged = userToLogin;
-                if (req.body.remember) {
-                    res.cookie('remember', userToLogin.email, {maxAge: (1000 * 60) * 60});
-                }
-                return res.redirect('profile');
-            }
+            User.findOne({where: {email: req.body.email}})
+                .then((userToLogin) =>{
+                    if (userToLogin == undefined || !(bcryptjs.compareSync(req.body.password, userToLogin.password))){
+                        return res.render('users/ingresa', {errors:{email:{msg: 'Email o contraseña inválidos'}}});
+                        
+                    }else{
+                        delete userToLogin.password;
+                        req.session.userLogged = userToLogin;
+                        if (req.body.remember) {
+                            res.cookie('remember', userToLogin.email, {maxAge: (1000 * 60) * 60});
+                        }
+                        return res.redirect('profile');
+                    }
+                });       
         }else{
             return res.render('users/ingresa', {errors: errors.mapped()});
         }

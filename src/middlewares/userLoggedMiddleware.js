@@ -1,16 +1,22 @@
 //Modelo
-const User  = require('../models/Users' );
+const db  = require('../database/models' );
 
 function userLoggedMiddleware(req, res, next) {
 
-    let userInCookie = User.findUserByField('email', req.cookies.remember);
-    if (userInCookie){
-        delete userInCookie.password;
-        delete userInCookie.password2;
-        req.session.userLogged = userInCookie
+    if (req.cookies.remember) {
+        
+        db.User.findOne({where: {email: req.cookies.remember}})
+            .then((userInCookie) => {
+                if (userInCookie){
+                    delete userInCookie.password;
+                    req.session.userLogged = userInCookie
+                }
+            }).catch((err) => {
+                console.log('No hay email')
+            });
     }
-    res.locals.isLogged = false;
 
+    res.locals.isLogged = false;
     if (req.session.userLogged){
         res.locals.isLogged = true;
         res.locals.userLogged = req.session.userLogged
