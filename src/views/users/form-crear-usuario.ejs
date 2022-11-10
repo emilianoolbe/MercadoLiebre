@@ -30,7 +30,7 @@
                 <article class=" formulario-crear-cuenta borde-fondo-2">
                     <form action="/users/form-crear-usuario" method="post" id="form" enctype="multipart/form-data">
                         <div class="col-sm-12">
-                            <label for="nombre" class="form-label">Nombre completo</label>    
+                            <label for="nombre" class="form-label">Nombre de ssuario:</label>    
                             <input id="nombre" class="form-control <%= locals.errors && errors.nombre ? 'is-invalid' : null %>" type="text" name="nombre" value="<%= locals.oldData ? oldData.nombre: null %> ">
                             <% if (locals.errors && errors.nombre) { %>
                                 <div class="text-danger">
@@ -39,7 +39,7 @@
                                 <% } %>
                         </div>
                         <div class="col-sm-12">
-                            <label for="email" class="form-label">Correo Electrónico</label>        
+                            <label for="email" class="form-label">Correo Electrónico:</label>        
                             <input id="email" type="email" name="email" class="form-control  <%= locals.errors && errors.email ? 'is-invalid' : null %>" value="<%= locals.oldData ? oldData.email : null %>" >
                             <% if (locals.errors && errors.email) { %>
                                 <div class="text-danger">
@@ -68,37 +68,6 @@
                                 <% } %>
                         </div>
                         <div class="col-sm-12">
-                            Perfil de usuario: <br><br>
-                            <label for="tipotransaccion" for="form-label">Voy a comprar </label>
-                            <input type="radio" name="tipotransaccion" value="<%= locals.oldData ? oldData.tipotransaccion : 'comprar' %>">
-                        
-                            <label for="form-label">Voy a vender </label>
-                            <input type="radio"  name="tipotransaccion" value="<%= locals.oldData ? oldData.tipotransaccion : 'vender' %>">
-                            <% if (locals.errors && errors.tipotransaccion) { %>
-
-                                <div class="text-danger">
-                                    <%= errors.tipotransaccion.msg %>   
-                                </div>
-                                <% } %>
-                        </div>
-                        <div class="col-sm-12">
-                            <label>Seleccione categorías de interés :</label> <br>
-                            Electrónica <input type="checkbox" name="interes">
-                            <br>
-                            Moda <input type="checkbox" name="interes">
-                            <br>
-                            Hogar <input type="checkbox" name="interes">
-                            <br>
-                            Juguetería <input type="checkbox" name="interes">
-                            <br>
-                            Vida Santa <input type="checkbox" name="interes">
-                            <% if (locals.errors && errors.interes) { %>
-                                <div class="text-danger">
-                                        <%= errors.interes.msg %>   
-                                </div>
-                                <% } %>
-                        </div>
-                        <div class="col-sm-12">
                             <label for="fileform" class="form-label">Ávatar</label>
                             <input type="file" name="img" class=" form-control input-img-usuario <%= locals.errors && errors.img ? 'is-invalid' : null %>" id="fileform">
                             <% if (locals.errors && errors.img) { %>
@@ -110,9 +79,6 @@
                         <div class="col-sm-12">
                             <label for="inputPassword4">Contraseña</label>
                             <input type="password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" id="inputPassword4" name="password">
-
-                            <label for="inputPassword4">Repetita contraseña</label>
-                            <input type="password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" id="inputPassword4" name="password2">
           
                             <% if (locals.errors && errors.password) { %>
                               <h5 class = "text-danger">
