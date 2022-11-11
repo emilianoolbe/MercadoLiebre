@@ -6,7 +6,7 @@ const controlador = {
     home: (req, res) => {
         db.Product.findAll()
             .then((products) => {
-                res.render('home', {productos: products});
+                res.render('home', {products: products});
             })
     },
 

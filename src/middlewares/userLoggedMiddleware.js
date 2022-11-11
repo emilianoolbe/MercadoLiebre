@@ -11,7 +11,7 @@ function userLoggedMiddleware(req, res, next) {
                     delete userInCookie.password;
                     req.session.userLogged = userInCookie
                 }
-            }).catch((err) => {
+            }).catch(() => {
                 console.log('No hay email')
             });
     }
