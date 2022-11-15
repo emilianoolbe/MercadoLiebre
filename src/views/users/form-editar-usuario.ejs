@@ -33,7 +33,7 @@
                     <form action="/users/form-editar-usuario/<%=usuario.id%>?_method=PUT" method="post" id="form" enctype="multipart/form-data">
                         <div class="col-sm-12">
                             <label for="nombre" class="form-label">Nombre completo</label>    
-                            <input id="nombre" class="form-control" type="text" name="nombre" value="<%= locals.oldData && oldData.nombre ? oldData.nombre : usuario.nombre %>" >
+                            <input id="nombre" class="form-control" type="text" name="nombre" value="<%= locals.oldData && oldData.nombre ? oldData.nombre : usuario.username %>" >
                             <% if (locals.errors && errors.nombre) { %>
                                 <div class="text-danger">
                                         <%= errors.nombre.msg %>   
@@ -51,8 +51,8 @@
                         </div>
                         <div class="col-sm-12">
                             <label for="fecha" class="form-label" >Fecha de nacimiento:</label>
-                            <input type="date" name="fechanacimiento" class="form-control" value="<%= locals.oldData ? oldData.fechanacimiento : null %>">
-                            <% if (locals.errors && errors.fechanacimiento) { %>
+                            <input type="date" name="fechanacimiento" class="form-control" value="<%= locals.oldData ? oldData.fechanacimiento : usuario.birth_day %>">
+                            <% if (locals.errors && errors.birth_day) { %>
 
                                 <div class="text-danger">
                                         <%= errors.fechanacimiento.msg %>   
@@ -61,7 +61,7 @@
                         </div>
                         <div class="col-sm-12">
                             <label for="domicilio" for="form-label">Direccion:</label>    
-                            <input id="domicilio" type="text" name="domicilio"  value="<%= locals.oldData && oldData.domicilio ? oldData.domicilio : usuario.domicilio %>" class="form-control">
+                            <input id="domicilio" type="text" name="domicilio"  value="<%= locals.oldData && oldData.domicilio ? oldData.domicilio : usuario.address %>" class="form-control">
 
                             <% if (locals.errors && errors.domicilio) { %>
                                 <div class="text-danger">
@@ -69,37 +69,7 @@
                                 </div>
                                 <% } %>
                         </div>
-                        <div class="col-sm-12">
-                            Perfil de usuario: <br><br>
-                            <label for="tipotransaccion" for="form-label">Voy a comprar </label>
-                            <input type="radio" name="tipotransaccion">
-                        
-                            <label for="form-label">Voy a vender </label>
-                            <input type="radio"  name="tipotransaccion">
-                            <% if (locals.errors && errors.tipotransaccion) { %>
-
-                                <div class="text-danger">
-                                    <%= errors.tipotransaccion.msg %>   
-                                </div>
-                                <% } %>
-                        </div>
-                        <div class="col-sm-12">
-                            <label>Seleccione categorías de interés :</label> <br>
-                            Electrónica <input type="checkbox" name="interes">
-                            <br>
-                            Moda <input type="checkbox" name="interes">
-                            <br>
-                            Hogar <input type="checkbox" name="interes">
-                            <br>
-                            Juguetería <input type="checkbox" name="interes">
-                            <br>
-                            Vida Santa <input type="checkbox" name="interes">
-                            <% if (locals.errors && errors.interes) { %>
-                                <div class="text-danger">
-                                        <%= errors.interes.msg %>   
-                                </div>
-                                <% } %>
-                        </div>
+                     
                         <div class="col-sm-12">
                             <label for="fileform" class="form-label">Ávatar</label>
                             <input type="file" name="img" class=" form-control input-img-usuario" id="fileform">

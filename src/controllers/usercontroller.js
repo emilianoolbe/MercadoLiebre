@@ -11,9 +11,6 @@ const db = require('../database/models');
 //CONTROLADOR
 const controlador = {
 
-    //Ruta img-users
-    fileNameAvatar:path.join(__dirname, '../../public/imagenes/img-users/'),
-
     //Vista Registro
     register: (req, res) => {
         return res.render('users/form-crear-usuario')
@@ -25,8 +22,8 @@ const controlador = {
 
         if (errors.isEmpty()){
 
-            let fileName = `${'user-'}${Date.now()} ${path.extname(req.file.originalname)}`;
-            await sharp(req.file.buffer).resize(500, 500).jpeg({quality : 50, chromaSubsampling: '4:4:4'}).toFile(`${this.fileNameAvatar}${fileName}`);
+            let fileName = `${'user-'}${Date.now()}${path.extname(req.file.originalname)}`;
+            await sharp(req.file.buffer).resize(500, 500).jpeg({quality : 50, chromaSubsampling: '4:4:4'}).toFile(`${path.join(__dirname, '../../public/imagenes/img-users/')}${fileName}`);
 
             db.User.create({
                 username: req.body.nombre,
@@ -37,7 +34,10 @@ const controlador = {
                 avatar: fileName
             })
             .then(() => {
-                return res.redirect('ingresa')
+                res.redirect('ingresa')
+            })
+            .catch((err) => {
+                console.log(`${'No se pudo cargar a usuario'}${err}`);
             });
         }else{
             return res.render('users/form-crear-usuario', {errors: errors.mapped(), oldData: req.body});
@@ -62,7 +62,7 @@ const controlador = {
             //Busco al usuario para borrar la img
             db.User.findByPk(req.params.id)
                 .then((user) => {
-                    let avatarToDelete = `${this.fileNameAvatar}${user.avatar}`
+                    let avatarToDelete = path.join(__dirname, '../../public/imagenes/img-users/') + user.avatar;
                     fs.existsSync(avatarToDelete) ? fs.unlinkSync(avatarToDelete) : null;   
                 }).catch((err) => {
                     res.send(`${'Usuario no existe'}${err}`);
@@ -70,7 +70,7 @@ const controlador = {
             
             //Sharp
             let fileName = `${'user-'}${Date.now()}${path.extname(req.file.originalname)}`;
-            await sharp(req.file.buffer).resize(500, 500).jpeg({quality : 50, chromaSubsampling: '4:4:4'}).toFile(`${this.fileNameAvatar}${fileName}`);
+            await sharp(req.file.buffer).resize(500, 500).jpeg({quality : 50, chromaSubsampling: '4:4:4'}).toFile(`${path.join(__dirname, '../../public/imagenes/img-users/')}${fileName}`);
             
             db.User.update({
                 username: req.body.nombre,
@@ -83,7 +83,7 @@ const controlador = {
                 where: {id: req.params.id}
             })
                 .then(() => {
-                    return res.redirect('profile');
+                    return res.redirect('/users/profile');
                 })
         }else{
             db.User.findByPk(req.params.id)
@@ -99,8 +99,8 @@ const controlador = {
 
         db.User.findByPk(req.params.id)
             .then((user) => {
-                let imgToDelete = `${this.fileNameAvatar}${user.avatar}`
-                fs.existsSync(imgToDelete) ? fs.unlinkSync(imgToDelete) : null; 
+                let avatarToDelete = path.join(__dirname, '../../public/imagenes/img-users/') + user.avatar;
+                fs.existsSync(avatarToDelete) ? fs.unlinkSync(avatarToDelete) : null; 
             }).catch((err) => {
                 res.send(`${'Usuario no existe'}${err}`);
             })
@@ -121,32 +121,40 @@ const controlador = {
       
         let errors = validationResult(req)
         if (errors.isEmpty()) {
-            User.findOne({where: {email: req.body.email}})
+
+            db.User.findOne({where: {email: req.body.email}})
                 .then((userToLogin) =>{
-                    if (userToLogin == undefined || !(bcryptjs.compareSync(req.body.password, userToLogin.password))){
-                        return res.render('users/ingresa', {errors:{email:{msg: 'Email o contraseña inválidos'}}});
-                        
-                    }else{
+                    if ((bcryptjs.compareSync(req.body.password, userToLogin.password))){          
                         delete userToLogin.password;
                         req.session.userLogged = userToLogin;
                         if (req.body.remember) {
                             res.cookie('remember', userToLogin.email, {maxAge: (1000 * 60) * 60});
                         }
-                        return res.redirect('profile');
+                        res.redirect('/users/profile')      
+                    }else{
+                        res.render('users/ingresa', {errors:{email:{msg: 'Credenciales inválidas'}}});
                     }
-                });       
+                })
+                .catch(() => {
+                    return res.render('users/ingresa', {errors:{email:{msg: 'Credenciales inválidas'}}});
+                })       
         }else{
             return res.render('users/ingresa', {errors: errors.mapped()});
         }
     }, 
     //profile
     profile: (req, res) => {
-        return res.render('users/profile', {user : req.session.userLogged})
+        db.User.findOne({
+            where: {email: req.session.userLogged.email}
+        })
+            .then((user) => {
+                return res.render('users/profile', {user});
+            })
     },
     //Logout
     logout: (req, res) => {
-        res.clearCookie('remember');
         req.session.destroy();
+        res.clearCookie('remember');
         res.redirect('/');
     }
 };

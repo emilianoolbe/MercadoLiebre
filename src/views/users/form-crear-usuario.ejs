@@ -30,21 +30,21 @@
                 <article class=" formulario-crear-cuenta borde-fondo-2">
                     <form action="/users/form-crear-usuario" method="post" id="form" enctype="multipart/form-data">
                         <div class="col-sm-12">
-                            <label for="nombre" class="form-label">Nombre de ssuario:</label>    
+                            <label for="nombre" class="form-label">Nombre de usuario:</label>    
                             <input id="nombre" class="form-control <%= locals.errors && errors.nombre ? 'is-invalid' : null %>" type="text" name="nombre" value="<%= locals.oldData ? oldData.nombre: null %> ">
                             <% if (locals.errors && errors.nombre) { %>
-                                <div class="text-danger">
+                                <h5 class="text-danger">
                                         <%= errors.nombre.msg %>   
-                                </div>
+                                </h5>
                                 <% } %>
                         </div>
                         <div class="col-sm-12">
                             <label for="email" class="form-label">Correo Electrónico:</label>        
                             <input id="email" type="email" name="email" class="form-control  <%= locals.errors && errors.email ? 'is-invalid' : null %>" value="<%= locals.oldData ? oldData.email : null %>" >
                             <% if (locals.errors && errors.email) { %>
-                                <div class="text-danger">
+                                <h5 class="text-danger">
                                         <%= errors.email.msg %>   
-                                </div>
+                                </h5>
                                 <% } %>
                         </div>
                         <div class="col-sm-12">
@@ -52,9 +52,9 @@
                             <input type="date" name="fechanacimiento" class="form-control <%= locals.errors && errors.fechanacimiento ? 'is-invalid' : null %>" value="<%= locals.oldData ? oldData.fechanacimiento : null %>">
                             <% if (locals.errors && errors.fechanacimiento) { %>
 
-                                <div class="text-danger">
+                                <h5 class="text-danger">
                                         <%= errors.fechanacimiento.msg %>   
-                                </div>
+                                </h5>
                                 <% } %>
                         </div>
                         <div class="col-sm-12">
@@ -62,18 +62,18 @@
                             <input id="domicilio" type="text" name="domicilio" value="<%= locals.oldData ? oldData.domicilio : null %>" class="form-control <%= locals.errors && errors.domicilio ? 'is-invalid' : null %>">
 
                             <% if (locals.errors && errors.domicilio) { %>
-                                <div class="text-danger">
+                                <h5 class="text-danger">
                                     <%= errors.domicilio.msg %>   
-                                </div>
+                                </h5>
                                 <% } %>
                         </div>
                         <div class="col-sm-12">
                             <label for="fileform" class="form-label">Ávatar</label>
                             <input type="file" name="img" class=" form-control input-img-usuario <%= locals.errors && errors.img ? 'is-invalid' : null %>" id="fileform">
                             <% if (locals.errors && errors.img) { %>
-                                <div class="text-danger">
+                                <h5 class="text-danger">
                                         <%= errors.img.msg %>   
-                                </div>
+                                </h5>
                                 <% } %>
                         </div>
                         <div class="col-sm-12">

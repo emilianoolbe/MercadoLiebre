@@ -8,7 +8,7 @@ module.exports = (sequelize, dataTypes) => {
         email: {type: dataTypes.STRING(255), allowNull: false},
         birth_day: {type: dataTypes.DATE, allowNull: true},
         address: {type: dataTypes.STRING(45), allowNull: true},
-        password: {type: dataTypes.STRING(200), allowNull: false},
+        password: {type: dataTypes.STRING(255), allowNull: false},
         avatar: {type: dataTypes.STRING(100), allowNull: false}
     };
 
