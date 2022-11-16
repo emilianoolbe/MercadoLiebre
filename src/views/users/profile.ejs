@@ -65,10 +65,14 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-1">
               <a href="/users/form-editar-usuario/<%= user.id %> " class="text-decoration-none"><button type="submit" class="submit-button"> Editar </button></a>
-           
-          </div>
+            </div>
+            <div class="col-md-1">
+              <form action="/users/delete/<%= user.id%>?_method=DELETE" method='POST'>
+                <button type="submit" class="detele-button "> Borrar </button></a>
+              </form>
+            </div>
         </div>
       </div>
     </div>

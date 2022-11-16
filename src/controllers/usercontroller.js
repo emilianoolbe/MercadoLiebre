@@ -103,14 +103,20 @@ const controlador = {
                 fs.existsSync(avatarToDelete) ? fs.unlinkSync(avatarToDelete) : null; 
             }).catch((err) => {
                 res.send(`${'Usuario no existe'}${err}`);
-            })
-
-        db.User.destroy({
-            where: {id : req.params.id}
-        })
-            .then(() => {
-                return res.redirect('/')      
             });
+        
+        setTimeout(() => {
+            db.User.destroy({
+                where: {id : req.params.id}
+            })
+                .then(() => {
+                    req.session.destroy();
+                    res.clearCookie('remember');
+                    return res.redirect('/')      
+                });
+
+        }, '3000')
+
     },
 
     //Login

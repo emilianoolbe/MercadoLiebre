@@ -12,14 +12,14 @@
             <section class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="text-black-50">Detalle de producto : <%= producto.nombre%></h2>
+                        <h2 class="text-black-50">Detalle de producto : <%= product.name%></h2>
                     </div>
                     <div class="col row  justify-content-around mt-4 ">
 
                         <div class="col-lg-5 col-md-5 col-sm-12">
                             <article class= " articulo-margin borde-producto">
                                 <div class="camion-con-foto">
-                                    <img src="/imagenes/img-products/<%= producto.img %>" alt="<%= producto.nombre %>" class="resoluciones">
+                                    <img src="/imagenes/img-products/<%= product.img %>" alt="<%= product.name %>" class="resoluciones">
                                     <p class="item-truck"><i class="fa-solid fa-truck-fast iconos-main-truck truck"></i></p>
                                 </div>
                             </article>
@@ -27,13 +27,20 @@
                         <div class=" row col-lg-5 col-md-5 col-sm-12 justify-content-center">
 
                             <div class="col-12">
-                                <p class="main-size fs-1 fw-bold "><%= producto.nombre %></p> 
-                                <span class="fs-5 text-black-50 fst-italic text-decoration-line-through"> uS$<%= producto.precio%></span> <span class="main-size  iconos-main fs-4"><%= producto.descuento %>% off</span> 
-                                <p class="precios fs-1">uS$<%= (((100-producto.descuento)*producto.precio) / 100) %></p>
+                                <p class="main-size fs-1 fw-bold "><%= product.name %></p> 
+                                <span class="fs-5 text-black-50 fst-italic text-decoration-line-through"> uS$<%= product.price%></span> <span class="main-size  iconos-main fs-4"><%= product.discount %>% off</span> 
+                                <p class="precios fs-1">uS$<%= (((100-product.discount)*product.price) / 100) %></p>
                             </div>
 
                             <div class="col-12">
-                                <p class="fs-2 fw-lighter"> <%= producto.descripcion %></p>
+                                <p class="fs-3 fw-lighter"> Descripcion del producto:</p>
+                                <p class="fs-6 fw-lighter"><%=product.description%></p>
+        
+                                <p class="fs-6 fw-lighter"> Categoría: <%=product.category.name%></p>
+                                <p class="fs-6 fw-lighter"> Sección: <%=product.section.name%></p>
+                                <p class="fs-6 fw-lighter"> Marca: <%=product.brand.name%></p>
+                                
+                             
                             </div>
                             <div class="col-12 m-2">
                                 <button type="submit" class="submit-button col-12"> COMPRAR AHORA </button>
@@ -44,9 +51,9 @@
                                  
                                     <div  class="row col-12 h-50 p-1">
     
-                                        <a href="/products/editar/<%= producto.id %>" class="text-decoration-none"><button type="submit" class="submit-button col-5 "> Editar </button></a>
+                                        <a href="/products/editar/<%= product.id %>" class="text-decoration-none"><button type="submit" class="submit-button col-5 "> Editar </button></a>
     
-                                        <form action="/products/<%= producto.id %>?_method=DELETE" method="post">
+                                        <form action="/products/<%= product.id %>?_method=DELETE" method="post">
                                             <button type="submit" class="detele-button col-5 mt-2"> Eliminar </button>
                                         </form>
     

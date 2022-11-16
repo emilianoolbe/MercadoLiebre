@@ -19,15 +19,20 @@ let controlador = {
         //vuelve a leer productos (por modificaciones)
         db.Product.findAll()
             .then((products) => {
-                return res.render('products/ofertas', {productos: products})
-            });
+                return res.render('products/ofertas', {products: products})
+            })
+            .catch((err) => {
+                console.log(`${err}${'Error al cargar ofertas'}`);
+            })
     },
 
     //Vista detalles del producto
     detalle: (req, res) => {
-        db.Product.findByPk(req.params.id)
+        db.Product.findByPk(req.params.id, {
+            include: [{association: 'brand'}, {association: 'section'}, {association: 'category'}]
+        })
             .then((product) => {
-                res.render('products/detalle', {producto: product})
+                res.render('products/detalle', {product})
             }).catch((err) => {
                 res.send(`${'Producto no encontrado'}${err}`);
             }); 
@@ -35,12 +40,22 @@ let controlador = {
 
     //Vista formulario de Crear Producto
     crear: (req, res) => {
-        res.render('products/form-crear-producto');
+        let brand = db.Brand.findAll();
+        let category = db.Category.findAll();
+        let section = db.Section.findAll();
+        
+        Promise.all([brand, category, section])
+            .then(([brand, category, section]) => {
+                res.render('products/form-crear-producto', {brand: brand, category:category, section: section});
+            })
+            .catch((err) => {
+                console.log(`${'Error al cargar marca, categoria y secciones'}${err}`);
+            });
     },
 
     //Creación de producto
     guardar: async (req, res) => {
-        
+     
         let errors = validationResult(req);
         if(errors.isEmpty()){
             
@@ -48,32 +63,53 @@ let controlador = {
             let fileName = ('pruduct-' + Date.now() + path.extname(req.file.originalname)); 
             
             //SHARP rezising
-            await sharp(req.file.buffer).resize(500, 500).jpeg({quality: 50, chromaSubsampling: '4:4:4'}).toFile(`${this.fileNameImg}${fileName}`);  
+            await sharp(req.file.buffer).resize(500, 500).jpeg({quality: 50, chromaSubsampling: '4:4:4'}).toFile(`${path.join(__dirname, '../../public/imagenes/img-products/')}${fileName}`);  
             
             db.Product.create({
-                name: req.body.nombre,
-                price: req.body.precio,
-                discount: req.body.descuento,
-                category: req.body.categoria,
-                description: req.body.descripcion,
+                name: req.body.name,
+                price: parseFloat(req.body.price),
+                discount: parseInt(req.body.discount),
+                description: req.body.description,
                 img: fileName,
+                category_id: req.body.category,
+                brand_id: req.body.brand,
+                section_id: req.body.section,
+                created_by : req.session.userLogged.id
             })
-            .then(() => res.redirect('/products/ofertas'))
+                .then(() => {
+                    res.redirect('ofertas')})
+                .catch((err) => {
+                    res.send(`${err}${'No se pudo crear un producto nuevo'}`)   
+                });
             
         }else{
-            return res.render('products/form-crear-producto', {errors : errors.mapped(), oldData: req.body});
-        }          
+            let brand = db.Brand.findAll();
+            let category = db.Category.findAll();
+            let section = db.Section.findAll();
+          
+            Promise.all([brand, category, section])
+                .then(([brand, category, section]) => {
+                    res.render('products/form-crear-producto', {brand: brand, category:category, section: section, errors : errors.mapped(), oldData: req.body});
+                })
+                .catch((err) => {
+                    console.log(`${'Error al cargar marca, categoria y secciones'}${err}`);
+                });
+            
+        };          
     },
 
     //Editar producto form vista
     editar: (req, res) =>{
-
-        db.Product.findByPk(req.params.id)
-            .then((product) => {
-                res.render('products/form-editar-producto', {producto: product})
+        let productToEdit = db.Product.findByPk(req.params.id);
+        let category = db.Category.findAll();
+        let section = db.Section.findAll();
+        let brand = db.Brand.findAll();
+        Promise.all([productToEdit, category, section, brand])
+            .then(([productToEdit, category, section, brand]) => {
+                res.render('products/form-editar-producto', {product: productToEdit, category: category, section: section, brand: brand})
             }).catch((err) => {
-                res.send(`${'Producto no encontrado'}${err}`);
-            });  
+                console.log(`${'Producto no encontrado'}${err}`);
+            });
     },
 
     //Editar producto 
@@ -85,7 +121,7 @@ let controlador = {
             //Busco el producto y borro la img
             db.Product.findByPk(req.params.id)
                 .then((product) => {
-                    let imgToDelete = `${this.fileNameImg}${product.img}`
+                    let imgToDelete = `${path.join(__dirname, '../../public/imagenes/img-products/')}${product.img}`;
                     fs.existsSync(imgToDelete) ? fs.unlinkSync(imgToDelete) : null;
                 });
             
@@ -113,12 +149,17 @@ let controlador = {
             });    
 
         }else{   
-            db.Product.findByPk(req.params.id)
-                .then((product) => {
-                    res.render('products/form-editar-producto', {producto: product, errors : errors.mapped(), oldData : req.body });
+
+            let productToEdit = db.Product.findByPk(req.params.id);
+            let category = db.Category.findAll();
+            let section = db.Section.findAll();
+            let brand = db.Brand.findAll();
+            Promise.all([productToEdit, category, section, brand])
+                .then(([productToEdit, category, section, brand]) => {
+                    res.render('products/form-editar-producto', {product: productToEdit, category: category, section: section, brand: brand, errors : errors.mapped(), oldData : req.body })
                 }).catch((err) => {
-                    res.send('Producto no encontrado');
-                });  
+                    console.log(`${'Producto no encontrado'}${err}`);
+                });
         }     
     },
     //Borrado de producto

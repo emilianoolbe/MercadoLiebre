@@ -23,7 +23,7 @@ router.get('/form-editar-usuario/:id', authMiddleware, userController.edit);
 router.put('/form-editar-usuario/:id', upload.single('img'), validationUsers, userController.update);
 
 //Borrado usuario
-router.delete('/:id',authMiddleware, userController.delete);
+router.delete('/delete/:id',authMiddleware, userController.delete);
 
 //Login
 router.get('/ingresa', guestMiddleware, userController.login);

@@ -7,11 +7,12 @@ module.exports = (sequelize, dataTypes) => {
         name: {type: dataTypes.STRING(50), allowNull: false},
         price: {type: dataTypes.DECIMAL, allowNull: false},
         discount: {type: dataTypes.INTEGER, allowNull: true},
-        category: {type: dataTypes.STRING(30), allowNull: false},
         description: {type: dataTypes.TEXT(400), allowNull: true},
         img: {type: dataTypes.STRING, allowNull: false},
+        category_id: {type: dataTypes.INTEGER},
         created_by: {type: dataTypes.INTEGER},
-        brand_id: {type: dataTypes.INTEGER}
+        brand_id: {type: dataTypes.INTEGER},
+        section_id: {type: dataTypes.INTEGER}
     };
 
     let config = {tableName: 'product', timestamps: false};
@@ -25,17 +26,27 @@ module.exports = (sequelize, dataTypes) => {
         });
 
         Product.belongsTo(models.Brand, {
-            as: 'brands',
+            as: 'brand',
             foreignKey: 'brand_id'
         });
 
         Product.belongsToMany(models.Purchase, {
             as: 'products-in-orders',
-            through: 'order_detail',
+            through: 'purchase_detail',
             foreignKey: 'product_id',
-            otherKey: 'order_id',
+            otherKey: 'purchase_id',
             timestamps: false
-        })
+        });
+
+        Product.belongsTo(models.Section, {
+            as:'section',
+            foreignKey: 'section_id'
+        });
+
+        Product.belongsTo(models.Category, {
+            as: 'category',
+            foreignKey: 'category_id'
+        });
     };
 
 
