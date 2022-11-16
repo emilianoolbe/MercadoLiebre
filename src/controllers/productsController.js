@@ -129,15 +129,17 @@ let controlador = {
             let fileName = ('pruduct-' + Date.now() + path.extname(req.file.originalname));
             
             //Nombre de img como parámetro toFile()
-            await sharp(req.file.buffer).resize(500, 500 , {fit:"contain",background:'#fff'}).jpeg({quality: 50, chromaSubsampling: '4:4:4'}).toFile(`${this.fileNameImg}${fileName}`); 
+            await sharp(req.file.buffer).resize(500, 500 , {fit:"contain",background:'#fff'}).jpeg({quality: 50, chromaSubsampling: '4:4:4'}).toFile(`${path.join(__dirname, '../../public/imagenes/img-products/')}${fileName}`); 
             
             db.Product.update({
-                name: req.body.nombre,
-                price: req.body.precio,
-                discount: req.body.descuento,
-                description: req.body.descripcion,
-                category: req.body.categoria,
-                img: fileName
+                name: req.body.name,
+                price: parseFloat(req.body.price),
+                discount: parseInt(req.body.discount),
+                description: req.body.description,
+                img: fileName,
+                category_id: req.body.category,
+                brand_id: req.body.brand,
+                section_id: req.body.section,
             },
             {
                 where: {
@@ -169,17 +171,23 @@ let controlador = {
             .then((product) => {
                 //Ruteo la img a Borrar
                 //Si existe archivo lo borra --- unlinkSync() recibe como parametro la ruta del archivo a eliminar + nombre
-                let imgABorrar = `${this.fileNameImg}${product.img}` 
+                let imgABorrar = `${path.join(__dirname, '../../public/imagenes/img-products/')}${product.img}`;
                 fs.existsSync(imgABorrar) ? fs.unlinkSync(imgABorrar) : null;
             }).catch((err) => {
                 res.send('Img no encontrada');
             })
-    
-       db.Product.destroy({
-            where : {id : req.params.id}
-        })
-        then(() => res.redirect('/products/ofertas'))
         
+        setTimeout(() => {
+            db.Product.destroy({
+                 where : {id : req.params.id}
+             })
+                 .then(() => {
+                     res.redirect('/products/ofertas')
+                 })
+                 .catch((err) => {
+                     console.log(`${'ERROR AL ELIMINAR PRODUCTO'}${err}`);
+                 });
+        }, '500');
     }
 }
 
