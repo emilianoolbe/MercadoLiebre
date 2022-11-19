@@ -1,9 +1,9 @@
 module.exports = {
   "development": {
-    "username": "root",
+    "username": "289344",
     "password": '6350vishera',
-    "database": "mercadoliebre",
-    "host": "127.0.0.1",
+    "database": "emilianoolbe_mercadoliebre",
+    "host": "mysql-emilianoolbe.alwaysdata.net",
     "dialect": "mysql"
   },
   "test": {
