@@ -11,18 +11,18 @@
         </header>
 
         <main class="main-ofertas">
-            <% for(let i = 0; i < products.length ; i++){ %>
+            <% for(const element of products){ %>
                 <div class="div-Ofertas">
-                    <a href="/products/detalle/<%= products[i].id %>" class="links-Art"><article class= " articulo-margin borde-producto">
+                    <a href="/products/detalle/<%= element.id %>" class="links-Art"><article class= " articulo-margin borde-producto">
                         <div class="camion-con-foto">
-                            <img src="/imagenes/img-products/<%= products[i].img %>" alt="<%= products[i].name %>" class="resoluciones">
+                            <img src="/imagenes/img-products/<%= element.img %>" alt="<%= element.name %>" class="resoluciones">
                             <p class="item-truck"><i class="fa-solid fa-truck-fast iconos-main-truck truck"></i></p>
                         </div>
                 
                         <div class="contenedor-descripciones">
-                            <p class="precios item1">uS$<%= products[i].price %></p>    
-                            <p class="main-size  iconos-main item0"><%= products[i].discount %>% off </p>
-                            <p class="main-size item4 "><%= products[i].name %></p>    
+                            <p class="precios item1">uS$<%= element.price %></p>    
+                            <p class="main-size  iconos-main item0"><%= element.discount %>% off </p>
+                            <p class="main-size item4 "><%= element.name %></p>    
                         </div>
                     </article></a>
                     </div>

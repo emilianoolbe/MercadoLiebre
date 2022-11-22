@@ -9,9 +9,9 @@ module.exports = (sequelize, dataTypes) => {
         discount: {type: dataTypes.INTEGER, allowNull: true},
         description: {type: dataTypes.TEXT(400), allowNull: true},
         img: {type: dataTypes.STRING, allowNull: false},
-        category_id: {type: dataTypes.INTEGER},
         created_by: {type: dataTypes.INTEGER},
         brand_id: {type: dataTypes.INTEGER},
+        category_id: {type: dataTypes.INTEGER},
         section_id: {type: dataTypes.INTEGER}
     };
 
