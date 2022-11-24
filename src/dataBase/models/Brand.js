@@ -27,4 +27,4 @@ module.exports = (sequelize, dataTypes) => {
     };
 
     return Brand;
-}
+};

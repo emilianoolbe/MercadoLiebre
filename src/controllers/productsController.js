@@ -7,8 +7,11 @@ const {validationResult} = require('express-validator');
 let controlador = {
     //Vista Ofertas
     ofertas: async (req, res) => {
-        const allProducts = await productService.getAllProducts;
-        res.render('products/ofertas', { products : allProducts })
+        // productService.getAllProducts
+        //     .then((allProducts) => {console.log(allProducts); res.render('products/ofertas', { products : allProducts })})
+        //     .catch((err) => {console.log(err);})
+        let productos= await productService.getProducts()
+        res.render('products/ofertas', { products : productos })
     } ,
 
     //Vista detalles del producto

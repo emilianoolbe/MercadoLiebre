@@ -1,21 +1,17 @@
-//Importo File System + Path + Sharp + Express-Validator + modelo
+//Importo File System + Path + Sharp + modelo
 const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
-const { validationResult} = require('express-validator');
 const db = require('../database/models');
-
-
 
 // GET ALL PRODUCTS
 async function getProducts(){
-    return await db.Product.findAll()
-        .then((result) => {return  result})
-        .catch((err) => {return console.log(`${err}${'Error al cargar productos'}`)});
+    let productos = await db.Product.findAll()
+    return productos;
 };
-let getAllProducts = getProducts()
-    .then((resultPromise) => {return resultPromise;})
-    .catch((err) => {console.log(`${'ERROR AL CARGAR PRODUCTOS'}${err}`)}) 
+// let getAllProducts = getProducts()
+//     .then((resultPromise) => {return resultPromise;})
+//     .catch((err) => {console.log(`${'ERROR AL CARGAR PRODUCTOS'}${err}`)}) 
 
 
 // GET PRODUCT BY ID
@@ -28,29 +24,29 @@ async function getProductBypK (id){
 };
 
 //GET BRAND
-async function getBrand() {
-    return await  db.Brand.findAll()
-        .then((resultPromise) =>{ return resultPromise})
-        .catch((err) => {`${'ERROR AL CARGAR MARCA'}${err}`});  
+function getBrand() {
+    return db.Brand.findAll()
 };
-let getAllBrand = getBrand().then((resultPromise) => { return resultPromise });
+let getAllBrand = getBrand()
+    .then((resultPromise) => { return resultPromise })
+    .catch((err) => {`${'Error al cargar marca '}${err}`});
 
 //GET CATEGORY
-async function getCategory() {
-    return await db.Category.findAll()
-        .then((resultPromise) =>{ return resultPromise})
-        .catch((err) => {`${'ERROR AL CARGAR CATEGORIA'}${err}`});
+function getCategory() {
+    return db.Category.findAll()
 };
-let getAllCategory = getCategory().then((resultPromise) => { return resultPromise });
+let getAllCategory = getCategory()
+    .then((resultPromise) => { return resultPromise })
+    .catch((err) => {`${'Error al cargar categoria '}${err}`});
 
 
 //GET SECTION
-async function getSection() {
-    return await db.Section.findAll()
-        .then((resultPromise) =>{ return resultPromise})
-        .catch((err) => {`${'ERROR AL CARGAR CATEGORIA'}${err}`});
+function getSection() {
+    return db.Section.findAll()
 };
-let getAllSection = getSection().then((resultPromise) => { return resultPromise });
+let getAllSection = getSection()
+    .then((resultPromise) =>{ return resultPromise})
+    .catch((err) => {`${'ERROR AL CARGAR SECTION '}${err}`});
 
 
 //NEW PRODUCT
@@ -58,50 +54,36 @@ async function storeNewProduct (data, file, userId) {
     const fileName = ('pruduct-' + Date.now() + path.extname(file.originalname)); 
     await sharp(file.buffer).resize(500, 500).jpeg({quality: 50, chromaSubsampling: '4:4:4'}).toFile(`${path.join(__dirname, '../../public/imagenes/img-products/')}${fileName}`);
   
-    for (value in data) {;
-
-        return await db.Product.create({
-            name: data[value],
-            price: parseFloat(data[value]),
-            discount: parseInt(data[value]),
-            description: data[value],
-            img: fileName,
-            created_by : userId,
-            brand_id: (data[value]),
-            category_id: (data[value]),
-            section_id: (data[value])
-        })
-        .then((resultPromise) => { return resultPromise})
-        .catch((err) => {return console.log(`${err}${' No se pudo crear un producto nuevo'}`)});   
-    };
+    await db.Product.create({
+        name: data.name,
+        price: parseFloat(data.price),
+        discount: parseInt(data.discount),
+        description: data.description,
+        img: fileName,
+        created_by : userId,
+        brand_id: parseInt(data.brand),
+        category_id: parseInt(data.category),
+        section_id: parseInt(data.section),
+    });    
 };
 
-
+//UPDATE PRODUCT
 async function updateProduct(data, file, idProduct){
         
     const fileName = ('pruduct-' + Date.now() + path.extname(file.originalname));     
     await sharp(file.buffer).resize(500, 500 , {fit:"contain",background:'#fff'}).jpeg({quality: 50, chromaSubsampling: '4:4:4'}).toFile(`${path.join(__dirname, '../../public/imagenes/img-products/')}${fileName}`); 
-       
-    // console.log(data);
-    // console.log(file);
-    // console.log(idProduct);
-    
-    for (value in data) {
-        let productUpdate = db.Product.update({
-            name: data[value],
-            price: parseFloat(data[value]),
-            discount: parseInt(data[value]),
-            description: data[value],
-            img: fileName,
-            brand_id: (data[value]),
-            category_id: (data[value]),
-            section_id: (data[value])
+
+    return await db.Product.update({
+        name: data.name,
+        price: parseFloat(data.price),
+        discount: parseInt(data.discount),
+        description: data.description,
+        img: fileName,
+        brand_id: parseInt(data.brand),
+        category_id: parseInt(data.category),
+        section_id: parseInt(data.section),
         },
-        {where: { id: idProduct }})
-            .then((productUpdate)=>{ return productUpdate; })
-            .catch((err) => {`${'ERRO AL ACTUALIZAR PRODUCTO'}${err}`})     
-            return Promise.resolve(productUpdate)
-    };
+    {where: { id: idProduct }})     
 };
 
 //DELETE IMG
@@ -113,13 +95,12 @@ async function deleteImg(id) {
     }).catch((err) => {
         console.log(`${'Img no encontrada'}${err}`);
     })
-}
+};
 
 //DELETE PRODUCT
-
 async function productToDelete(id) {
     return await db.Product.destroy({where : {id : id}})
-        .then(() => {console.log('Usuario eliminado con éxito');})
+        .then(() => {console.log('Usuario eliminado con éxito')})
         .catch((err) => { console.log(`${'ERROR AL ELIMINAR PRODUCTO'}${err}`)});
 };
-module.exports = {getAllProducts, getProductBypK, getAllBrand, getAllCategory, getAllSection, storeNewProduct, updateProduct, productToDelete, deleteImg};
+module.exports = {getProducts, getProductBypK, getAllBrand, getAllCategory, getAllSection, storeNewProduct, updateProduct, productToDelete, deleteImg};
