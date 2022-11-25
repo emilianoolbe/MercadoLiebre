@@ -4,6 +4,7 @@ const path = require('path');
 const bcryptjs = require('bcryptjs');
 const sharp = require('sharp');
 const { validationResult } = require('express-validator');
+const userService = require('../service/userService');
 
 //Importo Modelo
 const db = require('../database/models');
@@ -17,41 +18,22 @@ const controlador = {
     },
 
     //Guardado Registro
-    newUser: async (req, res) => {
+    newUser: (req, res) => {
         let errors = validationResult(req);
 
         if (errors.isEmpty()){
-
-            let fileName = `${'user-'}${Date.now()}${path.extname(req.file.originalname)}`;
-            await sharp(req.file.buffer).resize(500, 500).jpeg({quality : 50, chromaSubsampling: '4:4:4'}).toFile(`${path.join(__dirname, '../../public/imagenes/img-users/')}${fileName}`);
-
-            db.User.create({
-                username: req.body.nombre,
-                email: req.body.email,
-                birth_day: req.body.fechanacimiento,
-                address: req.body.domicilio,
-                password: bcryptjs.hashSync(req.body.password, 10),
-                avatar: fileName
-            })
-            .then(() => {
-                res.redirect('ingresa')
-            })
-            .catch((err) => {
-                console.log(`${'No se pudo cargar a usuario'}${err}`);
-            });
+            userService.newUser(req.body, req.file)
+                .then(() => {res.redirect('ingresa')})
+                .catch((err) => {console.log(`${'No se pudo cargar a usuario '}${err}`)});
         }else{
-            return res.render('users/form-crear-usuario', {errors: errors.mapped(), oldData: req.body});
+            res.render('users/form-crear-usuario', {errors: errors.mapped(), oldData: req.body});
         }   
     },
 
     //Vista editar
-    edit: (req, res) =>{
-        db.User.findByPk(req.params.id)
-            .then((usuario) => {
-                res.render('users/form-editar-usuario', {usuario:  usuario})
-            }).catch((err) => {
-                res.send(`${'Usuario no existe'}${err}`);
-            })
+    edit: async (req, res) =>{
+       let user = await userService.userByPk(req.params.id);
+       res.render('users/form-editar-usuario', {usuario:  user})
     },
 
     //Edición

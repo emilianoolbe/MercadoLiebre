@@ -7,27 +7,21 @@ const {validationResult} = require('express-validator');
 let controlador = {
     //Vista Ofertas
     ofertas: async (req, res) => {
-        // productService.getAllProducts
-        //     .then((allProducts) => {console.log(allProducts); res.render('products/ofertas', { products : allProducts })})
-        //     .catch((err) => {console.log(err);})
-        let productos= await productService.getProducts()
-        res.render('products/ofertas', { products : productos })
+        const products = await productService.getProducts()
+        res.render('products/ofertas', { products})
     } ,
-
     //Vista detalles del producto
     detalle: async (req, res) => {
         const product = await productService.getProductBypK(req.params.id);
         res.render('products/detalle',{product})
     } ,
-
     //Vista formulario de Crear Producto
     crear: async (req, res) => {
-        const category = await productService.getAllCategory;
-        const brand = await productService.getAllBrand;
-        const section = await productService.getAllSection;
+        const category = await productService.getCategory();
+        const brand = await productService.getBrand();
+        const section = await productService.getSection();
         res.render('products/form-crear-producto', {brand, category, section})     
     },
-
     //Creación de producto
     guardar: async (req, res) => {
         let errors = validationResult(req);
@@ -38,22 +32,20 @@ let controlador = {
             await productService.storeNewProduct(data, file, userId)
             res.redirect('/products/ofertas');
         } else {
-            const category = await productService.getAllCategory;
-            const brand = await productService.getAllBrand;
-            const section = await productService.getAllSection;
-            res.render('products/form-crear-producto', {brand, category, section, errors: errors.mapped(), oldData : req.body})
+            const category = await productService.getCategory();
+            const brand = await productService.getBrand();
+            const section = await productService.getSection();
+            res.render('products/form-crear-producto', {brand, category, section, errors: errors.mapped(), oldData : req.body});
         }
     },
-
     //Editar producto form vista
     editar: async (req, res) => {
         const product = await productService.getProductBypK(req.params.id);
-        const category = await productService.getAllCategory;
-        const brand = await productService.getAllBrand;
-        const section = await productService.getAllSection;
-        return res.render('products/form-editar-producto', {product, category, section, brand})
+        const category = await productService.getCategory();
+        const brand = await productService.getBrand();
+        const section = await productService.getSection();
+        res.render('products/form-editar-producto', {product, category, section, brand})
     },
-
     //Editar producto 
     update: async (req, res) => {
         let errors = validationResult(req);
@@ -66,13 +58,12 @@ let controlador = {
             res.redirect('/products/ofertas');
         } else {
             const product = await productService.getProductBypK(req.params.id);
-            const category = await productService.getAllCategory;
-            const brand = await productService.getAllBrand;
-            const section = await productService.getAllSection;
+            const category = await productService.getCategory();
+            const brand = await productService.getBrand();
+            const section = await productService.getSection();
             return res.render('products/form-editar-producto', {product, category, section, brand, errors: errors.mapped(), oldData: req.body});
         }
     },
-
     //Borrado de producto
     borrar: async (req, res) => {
         await productService.deleteImg(req.params.id);
