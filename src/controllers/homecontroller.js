@@ -1,15 +1,12 @@
 //Importo modelo
-const db = require('../database/models');
+const productService = require('../service/productsService');
 
 //CONTROLADOR
 const controlador = {
-    home: (req, res) => {
-        db.Product.findAll()
-            .then((products) => {
-                res.render('home', {products: products});
-            });
+    home: async (req, res) => {
+        let products = await productService.getProducts();
+        res.render('home', {products});
     },
-
-}
+};
 
 module.exports = controlador;

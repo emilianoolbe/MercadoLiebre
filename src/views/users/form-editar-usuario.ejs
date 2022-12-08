@@ -35,18 +35,18 @@
                             <label for="nombre" class="form-label">Nombre completo</label>    
                             <input id="nombre" class="form-control" type="text" name="nombre" value="<%= locals.oldData && oldData.nombre ? oldData.nombre : usuario.username %>" >
                             <% if (locals.errors && errors.nombre) { %>
-                                <div class="text-danger">
+                                <h5 class="text-danger">
                                         <%= errors.nombre.msg %>   
-                                </div>
+                                </h5>
                                 <% } %>
                         </div>
                         <div class="col-sm-12">
                             <label for="email" class="form-label">Correo Electrónico</label>        
                             <input id="email" type="email" name="email" class="form-control" value="<%= locals.oldData && oldData.email ? oldData.email : usuario.email %>" >
                             <% if (locals.errors && errors.email) { %>
-                                <div class="text-danger">
+                                <h5 class="text-danger">
                                         <%= errors.email.msg %>   
-                                </div>
+                                </h5>
                                 <% } %>
                         </div>
                         <div class="col-sm-12">
@@ -54,9 +54,9 @@
                             <input type="date" name="fechanacimiento" class="form-control" value="<%= locals.oldData ? oldData.fechanacimiento : usuario.birth_day %>">
                             <% if (locals.errors && errors.birth_day) { %>
 
-                                <div class="text-danger">
+                                <h5 class="text-danger">
                                         <%= errors.fechanacimiento.msg %>   
-                                </div>
+                                </h5>
                                 <% } %>
                         </div>
                         <div class="col-sm-12">
@@ -64,9 +64,9 @@
                             <input id="domicilio" type="text" name="domicilio"  value="<%= locals.oldData && oldData.domicilio ? oldData.domicilio : usuario.address %>" class="form-control">
 
                             <% if (locals.errors && errors.domicilio) { %>
-                                <div class="text-danger">
+                                <h5 class="text-danger">
                                     <%= errors.domicilio.msg %>   
-                                </div>
+                                </h5>
                                 <% } %>
                         </div>
                      
@@ -74,9 +74,9 @@
                             <label for="fileform" class="form-label">Ávatar</label>
                             <input type="file" name="img" class=" form-control input-img-usuario" id="fileform">
                             <% if (locals.errors && errors.img) { %>
-                                <div class="text-danger">
+                                <h5 class="text-danger">
                                         <%= errors.img.msg %>   
-                                </div>
+                                </h5>
                                 <% } %>
                         </div>
                         <div class="col-sm-12">

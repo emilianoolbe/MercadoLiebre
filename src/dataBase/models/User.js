@@ -9,12 +9,16 @@ module.exports = (sequelize, dataTypes) => {
         birth_day: {type: dataTypes.DATE, allowNull: true},
         address: {type: dataTypes.STRING(45), allowNull: true},
         password: {type: dataTypes.STRING(255), allowNull: false},
-        avatar: {type: dataTypes.STRING(100), allowNull: false}
+        avatar: {type: dataTypes.STRING(100), allowNull: false},
+        createdAt: {type: dataTypes.DATE, allowNull: true},
+        updatedAt: {type: dataTypes.DATE, allowNull: true},
+        deletedAt: {type: dataTypes.DATE, allowNull: true}
     };
 
     let config = {
         tableName : 'user',
-        timestamps : false
+        timestamps : true,
+        paranoid: true,
     };
 
     const User = sequelize.define(alias, cols, config);

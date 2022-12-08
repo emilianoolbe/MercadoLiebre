@@ -15,7 +15,6 @@ function userLoggedMiddleware(req, res, next) {
                 console.log('No hay email')
             });
     }
-
     res.locals.isLogged = false;
     if (req.session.userLogged){
         db.User.findOne({where: {email: req.session.userLogged.email}})
@@ -25,6 +24,6 @@ function userLoggedMiddleware(req, res, next) {
             })
     }
     next();
-}
+};
 
 module.exports = userLoggedMiddleware;
