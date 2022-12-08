@@ -1,0 +1,29 @@
+.erroresFront{
+    color: red;
+    display: block;
+}
+
+.inputBorder{
+    border: 1px red solid;
+    box-shadow: 0 0 10px red;
+}
+
+.inputBorderCorrect{
+    border: 1px green solid;
+    box-shadow: 0 0 10px green;
+}
+
+.validatationIncomplete{
+    height: 40px;
+    background-color: salmon;
+    border-radius: 3px;
+    display: none;
+}
+.validatationIncomplete-active{
+    display: block;
+}
+
+.validatationIncomplete p {
+    margin: 0;
+    text-align: center;
+}
