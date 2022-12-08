@@ -289,12 +289,13 @@ body{
 }
 
 .formulario-crear-cuenta div  {
-    margin: 5px;
+    
     padding: 10px;
 }
 
 
 .section-crea-tu-cuenta{
+    width: 48%;
     height: 100%;
     display: flex;
     justify-content: center;
