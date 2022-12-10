@@ -30,10 +30,11 @@
         <main class="main-login row">
             <section class="  section-crea-tu-cuenta container col-sm-12 col-md-6 col-lg-4">
                 <article class=" formulario-crear-cuenta borde-fondo-2">
-                    <form action="/users/form-editar-usuario/<%=usuario.id%>?_method=PUT" method="post" id="form" enctype="multipart/form-data">
+                    <form action="/users/form-editar-usuario/<%=usuario.id%>?_method=PUT" method="post" id="formulario" enctype="multipart/form-data">
                         <div class="col-sm-12">
                             <label for="nombre" class="form-label">Nombre completo</label>    
                             <input id="nombre" class="form-control" type="text" name="nombre" value="<%= locals.oldData && oldData.nombre ? oldData.nombre : usuario.username %>" >
+                            <span></span>
                             <% if (locals.errors && errors.nombre) { %>
                                 <h5 class="text-danger">
                                         <%= errors.nombre.msg %>   
@@ -42,7 +43,8 @@
                         </div>
                         <div class="col-sm-12">
                             <label for="email" class="form-label">Correo Electrónico</label>        
-                            <input id="email" type="email" name="email" class="form-control" value="<%= locals.oldData && oldData.email ? oldData.email : usuario.email %>" >
+                            <input id="email" type="email" name="email" class="form-control" value="<%= locals.oldData && oldData.email ? oldData.email : usuario.email %>">
+                            <span></span>
                             <% if (locals.errors && errors.email) { %>
                                 <h5 class="text-danger">
                                         <%= errors.email.msg %>   
@@ -51,7 +53,8 @@
                         </div>
                         <div class="col-sm-12">
                             <label for="fecha" class="form-label" >Fecha de nacimiento:</label>
-                            <input type="date" name="fechanacimiento" class="form-control" value="<%= locals.oldData ? oldData.fechanacimiento : usuario.birth_day %>">
+                            <input type="date" name="fechanacimiento" id="fechanacimiento" class="form-control" value="<%= locals.oldData ? oldData.fechanacimiento : usuario.birth_day %>">
+                            <span></span>
                             <% if (locals.errors && errors.birth_day) { %>
 
                                 <h5 class="text-danger">
@@ -62,6 +65,7 @@
                         <div class="col-sm-12">
                             <label for="domicilio" for="form-label">Direccion:</label>    
                             <input id="domicilio" type="text" name="domicilio"  value="<%= locals.oldData && oldData.domicilio ? oldData.domicilio : usuario.address %>" class="form-control">
+                            <span></span>
 
                             <% if (locals.errors && errors.domicilio) { %>
                                 <h5 class="text-danger">
@@ -72,7 +76,8 @@
                      
                         <div class="col-sm-12">
                             <label for="fileform" class="form-label">Ávatar</label>
-                            <input type="file" name="img" class=" form-control input-img-usuario" id="fileform">
+                            <input type="file" id="img" name="img" class=" form-control input-img-usuario">
+                            <span></span>
                             <% if (locals.errors && errors.img) { %>
                                 <h5 class="text-danger">
                                         <%= errors.img.msg %>   
@@ -81,14 +86,20 @@
                         </div>
                         <div class="col-sm-12">
                             <label for="inputPassword4" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" id="inputPassword4" name="password">
-          
+                            <input type="password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" id="password" name="password">
+                            <span></span>
                             <% if (locals.errors && errors.password) { %>
                               <h5 class = "text-danger">
                                   <%= errors.password.msg %> 
                               </h5>
                               <% } %>
                           </div>
+                        
+                        <div class="col-sm-12 validatationIncomplete" id="formIncomplete" >
+                            <p><i class="fa-solid fa-triangle-exclamation"></i> <b>Error: </b> Complete el formulario correctamente</p>
+                        </div>
+ 
+
                         <div>
                             <button type="reset" class="detele-button">Borrar</button>
                             <button type="submit" class="submit-button"> Enviar</button>
@@ -103,6 +114,7 @@
             <%- include('../partials/footer.ejs') %>
         </footer>
         
+      
     </body>
-
+    <script src="/js/validationForUsers.js"></script>
 </html>
