@@ -31,24 +31,25 @@
                     <h2 class="titulo-login">Bienvenidos</h2>
                     <div class="row">
                       
-                        <form action="/users/ingresa" method="post" class="col-12">
+                        <form action="/users/ingresa" method="post" class="col-12" id ="formulario" >
                             <div class="row justify-content-center aling-items-center">
                                 <div class="div-form-hijo col-12">
-                                    <input type="text" name="email" placeholder="email" class="form-control <%= locals.errors && errors.email ? 'is-invalid' : null %>"  >
-        
+                                    <input type="text" name="email" id='email' placeholder="email" class="form-control <%= locals.errors && errors.email ? 'is-invalid' : null %>"  >
+                                    <span class='fs-6'></span>
                                     <% if (locals.errors && errors.email) { %>
-                                      <div class="text-danger">
+                                        <div class="text-danger">
                                             <%= errors.email.msg %>   
                                         </div>
                                     <% } %>
                                     
                                 </div>
                                 <div class="col-12">
-                                    <input type="password" name="password" placeholder="Password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" >
+                                    <input type="password" name="password" id='password' placeholder="Password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" >
+                                    <span class='fs-6'></span>
                                     <% if (locals.errors && errors.password) { %>
-                                        <div class="text-danger">
+                                            <div class="text-danger">
                                               <%= errors.password.msg %>   
-                                          </div>
+                                            </div>
                                       <% } %>
                                 </div>
                                 <div class="text-start">
@@ -59,7 +60,11 @@
                                 <div class="col-12">
                                    <input type="submit" value="Login" class="div-form-hijo button-login-siging">
                                 </div>
-        
+                                
+                                <div class="col-sm-12 validatationIncomplete" id="formIncomplete" >
+                                    <p><i class="fa-solid fa-triangle-exclamation"></i> <b>Error: </b>Ingrese credenciales válidas</p>
+                                 </div>
+
                                 <div class="div-form-hijo col-12">
                                     <h5>¿No recordás la contraseña?</h5> <span><a href="#" class="link-login link-login-2">Recupera tu contraseña</a></span>
                                 </div>
@@ -82,5 +87,6 @@
             <%- include('../partials/footer.ejs') %>
         </footer>
         
+        <script src="/js/validationLogin.js"></script>
     </body>
 </html>
