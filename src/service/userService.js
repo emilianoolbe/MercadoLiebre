@@ -61,32 +61,23 @@ function deteleUser(req, res) {
             res.clearCookie('remember');
         })
 };
-function restoreUser(req) {
-    return db.User.findOne({where: {email: req.body.email}, paranoid: false})
-        .then((user) => { 
-            if (bcryptjs.compareSync(req.body.password, user.password)) {
-                db.User.restore({ where: { id: user.id}})         
-            }else{
-                console.log('error AL RECUPERAR');
-            }
-        })
-        .catch((err) => {`${err}' No se pudo recuperar'`});
+async function restoreUser(req) {
+    let user = await db.User.findOne({where: {email: req.body.email}, paranoid: false})
+    if (user && bcryptjs.compareSync(req.body.password, user.password)) {
+        db.User.restore({ where: { id: user.id}});
+    return user
+    };
 };
-
 //Proceso de logueo
 async function login(req, res) {
     let user =  await db.User.findOne({where: {email: req.body.email}})
-    if (user) {
-        if (bcryptjs.compareSync(req.body.password, user.password)) {
-            delete user.password;
-            if (req.body.remember) {
-                res.cookie('remember', user.email, {maxAge: (1000 * 60) * 60});       
-            };     
-            return req.session.userLogged = user;
-        };
-    }else{
-        res.render('users/ingresa', {errors:{email:{msg: 'Credenciales inválidas'}}});
-    }
+    if (user && bcryptjs.compareSync(req.body.password, user.password)) {
+        delete user.password;
+        if (req.body.remember) {
+            res.cookie('remember', user.email, {maxAge: (1000 * 60) * 60});       
+        };     
+    return req.session.userLogged = user;
+    };
 };
 
 async function userInSession(req ) {

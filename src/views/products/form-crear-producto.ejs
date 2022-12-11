@@ -34,7 +34,7 @@
                 <div class="row  m-1  p-2">
                     <div class="col-md-6 col-sm-12 ">
 
-                        <input type="text" class="form-control <%= locals.errors && errors.name ? 'is-invalid' : null %> " placeholder="Nombre:" aria-label="name" name="name" value="<%= locals.oldData ? oldData.name : null %>">
+                        <input type="text" class="form-control <%= locals.errors && errors.name ? 'is-invalid' : null %> " placeholder="Nombre:" aria-label="name" name="name" id="name" value="<%= locals.oldData ? oldData.name : null %>">
                         <span></span>
                         <% if (locals.errors && errors.name) { %>
                         <h5 class="text-danger">
@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="col-md-6 col-sm-12">
-                        <input type="number" class="form-control <%= locals.errors && errors.price ? 'is-invalid' : null %>" placeholder="Precio del producto:" name="price" value="<%= locals.oldData ? oldData.price : null %>">
+                        <input type="number" class="form-control <%= locals.errors && errors.price ? 'is-invalid' : null %>" placeholder="Precio del producto:" name="price" id="price" value="<%= locals.oldData ? oldData.price : null %>">
                         <span></span>
                         <% if (locals.errors && errors.price) { %>
                             <h5 class="text-danger">
@@ -58,13 +58,13 @@
                 <div class="row m-1 p-2">
 
                     <div class="col-md-6 col-sm-12 mb-4">
-                        <input type="number" class="form-control" placeholder="Descuento"  name="discount" value="<%= locals.oldData ? oldData.discount : null %>">
+                        <input type="number" class="form-control" placeholder="Descuento"  name="discount" id="discount" value="<%= locals.oldData ? oldData.discount : null %>">
                         <span></span>
                     </div>
 
                     <div class="col-md-6 col-sm-12">
 
-                        <select class="form-select  <%= locals.errors && errors.category ? 'is-invalid' : null %>" name="category">
+                        <select class="form-select  <%= locals.errors && errors.category ? 'is-invalid' : null %>" name="category" id="category">
                         
                         <option value="">Seleccione Categoría</option>
  
@@ -82,7 +82,7 @@
                     </div>
 
                     <div class="col-md-6 col-sm-12">
-                        <select class="form-select  <%= locals.errors && errors.section ? 'is-invalid' : null %>" name="section">               
+                        <select class="form-select  <%= locals.errors && errors.section ? 'is-invalid' : null %>" name="section" id="section">               
 
                         <option value="">Sección del producto</option>
                          <% for (const element of section) { %> 
@@ -99,7 +99,7 @@
                     </div>
 
                     <div class="col-md-6 col-sm-12">
-                        <select class="form-select  <%= locals.errors && errors.brand ? 'is-invalid' : null %>" name="brand">
+                        <select class="form-select  <%= locals.errors && errors.brand ? 'is-invalid' : null %>" name="brand", id="brand">
 
                         <option value="">Seleccione Marca</option>
                          <% for (const element of brand) { %> 
@@ -120,7 +120,7 @@
                 </div> 
                 <div class=" row m-1 p-2">
                     <div class="col-12 mb-2">
-                        <textarea class="form-control <%= locals.errors && errors.description ? 'is-invalid' : null %> " placeholder="Descripción" name="description"><%= locals.oldData ? oldData.description : null %></textarea>
+                        <textarea class="form-control <%= locals.errors && errors.description ? 'is-invalid' : null %> " placeholder="Descripción" name="description" id="description"><%= locals.oldData ? oldData.description : null %></textarea>
                         <span></span> 
                         <% if (locals.errors && errors.description) { %>
                             <h5 class="text-danger">
@@ -129,7 +129,7 @@
                             <% } %>
                     </div>
                     <div class="col-12 mt-3 mb-3">
-                        <input type="file" enctype="" class="form-control <%= locals.errors && errors.img ? 'is-invalid' : null %> " name="img">
+                        <input type="file" class="form-control <%= locals.errors && errors.img ? 'is-invalid' : null %> " name="img" id="img">
                         <span></span>
                         <% if (locals.errors && errors.img) { %>
                             <h5 class="text-danger">
@@ -144,7 +144,7 @@
 
                     <div class="col-sm-12 validatationIncomplete" id="formIncomplete" >
                         <p><i class="fa-solid fa-triangle-exclamation"></i> <b>Error: </b> Complete el formulario correctamente</p>
-                     </div>
+                    </div>
 
                 </div>    
             </div>
@@ -158,4 +158,5 @@
 <%- include('../partials/footer.ejs') %>
 <!--Footer-->
 </body>
+<script src="/js/validationForProducts.js"></script>
 </html>
