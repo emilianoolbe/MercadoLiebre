@@ -8,8 +8,7 @@ let fields = {
 const expresions = {
 	password: /^.{4,12}$/, // 4 a 12 digitos.
 	email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-}
-
+};
 validateField = (expresions, input, name, message) => {
     if (expresions.test(input.value) && input.length != 0) {
         input.nextElementSibling.innerText = '';
@@ -41,7 +40,7 @@ const validateForm = (e) => {
 inputs.forEach((input) => {
     input.addEventListener('keyup', validateForm);
     input.addEventListener('blur', validateForm);
-})
+});
 formulario.addEventListener("submit", (e) => {
     if (fields.email && fields.password) {
         formulario.submit();

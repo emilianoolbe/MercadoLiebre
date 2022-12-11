@@ -61,6 +61,17 @@ function deteleUser(req, res) {
             res.clearCookie('remember');
         })
 };
+function restoreUser(req) {
+    return db.User.findOne({where: {email: req.body.email}, paranoid: false})
+        .then((user) => { 
+            if (bcryptjs.compareSync(req.body.password, user.password)) {
+                db.User.restore({ where: { id: user.id}})         
+            }else{
+                console.log('error AL RECUPERAR');
+            }
+        })
+        .catch((err) => {`${err}' No se pudo recuperar'`});
+};
 
 //Proceso de logueo
 async function login(req, res) {
@@ -70,7 +81,7 @@ async function login(req, res) {
             delete user.password;
             if (req.body.remember) {
                 res.cookie('remember', user.email, {maxAge: (1000 * 60) * 60});       
-            }     
+            };     
             return req.session.userLogged = user;
         };
     }else{
@@ -81,4 +92,4 @@ async function login(req, res) {
 async function userInSession(req ) {
     return await db.User.findOne({where: {email: req.session.userLogged.email}});
 };
-module.exports = {newUser, userByPk, deteleteAvatar, updateUser, deteleUser, login, userInSession};
+module.exports = {newUser, userByPk, deteleteAvatar, updateUser, deteleUser, login, userInSession, restoreUser};

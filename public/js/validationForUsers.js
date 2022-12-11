@@ -95,11 +95,10 @@ inputs.forEach((input) =>{
 });
 
 formulario.addEventListener("submit", (e) =>{
-    e.preventDefault();
-    console.log(fields);
     if (fields.nombre && fields.password && fields.img && fields.fechanacimiento && fields.email && fields.domicilio) {
         formulario.submit();
     }else{
+        e.preventDefault();
         document.getElementById('formIncomplete').classList.add('validatationIncomplete-active');
     };
 });

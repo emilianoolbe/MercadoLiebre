@@ -25,6 +25,9 @@ router.put('/form-editar-usuario/:id', upload.single('img'), validationUsers, us
 //Borrado usuario
 router.delete('/delete/:id',authMiddleware, userController.delete);
 
+//Recuperar usuario
+router.get('/recuperar-usuario', guestMiddleware, userController.restoreUserView);
+router.post('/recuperar-usuario', guestMiddleware, userController.restoreUser);
 //Login
 router.get('/ingresa', guestMiddleware, userController.login);
 router.post('/ingresa', validationLoggin, userController.processLogin);

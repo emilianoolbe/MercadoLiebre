@@ -28,10 +28,10 @@
             <section class="form-login row">
                 <article class="form-login-hijo borde-fondo-2 container col-sm-12 col-md-6 col-lg-4">
 
-                    <h2 class="titulo-login">Bienvenidos</h2>
+                    <h2 class="titulo-login">Bienvenido de nuevo</h2>
                     <div class="row">
                       
-                        <form action="/users/ingresa" method="post" class="col-12" id ="formulario" >
+                        <form action="/users/recuperar-usuario" method="post" class="col-12" id ="formulario" >
                             <div class="row justify-content-center aling-items-center">
                                 <div class="div-form-hijo col-12">
                                     <input type="text" name="email" id='email' placeholder="email" class="form-control <%= locals.errors && errors.email ? 'is-invalid' : null %>"  >
@@ -52,27 +52,17 @@
                                             </div>
                                       <% } %>
                                 </div>
-                                <div class="text-start">
-                                    <label for="remember" class="form-label fs-5">Recordame</label>
-                                    <input type="checkbox" name="remember" id="remember" >
-                                </div>
                                 
                                 <div class="col-12">
-                                   <input type="submit" value="Login" class="div-form-hijo button-login-siging">
+                                   <input type="submit" value="Recuperar" class="div-form-hijo button-login-siging">
                                 </div>
                                 
                                 <div class="col-sm-12 validatationIncomplete" id="formIncomplete" >
                                     <p><i class="fa-solid fa-triangle-exclamation"></i> <b>Error: </b>Ingrese credenciales válidas</p>
-                                 </div>
-
-                                <div class="div-form-hijo col-12">
-                                    <h5>¿Ya tenías cuenta?</h5> <span><a href="/users/recuperar-usuario" class="link-login link-login-2">Recuperar</a></span>
                                 </div>
+                                
                                 <div class="div-form-hijo col-12">
                                     <h5>¿No tenés cuenta?</h5><span><a href="/users/form-crear-usuario" class="link-login link-login-2">Registrate</a></span>
-                                </div>
-                                <div class="div-form-hijo col-12">
-                                    <button class="button-login"><a href="https://myaccount.google.com/" class="link-login">REGISTRARME CON GOOGLE</a></button>
                                 </div>
                             </div>
                             

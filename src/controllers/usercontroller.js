@@ -43,13 +43,26 @@ const controlador = {
         }
     },
     //Eliminar usuario
-    delete: async (req, res) => {
-        await userService.deteleteAvatar(req.params.id);        
+    delete: async (req, res) => {      
         await userService.deteleUser(req, res);
         res.redirect('/'); 
-    },    
+    },  
+    //Restaurar usuario
+    restoreUserView: (res) => {
+        res.render('users/recuperar-usuario');
+    },
+    restoreUser: async (req, res) => {
+        let errors = validationResult(req);
+        
+        let userToRecover = await userService.restoreUser(req)
+        console.log(userToRecover);
+        res.render('users/ingresa')
+     
+        res.render('users/ingresa', {errors:{email:{msg: 'Credenciales inválidas'}}});
+        
+    },
     //Login
-    login: (req, res) => {
+    login: (res) => {
         res.render('users/ingresa')
     },
 
