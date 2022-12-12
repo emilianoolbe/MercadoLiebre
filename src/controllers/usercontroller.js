@@ -14,11 +14,10 @@ const controlador = {
     newUser: async (req, res) => {
         let errors = validationResult(req);
         if (errors.isEmpty()){
-            await userService.newUser(req.body, req.file);
-            res.redirect('ingresa')
+            await userService.newUser(req.body, req.file) ?  res.redirect('ingresa') : res.render('users/form-crear-usuario', {errors:{email:{msg: '¡Este email ya esta registrado!'}}, oldData: req.body}); 
         }else{
             res.render('users/form-crear-usuario', {errors: errors.mapped(), oldData: req.body});
-        }   
+        }; 
     },
     //Vista editar
     edit: async (req, res) =>{
@@ -52,7 +51,7 @@ const controlador = {
     },
     //Login
     login: (req, res) => {
-        res.render('users/ingresa')
+        res.render('users/ingresa');
     },
     processLogin: async(req, res) => {
         let errors = validationResult(req)
@@ -60,11 +59,11 @@ const controlador = {
             await userService.login(req, res) ? res.redirect('profile') :  res.render('users/ingresa', {errors:{email:{msg: 'Credenciales inválidas'}}});
         }else{
             res.render('users/ingresa', {errors: errors.mapped()});
-        }
+        };
     }, 
     //profile
     profile: async (req, res) => {
-        let user = await userService.userInSession(req)
+        let user = await userService.userInSession(req);
         res.render('users/profile', {user});  
     },
     //Logout
@@ -72,7 +71,7 @@ const controlador = {
         req.session.destroy();
         res.clearCookie('remember');
         res.redirect('/');
-    }
+    },
 };
 
 module.exports = controlador;

@@ -7,18 +7,19 @@ const bcryptjs = require('bcryptjs');
 
 //Usuario nuevo
 async function newUser(data, file) {
-    
-    let avatar = `${'user-'}${Date.now()}${path.extname(file.originalname)}`;
-    await sharp(file.buffer).resize(500, 500).jpeg({quality: 50 , chromaSubsampling: '4:4:4'}).toFile(`${path.join(__dirname, '../../public/imagenes/img-users/')}${avatar}`);
- 
-    return await db.User.create({
-        username: data.nombre,
-        email: data.email,
-        birth_day: data.fechanacimiento,
-        address: data.domicilio,
-        password: bcryptjs.hashSync(data.password, 10),
-        avatar: avatar 
-    })
+    let user = await db.User.findOne({where: {email: data.email}});
+    if (!user) {
+        let avatar = `${'user-'}${Date.now()}${path.extname(file.originalname)}`;
+        await sharp(file.buffer).resize(500, 500).jpeg({quality: 50 , chromaSubsampling: '4:4:4'}).toFile(`${path.join(__dirname, '../../public/imagenes/img-users/')}${avatar}`);
+        return await db.User.create({
+            username: data.nombre,
+            email: data.email,
+            birth_day: data.fechanacimiento,
+            address: data.domicilio,
+            password: bcryptjs.hashSync(data.password, 10),
+            avatar: avatar 
+        });
+    };
 };
 //Usuario por ID
 async function userByPk(id) {
