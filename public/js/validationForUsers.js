@@ -56,8 +56,8 @@ const validateAvatar = (input, name) => {
     //e.target.files obtengo un array de los archivos --> [0] porque es 1 solo. 
     //.name me da un string, lo divido con split donde haya un '.' y el resultado es un array
     let fileExtension = input.files[0].name.split('.').pop().toLowerCase();
-    let extesions =['jpg', 'png', 'gif' ];
-    if (extesions.includes(fileExtension)) {
+    let extensions =['jpg', 'png', 'gif' ];
+    if (extensions.includes(fileExtension)) {
         validetedErrors(input, name, true);
     } else {
         validetedErrors(input, name, 'Debe agregar una imagen, (*) Las extensiones de imagenes permitidas son: .jpg  .png .gif', false);

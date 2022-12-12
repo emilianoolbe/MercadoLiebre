@@ -20,9 +20,21 @@
                         </div>
                 
                         <div class="contenedor-descripciones">
-                            <p class="precios item1">uS$<%= element.price %></p>    
-                            <p class="main-size  iconos-main item0"><%= element.discount %>% off </p>
-                            <p class="main-size item4 "><%= element.name %></p>    
+                            <% if (element.discount === 0) { %>
+                                <div class= "row justify-content-center text-center">
+                                    <p class="main-size col-12"><%= element.name %></p>    
+                                    <p class="precios fw-bold col-12">uS$<%= element.price %></p>    
+                                </div>
+                                
+                            <% }else { %>
+                                <div class="row justify-content-center text-center">
+                                    <p class="main-size col-12"><%= element.name %></p>       
+                                    <span class= "col-3 fs-5 text-black-50 fst-italic text-decoration-line-through">uS$<%= element.price %> </span>
+                                    <span class="main-size col-6 iconos-main"><%= element.discount %>% off </span>
+                                    <p class="precios col-12 fw-bold">uS$<%= (((100-element.discount)*element.price) / 100) %></p>
+                                </div>
+                            <% } %> 
+                             
                         </div>
                     </article></a>
                     </div>

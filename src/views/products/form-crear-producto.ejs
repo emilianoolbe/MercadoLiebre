@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="col-md-6 col-sm-12">
-                        <input type="number" class="form-control <%= locals.errors && errors.price ? 'is-invalid' : null %>" placeholder="Precio del producto:" name="price" id="price" value="<%= locals.oldData ? oldData.price : null %>">
+                        <input type="text" class="form-control <%= locals.errors && errors.price ? 'is-invalid' : null %>" placeholder="Precio del producto:" name="price" id="price" value="<%= locals.oldData ? oldData.price : null %>">
                         <span></span>
                         <% if (locals.errors && errors.price) { %>
                             <h5 class="text-danger">
@@ -64,7 +64,7 @@
 
                     <div class="col-md-6 col-sm-12">
 
-                        <select class="form-select  <%= locals.errors && errors.category ? 'is-invalid' : null %>" name="category" id="category">
+                        <select class="form-control  <%= locals.errors && errors.category ? 'is-invalid' : null %>" name="category" id="category">
                         
                         <option value="">Seleccione Categoría</option>
  
@@ -82,7 +82,7 @@
                     </div>
 
                     <div class="col-md-6 col-sm-12">
-                        <select class="form-select  <%= locals.errors && errors.section ? 'is-invalid' : null %>" name="section" id="section">               
+                        <select class="form-control  <%= locals.errors && errors.section ? 'is-invalid' : null %>" name="section" id="section">               
 
                         <option value="">Sección del producto</option>
                          <% for (const element of section) { %> 
@@ -99,7 +99,7 @@
                     </div>
 
                     <div class="col-md-6 col-sm-12">
-                        <select class="form-select  <%= locals.errors && errors.brand ? 'is-invalid' : null %>" name="brand", id="brand">
+                        <select class="form-control  <%= locals.errors && errors.brand ? 'is-invalid' : null %>" name="brand", id="brand">
 
                         <option value="">Seleccione Marca</option>
                          <% for (const element of brand) { %> 
@@ -129,7 +129,7 @@
                             <% } %>
                     </div>
                     <div class="col-12 mt-3 mb-3">
-                        <input type="file" class="form-control <%= locals.errors && errors.img ? 'is-invalid' : null %> " name="img" id="img">
+                        <input type="file" class="form-control <%= locals.errors && errors.img ? 'is-invalid' : null %>" name="img" id="img">
                         <span></span>
                         <% if (locals.errors && errors.img) { %>
                             <h5 class="text-danger">
@@ -137,13 +137,13 @@
                             </h5>
                             <% } %>
                     </div>
+                    <div class="col-12 validatationIncomplete mb-1" id="formIncomplete" >
+                        <p><i class="fa-solid fa-triangle-exclamation"></i> <b>Error: </b> Complete el formulario correctamente</p>
+                    </div>
+
                     <div class="col mt-2">
                         <button type="submit" class="submit-button col-12"> Enviar</button>
                         <button type="reset" class="detele-button col-12 mt-2">Resetear</button>
-                    </div>
-
-                    <div class="col-sm-12 validatationIncomplete" id="formIncomplete" >
-                        <p><i class="fa-solid fa-triangle-exclamation"></i> <b>Error: </b> Complete el formulario correctamente</p>
                     </div>
 
                 </div>    

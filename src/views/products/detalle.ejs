@@ -28,7 +28,10 @@
 
                             <div class="col-12">
                                 <p class="main-size fs-1 fw-bold "><%= product.name %></p> 
-                                <span class="fs-5 text-black-50 fst-italic text-decoration-line-through"> uS$<%= product.price%></span> <span class="main-size  iconos-main fs-4"><%= product.discount %>% off</span> 
+                                <% if (product.discount !== 0) { %>
+                                    <span class="fs-5 text-black-50 fst-italic text-decoration-line-through"> 
+                                    uS$<%= product.price%></span> <span class="main-size  iconos-main fs-4"><%= product.discount %>% off</span>
+                                <% }%> 
                                 <p class="precios fs-1">uS$<%= (((100-product.discount)*product.price) / 100) %></p>
                             </div>
 
