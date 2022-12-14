@@ -11,34 +11,30 @@
         </header>
 
         <main class="main-ofertas">
-            <% for(const element of products){ %>
-                <div class="div-Ofertas">
-                    <a href="/products/detalle/<%= element.id %>" class="links-Art"><article class= " articulo-margin borde-producto">
-                        <div class="camion-con-foto">
-                            <img src="/imagenes/img-products/<%= element.img %>" alt="<%= element.name %>" class="resoluciones">
-                            <p class="item-truck"><i class="fa-solid fa-truck-fast iconos-main-truck truck"></i></p>
+        <% for(const element of products) { %>
+            <% if (element.category.id !== 1) { %>
+                     
+                        <div class="div-Ofertas">
+                            <article class= " articulo-margin borde-producto">
+                                <a href="/products/detalle/<%= element.id %>" class="links-Art">
+                                    <div class="camion-con-foto">
+                                        <img src="/imagenes/img-products/<%= element.img %>" alt="<%= element.name %>" class="resoluciones">
+                                        <p class="item-truck"><i class="fa-solid fa-truck-fast iconos-main-truck truck"></i></p>
+                                        </div>
+                                        <div class="contenedor-descripciones">
+                                            <div class="row justify-content-center text-center">
+                                            <p class="main-size col-12"><%= element.name %></p>       
+                                            <span class= "col-3 fs-5 text-black-50 fst-italic">uS$<%= element.price %> </span>
+                                                        
+                                            </div>        
+                                        </div>
+                                </a>
+                            <button type="submit" class="submit-button col-12" id="buy-button" data-id=" <%= element.id %> "> COMPRAR </button>
+                            </article>
                         </div>
+                    <% } %>  
+        <% } %> 
                 
-                        <div class="contenedor-descripciones">
-                            <% if (element.discount === 0) { %>
-                                <div class= "row justify-content-center text-center">
-                                    <p class="main-size col-12"><%= element.name %></p>    
-                                    <p class="precios fw-bold col-12">uS$<%= element.price %></p>    
-                                </div>
-                                
-                            <% }else { %>
-                                <div class="row justify-content-center text-center">
-                                    <p class="main-size col-12"><%= element.name %></p>       
-                                    <span class= "col-3 fs-5 text-black-50 fst-italic text-decoration-line-through">uS$<%= element.price %> </span>
-                                    <span class="main-size col-6 iconos-main"><%= element.discount %>% off </span>
-                                    <p class="precios col-12 fw-bold">uS$<%= (((100-element.discount)*element.price) / 100) %></p>
-                                </div>
-                            <% } %> 
-                             
-                        </div>
-                    </article></a>
-                    </div>
-                <% } %> 
         </main>
         
         <footer>
@@ -46,4 +42,5 @@
         </footer>
         
     </body>
+    <script src="/js/shoppingCart.js"></script>
 </html>

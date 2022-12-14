@@ -2,6 +2,7 @@
 
 const { validationResult } = require('express-validator');
 const userService = require('../service/userService');
+const productService = require('../service/productsService');
 
 //CONTROLADOR
 const controlador = {
@@ -72,6 +73,11 @@ const controlador = {
         res.clearCookie('remember');
         res.redirect('/');
     },
+    //Products For user
+    myProductView: async (req, res) => {
+        const products = await productService.getProducts();
+        res.render('users/products', {products});
+    }   
 };
 
 module.exports = controlador;

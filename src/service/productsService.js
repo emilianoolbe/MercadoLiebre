@@ -6,7 +6,7 @@ const db = require('../database/models');
 
 // GET ALL PRODUCTS
 async function getProducts(){
-    return await db.Product.findAll() 
+    return await db.Product.findAll({include: [{association: 'creator'}, {association: 'category'}]});
 };
 // GET PRODUCT BY ID
 async function getProductBypK (id){

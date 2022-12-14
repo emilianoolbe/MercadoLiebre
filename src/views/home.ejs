@@ -8,85 +8,34 @@
     <%- include('./partials/nav.ejs') %>  
     <%- include('./partials/header.ejs') %>    
     <main class="main">
-            <h2 class="titulares">Basado en tu última visita</h2> 
-            <div class="contenedor-1200">         
-                <section class= "main-articulos-visitas">
-                    
-                    <div class="productos-desktop">
-                        <%for (let i = 0; i < products.lenght; i++){ %>
-                        <a href="/products/detalle/<%= products[i].id %> "  class="links-Art "><article class= " articulo-margin borde-producto">
-                            <div class="camion-con-foto">
-                                <img src="/imagenes/img-products/<%= products[i].img %>" alt="<%= products[i].name %>" class="resoluciones">
-                                <p class="item-truck"><i class="fa-solid fa-truck-fast iconos-main-truck truck"></i></p>
-                            </div>
-                       
-                            <div class="contenedor-descripciones">
-                                <p class="precios item1">uS$<%= products[i].price %></p>    
-                                <p class="main-size  iconos-main item0"><%= products[i].discount %>% off </p>
-                                <p class="main-size item4 "><%= products[i].name %></p>    
-                            </div>
-                        </article></a>
-                        <% } %>
-                    </div>
-
-                    <div class="productos-desktop">
-                        <%for (let i = 0; i < products.lenght; i++){ %>
-                        <a href="/products/detalle/<%= products[i].id %>" class="links-Art "><article class= "articulo-margin borde-producto">
-                            <div class="camion-con-foto">
-                                <img src="/imagenes/img-products/<%= products[i].img %>" alt="<%= products[i].name %>" class="resoluciones">
-                                <p class="item-truck"><i class="fa-solid fa-truck-fast iconos-main-truck truck"></i></p>
-                            </div>
-                           
-                            <div class="contenedor-descripciones">    
-                                <p class="precios"  id="dimesiones-descripciones">uS$<%= products[i].price %></p>
-                                <p class="main-size iconos-main item0"><%= products[i].discount %>% off </p>
-                                <p class="main-size item4"><%= products[i].name %></p>
-                            </div>
-                        </article></a>
-                        <% } %>
-                    </div>
-                </section>
-                    
-                <h2 class="titulares ofertas-none">Sección de ofertas</h2>       
-                
-                <section  class="main-articulos-ofertas">
-                    <div class="productos-desktop">
-                        <%for (let i = 0; i < products.lenght; i++){ %>
-                         <a href="/products/detalle/<%= products[i].id %>"  class="links-Art"><article class="articulo-margin borde-producto">
-                                <div class="camion-con-foto">
-                                    <img src="/imagenes/img-products/<%= products[i].img %>" alt="<%= products[i].name %>" class="resoluciones">
-                                <p class="item-truck"><i class="fa-solid fa-truck-fast iconos-main-truck truck"></i></p>
-                                </div>
-                                <div class="contenedor-descripciones">
-                                    <p class="precios item1"> uS$<%= products[i].price %></p>
-                                    <p class="main-size iconos-main item0"><%= products[i].discount %>% off</p>
-                                    <p class="main-size item4"><%= products[i].name %></p>
-                                </div>   
-                        </article></a>
-                        <% } %>
-                    </div>
-                        
-                        <div class="productos-desktop">
-                            <%for (let i = 0; i < products.lenght; i++){ %>
-                            <a href="/products/detalle/<%= products[i].id %>" class="links-Art "><article class="articulo-margin borde-producto">
+            <% for(let i = 0; i < products.length; i++) { %> 
+                <% if (products[i].category.id !== 2) { %>
+                    <div class="div-Ofertas">
+                        <article class= " articulo-margin borde-producto">
+                            <a href="/products/detalle/<%= products[i].id %>" class="links-Art">
                                 <div class="camion-con-foto">
                                     <img src="/imagenes/img-products/<%= products[i].img %>" alt="<%= products[i].name %>" class="resoluciones">
                                     <p class="item-truck"><i class="fa-solid fa-truck-fast iconos-main-truck truck"></i></p>
-                                </div> 
-                                <div class="contenedor-descripciones">
-                                    <p class="precios"  id="dimesiones-descripciones">uS$<%= products[i].price %></p>
-                                    <p class="main-size iconos-main item0"><%= products[i].discount %>% off</p>
-                                    <p class="main-size item4"><%= products[i].name %></p>
                                 </div>
-                            </article></a>
-                            <% } %>
-                        </div>
-                </section>          
-            </div>
+                                <div class="contenedor-descripciones">
+                                    <div class="row justify-content-center text-center">
+                                    <p class="main-size col-12"><%= products[i].name %></p>       
+                                    <span class= "col-3 fs-5 text-black-50 fst-italic text-decoration-line-through">uS$<%= products[i].price %> </span>
+                                    <span class="main-size col-6 iconos-main"><%= products[i].discount %>% off </span>                                                 
+                                    </div>     
+                                </div>
+                            </a>
+                        <button type="submit" class="submit-button col-12" id="buy-button" data-id= "<%= products[i].id %>" > COMPRAR </button>
+                        </article>
+                    </div>
+                    <% } %> 
+                <% } %> 
+               
     </main>     
     <footer >
             <%- include('./partials/footer.ejs') %>
             <a href="#principio" class="link-arrow-home" ><i class="fa-solid fa-arrow-up-long" id="arrow"></i></a>
     </footer>       
 </body>
+<script src="/js/shoppingCart.js"></script>
 </html>

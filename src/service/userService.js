@@ -4,6 +4,7 @@ const path = require('path');
 const sharp = require('sharp');
 const db = require('../database/models');
 const bcryptjs = require('bcryptjs');
+const { Association } = require('sequelize');
 
 //Usuario nuevo
 async function newUser(data, file) {
@@ -80,8 +81,10 @@ async function login(req, res) {
     return req.session.userLogged = user;
     };
 };
-
 async function userInSession(req ) {
     return await db.User.findOne({where: {email: req.session.userLogged.email}});
 };
-module.exports = {newUser, userByPk, deteleteAvatar, updateUser, deteleUser, login, userInSession, restoreUser};
+async function allUsers() {
+    return await db.User.findAll({include:[{Association:'products'}]})
+}
+module.exports = {newUser, userByPk, deteleteAvatar, updateUser, deteleUser, login, userInSession, restoreUser, allUsers};

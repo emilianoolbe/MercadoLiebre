@@ -11,6 +11,12 @@ module.exports = (sequelize, dataTypes) => {
         },
         user_id: {
             type: dataTypes.INTEGER
+        },
+        payment_Method:{
+            type: dataTypes.STRING(45)
+        },
+        shipping_Method:{
+            type: dataTypes.STRING(45)
         }
     };
     let config = {

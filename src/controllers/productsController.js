@@ -7,8 +7,8 @@ const {validationResult} = require('express-validator');
 let controlador = {
     //Vista Ofertas
     ofertas: async (req, res) => {
-        const products = await productService.getProducts()
-        res.render('products/ofertas', { products})
+        const products = await productService.getProducts();
+        res.render('products/ofertas', {products})
     } ,
     //Vista detalles del producto
     detalle: async (req, res) => {
@@ -69,6 +69,11 @@ let controlador = {
         await productService.deleteImg(req.params.id);
         await productService.productToDelete(req.params.id);
         res.redirect('/');
+    },
+
+    //Carrito de compras
+    carrito: (req, res) => {
+        res.render('products/carrito');
     }
 };
 
