@@ -29,7 +29,7 @@ module.exports = (sequelize, dataTypes) => {
             foreignKey: 'created_by'
         })
 
-        User.hasMany(models.Purchase, {
+        User.hasMany(models.Order, {
             as: 'orders',
             foreignKey: 'user_id'
         })

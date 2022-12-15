@@ -30,14 +30,6 @@ module.exports = (sequelize, dataTypes) => {
             foreignKey: 'brand_id'
         });
 
-        Product.belongsToMany(models.Purchase, {
-            as: 'products-in-orders',
-            through: 'purchase_detail',
-            foreignKey: 'product_id',
-            otherKey: 'purchase_id',
-            timestamps: false
-        });
-
         Product.belongsTo(models.Section, {
             as:'section',
             foreignKey: 'section_id'

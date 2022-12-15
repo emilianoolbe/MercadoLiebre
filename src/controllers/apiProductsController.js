@@ -8,8 +8,8 @@ const controller = {
         return res.json(product);
     },
     checkout: async (req, res) => {
-        let checkoutCart = await apiService.checkoutCart(req.body, req.session.userLogged.id);
-        res.json({ok: true, status: 200, order: checkoutCart});
+        let order = await apiService.checkoutCart(req.body, req.session.userLogged.id);
+        res.json({ok: true, status: 200, order: order});
     }
 };
 

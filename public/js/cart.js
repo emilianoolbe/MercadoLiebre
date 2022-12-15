@@ -70,12 +70,13 @@ window.addEventListener("load", () => {
         e.preventDefault();
         //Para envíar información a la db desde el front es por fetch método POST, primero hay que detallar la formData
         const formData = {
-            purchase_detail: products, // esto es un array que contiene los valores a agregar para el detalle de la orden
+            orderItems: products, // esto es un array que contiene los valores a agregar para el detalle de la orden
             payment_Method: formCart.paymentMethod.value, //estoy accediendo al name del SELECT del formulario
-            shippingment_Method: formCart.shippingMethod.value,
+            shipping_Method: formCart.shippingMethod.value,
             total: totalPrice(products)
         };
 
+    
         fetch('/api/purchaseCheckout',{
             method: 'POST',
             headers: {'Content-Type':'application/json'},
@@ -83,11 +84,11 @@ window.addEventListener("load", () => {
         })
         .then((res) =>  res.json())
         .then((data) =>{
-            if (data.ok) {
+            console.log(data);
+            if (data.ok) { //en la respuesta del controlador seteo {ok: true, status: 200, order: order} 
                 emptyCart();
                 location.href = '/users/profile'
-            }
+            };
         })
-       
     });
 });
