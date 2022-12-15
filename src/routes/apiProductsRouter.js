@@ -5,5 +5,6 @@ const apiProductsController = require('../controllers/apiProductsController');
 
 //ENDPOINTS
 router.get('/productApi/:id', apiProductsController.product);
+router.post('/purchaseCheckout', apiProductsController.checkout);
 
 module.exports = router;

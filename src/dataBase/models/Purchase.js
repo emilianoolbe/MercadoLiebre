@@ -17,6 +17,9 @@ module.exports = (sequelize, dataTypes) => {
         },
         shipping_Method:{
             type: dataTypes.STRING(45)
+        },
+        total: {
+            type: dataTypes.INTEGER
         }
     };
     let config = {
@@ -32,8 +35,8 @@ module.exports = (sequelize, dataTypes) => {
             foreignKey: 'user_id'
         });
 
-        Purchase.belongsToMany(models.Product, {
-            as: 'products-orders',
+        Purchase.belongsToMany(models.Product,{
+            as: 'productsOrders',
             through: 'purchase_detail',
             foreignKey: 'purchase_id',
             otherKey: 'product_id',
@@ -42,4 +45,4 @@ module.exports = (sequelize, dataTypes) => {
     };
     
     return Purchase;
-}
+};

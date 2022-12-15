@@ -1,18 +1,21 @@
 window.addEventListener("load", () => {
-
-    //Función que va calcular el total de lo que hay en el carrito
-    //El segundo parámetro del reduce, indica en que valor empieza el acum
-    function totalPrice(products) {
-        return products.reduce((acum, product) => (acum += product.price * product.quantity), 0)
-    };
-
+    
     //Funcion para varíar carrito
     function emptyCart() {
         localStorage.removeItem('shoppingCart');
     };
 
+    //Función que va calcular el total de lo que hay en el carrito
+    //El segundo parámetro del reduce, indica en que valor empieza el acum
+    function totalPrice(products) {
+        return products.reduce((acum, product) => (acum += ((((100 - product.discount) * product.price) / 100) * product.quantity)), 0)
+    };
+
     //Antes de todo creo la variable productos para poder calcular el total después
     let products = [];
+
+    //Capturo el body de la tabla
+    let cartRows = document.querySelector('.cartRows');
 
     //1) Completar el carrito con la data de localStorage.
     if (localStorage.shoppingCart) {
@@ -22,11 +25,9 @@ window.addEventListener("load", () => {
         // ACLARACION: en localStorage se guarda solamente el id del producto y la cantidad
         // Los demas datos, los tengo que consumir desde un endpoint a la DB porque son valores mutables
         
-        //Capturo el body de la tabla
-        let cartRows = document.querySelector('.cartRows');
-
-
         shoppingCart.forEach((item, index) => {
+
+
             //Hago un fetch a la db
             fetch(`/api/productApi/${item.id}`)
                 .then((res) => {return res.json()}) //primer then() lo convierto a JSON
@@ -43,19 +44,19 @@ window.addEventListener("load", () => {
                                 <td>${product.price}</td>
                                 <td class="text-center">${item.quantity}</td>
                                 <td class="text-center">${product.discount}</td>
-                                <td class="text-center">${parseFloat((((100-product.discount)*product.price) / 100) * item.quantity,2).toFixed(2)}</td>
-                                <td><button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i></button></td>
+                                <td class="text-center">${parseFloat((((100 - product.discount)*product.price) / 100) * item.quantity,2).toFixed(2)}</td>
+                                <td><button class="btn btn-danger btn-sm" onclick=removeItem(${index})><i class="fa-solid fa-trash-can"></i></button></td>
                             </tr>
                         `
                         //Actualizo el array de productos, con los datos que necesito para guardar en la db
                         //Lo guardado en localStorage y los datos de la db
-                        products.push({product_id: product.id, name: product.name, price: product.price, quantity: item.quantity})
+                        products.push({product_id: product.id, name: product.name, price: product.price, discount: product.discount, quantity: item.quantity})
                     }else{
                         //Elimino el producto que no viene de localStorage - del index + 1
                         shoppingCart.splice(index, 1);
                         //Tengo que volver a crear el localStorage
                         localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
-                    }
+                    };
                 })
                 //Calculo el total
                 .then(() => {
@@ -74,6 +75,19 @@ window.addEventListener("load", () => {
             shippingment_Method: formCart.shippingMethod.value,
             total: totalPrice(products)
         };
-        console.log(formData);
-    })
+
+        fetch('/api/purchaseCheckout',{
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify(formData)
+        })
+        .then((res) =>  res.json())
+        .then((data) =>{
+            if (data.ok) {
+                emptyCart();
+                location.href = '/users/profile'
+            }
+        })
+       
+    });
 });

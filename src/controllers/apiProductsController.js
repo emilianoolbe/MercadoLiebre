@@ -7,6 +7,10 @@ const controller = {
         //Las api retornan JSON
         return res.json(product);
     },
+    checkout: async (req, res) => {
+        let checkoutCart = await apiService.checkoutCart(req.body, req.session.userLogged.id);
+        res.json({ok: true, status: 200, order: checkoutCart});
+    }
 };
 
 module.exports = controller;
