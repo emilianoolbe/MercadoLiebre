@@ -7,6 +7,7 @@ let app = express();
 const router = require("./routes/homeRouter");
 const routerUser = require('./routes/userRouter');
 const routerProducts = require('./routes/productsRouter');
+const routerApi = require('./routes/apiProductsRouter');
 
 //Seteo de template Engine EJS
 app.set('views', path.join(__dirname, '../src/views'));
@@ -37,6 +38,7 @@ app.use(express.static("./public"));
 app.use('/', router);
 app.use('/users', routerUser);
 app.use('/products', routerProducts);
+app.use('/api', routerApi);
 
 //Error
 const error404 = require('./middlewares/404ErrorMiddlleware');

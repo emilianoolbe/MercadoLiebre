@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<DOCTYPE html>
 <html lang="en">
     <head>
         <%- include('../partials/head.ejs') %>
@@ -8,14 +8,14 @@
         <header>
             <%- include('../partials/nav.ejs') %>  
         </header>
-        <main class="mt-2 mb-4 pt-4">
-            <div class="container wow fadeIn animated">
-                <h2 class="mt-2 mb-3 h2 text-center"> Productos en mi carrito</h2>
-                <div class="card my-5">
+        <main class="mt-2 mb-4 pt-4  row justify-content-center">
+            <div class="container main-login col-sm-12 row justify-content-center">
+                <h2 class="mt-1 mb-3 h2 text-center"> Productos en mi carrito</h2>
+                <div class=" col-sm-12 col-md-8 card m-4 my-2 bg-warning.bg-gradient ">
                     <div class="card-body">
-                        <table class="table table-responsive-md mb-0">
+                        <table class="table table-responsive-md mb-0  table-borderless">
                             <thead>
-                                <tr>
+                                <tr class="table-borderless">
                                     <th style="width: 50px;">
                                         <strong>#</strong>
                                     </th>
@@ -29,6 +29,9 @@
                                         <strong>Cantidad</strong>
                                     </th>
                                     <th class="text-center">
+                                        <strong>Descuento</strong>
+                                    </th>
+                                    <th class="text-center">
                                         <strong>Subtotal</strong>
                                     </th>
                                     <th style="width: 50px;"></th>
@@ -37,12 +40,12 @@
                             <tbody class="cartRows">
                             </tbody>
                         </table>
-                        <div class="card-footer text-right">
-                            <h2>Total: <span class="totalAmount">$ 0</span></h2>
+                        <div class="card-footer text-lefth">
+                            <h2 class="text-end colorTotal">Total: <span id="totalCarrito">$ 0</span></h2>
                         </div>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card m-4  col-sm-12 col-md-8 borde-fondo-2 ">
                     <div class="card-header text-center">
                         Terminar la compra
                     </div>
@@ -50,12 +53,11 @@
                         <div class="row">
                             <div class=" col-md-6 mb-4">
                                 <label for="country">Tipo Envio</label>
-                                <select class="custom-select d-block w-100" id="shippingMethod" name=" shippingMethod"
+                                <select class="custom-select d-block w-100 form-control" id="shippingMethod" name=" shippingMethod"
                                     required="">
                                     <option value="">Elegir...</option>
                                     <option value="Cadete">Cadete</option>
                                     <option value="Correo">Correo Uruguayo</option>
-                                    <option value="Andreani">Andreani</option>
                                     <option value="DHL">DHL</option>
                                 </select>
                                 <div class="invalid-feedback">
@@ -65,7 +67,7 @@
                             </div>
                             <div class=" col-md-6 mb-4">
                                 <label for="country">Pago</label>
-                                <select class="custom-select d-block w-100" id="paymentMethod" name="paymentMethod"
+                                <select class="custom-select d-block w-100 form-control" id="paymentMethod" name="paymentMethod"
                                     required="">
                                     <option value="">Elegir...</option>
                                     <option value="Efectivo">Efectivo</option>
@@ -78,7 +80,7 @@
 
                             </div>
                         </div>
-                        <button class="btn btn-primary btn-lg btn-block waves-effect waves-light"
+                        <button class="btn submit-button btn-lg btn-block waves-effect waves-light"
                             type="submit">Comprar</button>
                     </form>
                 </div>
@@ -88,4 +90,5 @@
             <%- include('../partials/footer.ejs') %>
         </footer>
     </body>
+    <script src="/js/cart.js"></script>
 </html>

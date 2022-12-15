@@ -325,6 +325,10 @@ body{
     transition: all 450ms;
 }
 
+.colorTotal {
+    color: rgb(106, 90, 205);
+};
+
 .submit-button:hover{
     background-color:#39b54a;
 }

@@ -13,9 +13,6 @@
                   <img src="../../../imagenes/img-users/<%= locals.userLogged.avatar %>" class="rounded-circle icono-user" alt=""> Hola <%= locals.userLogged.username %> 
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a href="/users/profile" class="nav-link"> <i class="fa-solid fa-user"></i></i> Mi perfil </a></li>
-                  <li><a href="/products/crear" class="nav-link"> <i class="fa-solid fa-sack-dollar"></i> Vender </a></li>
-                  <li><a href="/products/ofertas" class="nav-link"><i class="fa-solid fa-heart"></i> Comprar </a></li>
                   <li class="nav-item">
                     <a class="nav-link waves-effect mr-2 pr-4" href="/products/carrito">
                         <span class="clearfix d-none d-sm-inline-block"></span>
@@ -23,6 +20,9 @@
                         <span class="text-danger cart-number">0</span>
                     </a>
                 </li>
+                  <li><a href="/users/profile" class="nav-link"> <i class="fa-solid fa-user"></i></i> Mi perfil </a></li>
+                  <li><a href="/products/crear" class="nav-link"> <i class="fa-solid fa-sack-dollar"></i> Vender </a></li>
+                  <li><a href="/products/ofertas" class="nav-link"><i class="fa-solid fa-heart"></i> Comprar </a></li>
                   <li><a href="/users/logout" class="nav-link"><i class="fa-solid fa-person-walking-arrow-right"></i></i> Salir </a></li>
                 </ul>
               </li>

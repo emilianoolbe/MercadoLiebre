@@ -1,15 +1,14 @@
-//Funsión que va a verificar si existe algo en el carrito, lo contrario devuelvo 0
-function productInCart() {
-    return localStorage.shoppingCart ? JSON.parse(localStorage.shoppingCart).length : 0;
-};
-
 window.addEventListener("load", () => {
-   
+    //Funsión que va a verificar si existe algo en el carrito, lo contrario devuelvo 0
+    function productInCart() {
+        return localStorage.shoppingCart ? JSON.parse(localStorage.shoppingCart).length : 0;
+    };
     //Capturo los botones comprar
     let buyButton = document.querySelectorAll('#buy-button');
 
     //Capturo el span que aparece el n° de productos en el carrito
     //Cada vez que actualizo el carrito, le agregaré el innerText
+    //Pero también lo tengo que hacer antes del evento para saber si existe localstorage
     let cartNumber = document.querySelector('.cart-number');
     cartNumber.innerText = productInCart();
 
@@ -20,7 +19,7 @@ window.addEventListener("load", () => {
             //En la vista con el atributo data- me guardo en dataset ese algo, en este caso el Id del producto
             //console.log(e.target.dataset.id);
 
-            //Pregunto primero si hay carrito en LocalStorage
+            //Pregunto primero si hay carrito en localStorage
             if (localStorage.shoppingCart) {
                 
                 //Si hay carrito parseo  --> JSON.parse
@@ -36,14 +35,15 @@ window.addEventListener("load", () => {
                     //Sino, push al array el nuevo producto
                     cart.push({id: e.target.dataset.id, quantity: 1});
                 };
-                //Luego guardo en LocalStorage la actualización --> vuelvo a convertir el array a JSON
-                localStorage.setItem('shoppingCart', JSON.stringify(cart))
-                cartNumber.innerText = productInCart();
+                //Luego guardo en localStorage la actualización --> vuelvo a convertir el array a JSON
+                localStorage.setItem('shoppingCart', JSON.stringify(cart));
             }else{
 
                 //Si no hay carrito, lo creo, en local se guarda únicamente texto  --> JSON.stringify
                 localStorage.setItem('shoppingCart', JSON.stringify([{id: e.target.dataset.id, quantity: 1}]));
             };
-        })
-    })
-})
+            //Cada vez que se escucha el evento se agrega el producto al cartnumber
+            cartNumber.innerText = productInCart();
+        });
+    });
+});
