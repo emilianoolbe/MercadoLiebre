@@ -1,6 +1,6 @@
 window.addEventListener("load", () => {
     
-    //Funcion para varíar carrito
+    //Funcion para vacíar carrito
     function emptyCart() {
         localStorage.removeItem('shoppingCart');
     };
