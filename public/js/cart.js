@@ -1,16 +1,14 @@
 window.addEventListener("load", () => {
     
-    //Funcion para vacíar carrito
+    //Función para vacíar carrito
     function emptyCart() {
         localStorage.removeItem('shoppingCart');
     };
-
     //Función que va calcular el total de lo que hay en el carrito
     //El segundo parámetro del reduce, indica en que valor empieza el acum
     function totalPrice(products) {
         return products.reduce((acum, product) => (acum += ((((100 - product.discount) * product.price) / 100) * product.quantity)), 0)
     };
-
     //Antes de todo creo la variable productos para poder calcular el total después
     let products = [];
 
@@ -19,7 +17,7 @@ window.addEventListener("load", () => {
 
     //1) Completar el carrito con la data de localStorage.
     if (localStorage.shoppingCart) {
-        
+  
         //Si existe carrito, lo traigo JSON.parse()
         let shoppingCart = JSON.parse(localStorage.shoppingCart);
         // ACLARACION: en localStorage se guarda solamente el id del producto y la cantidad
@@ -45,7 +43,7 @@ window.addEventListener("load", () => {
                                 <td class="text-center">${item.quantity}</td>
                                 <td class="text-center">${product.discount}</td>
                                 <td class="text-center">${parseFloat((((100 - product.discount)*product.price) / 100) * item.quantity,2).toFixed(2)}</td>
-                                <td><button class="btn btn-danger btn-sm" onclick=removeItem(${index})><i class="fa-solid fa-trash-can"></i></button></td>
+                                <td><button class="btn btn-danger btn-sm buttonDelete"  data-index="${index}" ><i class="fa-solid fa-trash-can"></i></button></td>
                             </tr>
                         `
                         //Actualizo el array de productos, con los datos que necesito para guardar en la db
@@ -57,12 +55,24 @@ window.addEventListener("load", () => {
                         //Tengo que volver a crear el localStorage
                         localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
                     };
+                    deleteProduct()
                 })
                 //Calculo el total
                 .then(() => {
                     document.getElementById('totalCarrito').innerText = `${totalPrice(products)}`
                 })
-        });
+        });        
+        //Función eliminar producto del carrito
+        function deleteProduct() {
+            let buttonDelete = document.querySelectorAll('.buttonDelete');
+            buttonDelete.forEach((button) => {
+                button.addEventListener('click', (e) => {
+                    shoppingCart.splice(e.target.dataset.index, 1);
+                    localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
+                });
+                button.addEventListener('click', () => {location.reload()})
+            })
+        }
     };
     //Finalizar compra.
     let formCart = document.getElementById('checkoutCart');
