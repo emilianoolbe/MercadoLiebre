@@ -1,5 +1,5 @@
 //Importo Services + Express-validator 
-const productService = require('../service/productsService');
+const productService = require('../services/productsServices');
 const {validationResult} = require('express-validator');
 
 

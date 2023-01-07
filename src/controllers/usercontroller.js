@@ -1,8 +1,8 @@
 //Importo servicios + Express-validator
 
 const { validationResult } = require('express-validator');
-const userService = require('../service/userService');
-const productService = require('../service/productsService');
+const userService = require('../services/userServices');
+const productService = require('../services/productsServices');
 
 //CONTROLADOR
 const controlador = {

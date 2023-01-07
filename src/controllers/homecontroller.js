@@ -1,5 +1,5 @@
 //Importo modelo
-const productService = require('../service/productsService');
+const productService = require('../services/productsServices');
 
 //CONTROLADOR
 const controlador = {

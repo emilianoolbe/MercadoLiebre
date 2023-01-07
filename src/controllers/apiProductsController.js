@@ -1,4 +1,4 @@
-const apiService = require('../service/apiService');
+const apiService = require('../services/apiServices');
 
 //Controlador
 const controller = {
@@ -8,8 +8,12 @@ const controller = {
         return res.json(product);
     },
     checkout: async (req, res) => {
-        let order = await apiService.checkoutCart(req.body, req.session.userLogged.id);
+        let order = await apiService.order.checkoutCart(req.body, req.session.userLogged.id);
         res.json({ok: true, status: 200, order: order});
+    },
+    //Order
+    totalGain: async() => {
+        let total = await apiService.order.totalGain()
     }
 };
 

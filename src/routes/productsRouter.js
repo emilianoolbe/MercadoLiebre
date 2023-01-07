@@ -30,7 +30,6 @@ router.put('/editar/:id', upload.single('img'), validationProducts, productsCont
 router.delete('/:id', authMiddleware, productsController.borrar);
 
 //Carrito de compras
-router.get('/carrito', productsController.carrito);
-//router.get('/carrito', authMiddleware, productsController.carrito);
+router.get('/carrito', authMiddleware, productsController.carrito);
 
 module.exports = router;
