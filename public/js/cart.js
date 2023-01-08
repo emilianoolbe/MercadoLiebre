@@ -87,7 +87,7 @@ window.addEventListener("load", () => {
         };
 
     
-        fetch('/api/purchaseCheckout',{
+        fetch('/api/checkout-Cart',{
             method: 'POST',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify(formData)

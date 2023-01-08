@@ -8,7 +8,7 @@ let product = {
     allProducts: async () => {
         return await db.Product.findAll();
     },
-    quantityProducts: async() => {
+    quantityProducts: async () => {
         let total = await db.Product.findAll();
         return total.length;
     },
@@ -74,19 +74,21 @@ let order = {
         let total =  await db.Order.findAll();
         return total.length;
     },
-    users : async () => {
+    orderUsers : async() => {
         return await db.Order.findAll({include:[{association:'users-orders'}]});
     },
     totalGain: async() => {
-        let order = await db.Order.findAll();
-        
-       console.log(order);
+        let orders = await db.Order.findAll();
+        let subTotal = [];
+        orders.forEach(i => {subTotal.push(i.total)});
+        let total = subTotal.reduce((acum, num) => {return acum + num});
+        return total;
     },
     checkoutCart: async(req, userId) => {
         return await db.Order.create({...req.body, user_id: userId},{include: db.Order.OrderItems})
+        //Este include me genera automaticamente el registro en la tabla OrderItems - Sequelize me genera la columna ProductId *Ver como actualizar el nombre* 
     }
 };
-
 //Factura
 let orderItems = {
     allOrderItems : async() => {
@@ -100,13 +102,8 @@ let orderItems = {
         return await db.OrderItems.findByPk(id);
     },
     users: async() => {
-        return await db.orderItems.findAll({include: [{association: 'order'}]})
+        return await db.OrderItems.findAll({include: [{association: 'order'}]})
     }
 };
-
-//Creo el registro en la tabla de ordenes include: db.Order.OrderItems sequelize automáticamente carga los datos en OrderItems
-// async function checkoutCart(data, userId) {
-//     return await db.Order.create({...data, user_id: userId},{include: db.Order.OrderItems})
-// };
 
 module.exports = {product, user, brand, section, order, orderItems};

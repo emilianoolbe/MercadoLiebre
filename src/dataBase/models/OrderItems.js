@@ -7,7 +7,7 @@ module.exports = (sequelize, dataTypes) => {
         autoIncrement: true,
         allowNull: false,
       },
-      product_id: {
+      productId: {
         type: dataTypes.INTEGER(11),
         allowNull: true
       },
